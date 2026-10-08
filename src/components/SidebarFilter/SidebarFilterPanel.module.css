@@ -60,6 +60,7 @@
 	border-bottom-left-radius: 16px;
 	border-left: 0.8px var(--Semantic-outline-outline-variant, #c7cbd1) solid;
 	right: 0;
+	left: auto;
 }
 
 .slideOut[data-position="right"] {
@@ -70,6 +71,7 @@
 	border-bottom-left-radius: 16px;
 	border-left: 0.8px var(--Semantic-outline-outline-variant, #c7cbd1) solid;
 	right: 0;
+	left: auto;
 }
 
 .slideIn[data-position="left"] {
@@ -80,6 +82,7 @@
 	border-bottom-right-radius: 16px;
 	border-right: 0.8px var(--Semantic-outline-outline-variant, #c7cbd1) solid;
 	left: 0;
+	right: auto;
 }
 
 .slideOut[data-position="left"] {
@@ -90,6 +93,7 @@
 	border-bottom-right-radius: 16px;
 	border-right: 0.8px var(--Semantic-outline-outline-variant, #c7cbd1) solid;
 	left: 0;
+	right: auto;
 }
 
 .fadeIn {

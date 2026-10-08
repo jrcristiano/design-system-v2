@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 import { Pagination } from "../components/Pagination/Pagination";
 import { useState, useEffect } from "react";
 
@@ -121,6 +122,54 @@ export const Examples: Story = {
 		disabled: false,
 		showPageInput: true,
 		pageInputAlign: "center",
+	},
+	render: PaginationExample,
+};
+
+export const ActivePageColor: Story = {
+	name: "Active page color",
+	args: {
+		currentPage: 1,
+		positionLabel: undefined,
+		total: 100,
+		showPageInput: false,
+	},
+	render: PaginationExample,
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		const inactivePage = canvas.getByRole("button", { name: "Página 2" });
+		const activePage = canvas.getByRole("button", { name: "Página 1" });
+		const getComputedColor = (element: HTMLElement) =>
+			element.ownerDocument.defaultView?.getComputedStyle(element).color;
+		expect(
+			activePage.ownerDocument.defaultView
+				?.getComputedStyle(activePage.ownerDocument.documentElement)
+				.getPropertyValue("--ds-color-neutral-white")
+				.trim(),
+		).toBe("#ffffff");
+
+		expect(getComputedColor(activePage)).toBe("rgb(255, 255, 255)");
+		expect(getComputedColor(inactivePage)).toBe("rgb(92, 100, 112)");
+
+		await userEvent.click(inactivePage);
+
+		const newlyActivePage = canvas.getByRole("button", { name: "Página 2" });
+		await new Promise((resolve) => setTimeout(resolve, 200));
+		expect(newlyActivePage).toHaveAttribute("aria-current", "page");
+		expect(getComputedColor(newlyActivePage)).toBe("rgb(255, 255, 255)");
+		expect(getComputedColor(canvas.getByRole("button", { name: "Página 1" }))).toBe(
+			"rgb(92, 100, 112)",
+		);
+	},
+};
+
+export const Disabled: Story = {
+	args: {
+		currentPage: 3,
+		positionLabel: undefined,
+		total: 100,
+		showPageInput: false,
+		disabled: true,
 	},
 	render: PaginationExample,
 };

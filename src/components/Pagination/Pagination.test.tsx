@@ -24,6 +24,32 @@ describe("Pagination", () => {
 		render(<Pagination {...defaultProps} currentPage={3} />);
 		const currentPageButton = screen.getByLabelText("Página 3");
 		expect(currentPageButton).toHaveAttribute("aria-current", "page");
+		expect(currentPageButton).toHaveClass(
+			"text-[color:var(--ds-color-neutral-white)]",
+			"bg-[var(--ds-color-blue-10)]",
+		);
+		expect(screen.getByLabelText("Página 2")).toHaveClass(
+			"text-[var(--ds-color-neutral-40)]",
+			"hover:bg-[var(--ds-color-neutral-90)]",
+		);
+	});
+
+	it("moves active styles when the current page changes", () => {
+		const { rerender } = render(<Pagination {...defaultProps} currentPage={2} />);
+
+		expect(screen.getByLabelText("Página 2")).toHaveAttribute("aria-current", "page");
+		expect(screen.getByLabelText("Página 2")).toHaveClass(
+			"text-[color:var(--ds-color-neutral-white)]",
+		);
+
+		rerender(<Pagination {...defaultProps} currentPage={3} />);
+
+		expect(screen.getByLabelText("Página 2")).not.toHaveAttribute("aria-current");
+		expect(screen.getByLabelText("Página 2")).toHaveClass("text-[var(--ds-color-neutral-40)]");
+		expect(screen.getByLabelText("Página 3")).toHaveAttribute("aria-current", "page");
+		expect(screen.getByLabelText("Página 3")).toHaveClass(
+			"text-[color:var(--ds-color-neutral-white)]",
+		);
 	});
 
 	it("syncs input value with current page", () => {

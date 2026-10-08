@@ -218,14 +218,14 @@ describe("SidebarFilter", () => {
 		console.error = originalError;
 	});
 
-	it("supports custom position (left)", async () => {
+	it("inherits the configured left position when the panel has no override", async () => {
 		const user = userEvent.setup();
 		render(
 			<SidebarFilter position="left">
 				<SidebarFilterTrigger>
 					<Button>Filtrar</Button>
 				</SidebarFilterTrigger>
-				<SidebarFilterPanel position="left">
+				<SidebarFilterPanel>
 					<SidebarFilterHeader />
 				</SidebarFilterPanel>
 			</SidebarFilter>,
@@ -234,6 +234,29 @@ describe("SidebarFilter", () => {
 		await user.click(screen.getByText("Filtrar"));
 
 		const panel = screen.getByRole("dialog");
+		expect(panel).toHaveAttribute("data-position", "left");
+	});
+
+	it("inherits right position and updates it when the prop changes", async () => {
+		const user = userEvent.setup();
+		const sidebar = (position: "left" | "right") => (
+			<SidebarFilter position={position}>
+				<SidebarFilterTrigger>
+					<Button>Filtrar</Button>
+				</SidebarFilterTrigger>
+				<SidebarFilterPanel>
+					<SidebarFilterHeader />
+				</SidebarFilterPanel>
+			</SidebarFilter>
+		);
+		const { rerender } = render(sidebar("right"));
+
+		await user.click(screen.getByText("Filtrar"));
+
+		const panel = screen.getByRole("dialog");
+		expect(panel).toHaveAttribute("data-position", "right");
+
+		rerender(sidebar("left"));
 		expect(panel).toHaveAttribute("data-position", "left");
 	});
 

@@ -4,6 +4,7 @@ export interface FilterValue {
 
 export interface SidebarFilterContextValue {
 	isOpen: boolean;
+	position: "left" | "right";
 	open: () => void;
 	close: () => void;
 	toggle: () => void;

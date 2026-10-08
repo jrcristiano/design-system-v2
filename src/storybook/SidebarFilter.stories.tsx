@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { ComponentProps } from "react";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { useState } from "react";
 import { SidebarFilter } from "../components/SidebarFilter/SidebarFilter";
 import { SidebarFilterTrigger } from "../components/SidebarFilter/SidebarFilterTrigger";
@@ -27,31 +29,61 @@ import {
 import { FunnelIcon, CaretDownIcon } from "@phosphor-icons/react";
 import type { FilterValue } from "../components/SidebarFilter/SidebarFilter.type";
 
-const meta: Meta<typeof SidebarFilter> = {
+const meta = {
 	title: "Components/SidebarFilter",
 	component: SidebarFilter,
 	tags: ["autodocs"],
+	parameters: {
+		docs: {
+			description: {
+				component:
+					"Painel composto para reunir filtros de uma listagem. Use quando a pessoa precisa combinar critérios e aplicá-los em conjunto; evite para controles simples que podem ficar diretamente na página. O painel fecha ao aplicar, ao pressionar Escape ou pelo botão de fechar. O trigger deve ter nome acessível e o conteúdo do painel deve manter rótulos claros para cada controle.",
+			},
+		},
+	},
 	argTypes: {
+		children: {
+			control: false,
+			table: { disable: true },
+		},
 		position: {
 			control: "select",
 			options: ["left", "right"],
-			description: "Posição do filtro lateral",
+			description: "Lado em que o painel entra na tela.",
 		},
 		defaultFilters: {
+			control: false,
 			table: { disable: true },
+		},
+		filters: {
+			control: false,
+			table: { disable: true },
+			description: "Valores aplicados quando o componente é controlado pelo consumidor.",
+		},
+		onFiltersChange: {
+			control: false,
+			table: { disable: true },
+			description: "Notifica mudanças nos valores quando `filters` é controlado.",
+		},
+		onApply: {
+			control: false,
+			description: "Recebe os filtros quando a pessoa confirma a seleção.",
+			table: { category: "Eventos" },
 		},
 	},
 	args: {
+		children: null,
 		position: "right",
+		onApply: fn(),
 	},
-};
+} satisfies Meta<typeof SidebarFilter>;
 
 export default meta;
 
-type Story = StoryObj<typeof SidebarFilter>;
+type Story = StoryObj<typeof meta>;
 
 // Story básica
-const DefaultStory = (args: any) => {
+const DefaultStory = (args: ComponentProps<typeof SidebarFilter>) => {
 	const [appliedFilters, setAppliedFilters] = useState<FilterValue>({});
 	const [select1, setSelect1] = useState<string>("");
 	const [select2, setSelect2] = useState<string>("");
@@ -66,7 +98,7 @@ const DefaultStory = (args: any) => {
 			<SidebarFilter
 				{...args}
 				onApply={() => {
-					setAppliedFilters({
+					const nextFilters: FilterValue = {
 						select1,
 						select2,
 						select3,
@@ -74,7 +106,9 @@ const DefaultStory = (args: any) => {
 						status,
 						dataInicio,
 						dataFim,
-					});
+					};
+					setAppliedFilters(nextFilters);
+					args.onApply?.(nextFilters);
 				}}
 			>
 				<SidebarFilterTrigger>
@@ -243,7 +277,7 @@ export const Default: Story = {
 };
 
 // Story com posição à esquerda
-const PositionStory = (args: any) => {
+const PositionStory = (args: ComponentProps<typeof SidebarFilter>) => {
 	const [filtros, setFiltros] = useState<string[]>([]);
 
 	return (
@@ -253,7 +287,7 @@ const PositionStory = (args: any) => {
 					<Button iconLeft={FunnelIcon}>Filtrar (Esquerda)</Button>
 				</SidebarFilterTrigger>
 
-				<SidebarFilterPanel position="left">
+				<SidebarFilterPanel>
 					<SidebarFilterHeader />
 
 					<SidebarFilterContent>
@@ -298,7 +332,7 @@ const PositionStory = (args: any) => {
 				</SidebarFilterPanel>
 			</SidebarFilter>
 
-			<SidebarFilter position="right">
+			<SidebarFilter position="right" onApply={args.onApply}>
 				<SidebarFilterTrigger>
 					<Button iconLeft={FunnelIcon}>Filtrar (Direita)</Button>
 				</SidebarFilterTrigger>
@@ -359,7 +393,7 @@ export const Position: Story = {
 };
 
 // Story com integração em tabela
-const WithTableStory = (args: any) => {
+const WithTableStory = (args: ComponentProps<typeof SidebarFilter>) => {
 	const [appliedFilters, setAppliedFilters] = useState<FilterValue>({});
 	const [departamentos, setDepartamentos] = useState<string[]>([]);
 	const [status, setStatus] = useState<string>("");
@@ -400,13 +434,13 @@ const WithTableStory = (args: any) => {
 					<SidebarFilter
 						{...args}
 						onApply={() => {
-							// Captura os valores ATUAIS no momento do clique
-							console.log("Aplicando filtros:", { departamentos, status, nome: nomeSelecionado });
-							setAppliedFilters({
+							const nextFilters: FilterValue = {
 								departamentos: [...departamentos],
-								status: status,
+								status,
 								nome: nomeSelecionado,
-							});
+							};
+							setAppliedFilters(nextFilters);
+							args.onApply?.(nextFilters);
 						}}
 					>
 						<SidebarFilterTrigger>
@@ -562,4 +596,30 @@ export const WithTable: Story = {
 		layout: "fullscreen",
 	},
 	render: WithTableStory,
+	play: async ({ canvasElement, args }) => {
+		const canvas = within(canvasElement);
+		const page = within(document.body);
+
+		await userEvent.click(canvas.getByRole("button", { name: "Filtros Avançados" }));
+		const dialog = page.getByRole("dialog");
+		await userEvent.click(within(dialog).getByRole("checkbox", { name: "TI" }));
+		await userEvent.click(within(dialog).getByRole("button", { name: "Limpar" }));
+		await expect(canvas.getByText("Pedro Costa")).toBeInTheDocument();
+
+		await userEvent.click(within(dialog).getByRole("checkbox", { name: "TI" }));
+		await userEvent.click(within(dialog).getByRole("button", { name: "Aplicar" }));
+		await expect(canvas.getByText("João Silva")).toBeInTheDocument();
+		await expect(canvas.getByText("Ana Oliveira")).toBeInTheDocument();
+		await expect(canvas.queryByText("Maria Santos")).not.toBeInTheDocument();
+		await expect(args.onApply).toHaveBeenCalledWith({
+			departamentos: ["TI"],
+			status: "",
+			nome: "",
+		});
+
+		await userEvent.click(canvas.getByRole("button", { name: "Filtros Avançados" }));
+		await userEvent.click(within(page.getByRole("dialog")).getByRole("checkbox", { name: "TI" }));
+		await userEvent.keyboard("{Escape}");
+		await waitFor(() => expect(page.queryByRole("dialog")).not.toBeInTheDocument());
+	},
 };

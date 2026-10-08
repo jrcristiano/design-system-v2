@@ -11,11 +11,9 @@ interface SidebarFilterPanelProps {
 	position?: "left" | "right";
 }
 
-export function SidebarFilterPanel({
-	children,
-	position = "right",
-}: Readonly<SidebarFilterPanelProps>) {
-	const { isOpen, close } = useSidebarFilter();
+export function SidebarFilterPanel({ children, position }: Readonly<SidebarFilterPanelProps>) {
+	const { isOpen, close, position: sidebarPosition } = useSidebarFilter();
+	const panelPosition = position ?? sidebarPosition;
 
 	// CORREÇÃO 1: HTMLDialogElement para compatibilidade de tipos
 	const panelRef = useRef<HTMLDialogElement>(null);
@@ -116,7 +114,7 @@ export function SidebarFilterPanel({
 					"flex flex-col",
 					isClosing ? styles.slideOut : styles.slideIn,
 				)}
-				data-position={position}
+				data-position={panelPosition}
 			>
 				<div id={headerId} className="sr-only">
 					Painel de Filtros

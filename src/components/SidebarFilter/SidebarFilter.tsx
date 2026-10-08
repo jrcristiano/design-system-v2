@@ -103,6 +103,7 @@ export function SidebarFilter({
 	const contextValue = useMemo(
 		() => ({
 			isOpen,
+			position,
 			open,
 			close,
 			toggle,
@@ -111,7 +112,7 @@ export function SidebarFilter({
 			clearFilters,
 			applyFilters,
 		}),
-		[isOpen, open, close, toggle, filters, setFilter, clearFilters, applyFilters],
+		[isOpen, position, open, close, toggle, filters, setFilter, clearFilters, applyFilters],
 	);
 
 	return (

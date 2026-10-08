@@ -5,9 +5,9 @@ import type { IPaginationProps } from "./Pagination.interface";
 import type { PaginationSize, PaginationPageInputAlign } from "./Pagination.type";
 
 const BUTTON_SIZES: Record<PaginationSize, string> = {
-	sm: "w-6 h-6 text-[var(--ds-font-size-12)] min-w-6",
-	md: "w-9 h-9 text-[var(--ds-font-size-14)] min-w-9",
-	lg: "w-10 h-10 text-[var(--ds-font-size-14)] min-w-10",
+	sm: "w-6 h-6 text-[length:var(--ds-font-size-12)] min-w-6",
+	md: "w-9 h-9 text-[length:var(--ds-font-size-14)] min-w-9",
+	lg: "w-10 h-10 text-[length:var(--ds-font-size-14)] min-w-10",
 };
 
 const ICON_SIZES: Record<PaginationSize, number> = {
@@ -66,7 +66,7 @@ const PageButton = memo<PageButtonProps>(({ page, currentPage, disabled, size, o
 		buttonStateClasses =
 			"bg-[var(--ds-color-neutral-80)] text-[var(--ds-color-neutral-40)] cursor-not-allowed";
 	} else if (isActive) {
-		buttonStateClasses = "bg-[var(--ds-color-blue-10)] text-[var(--ds-color-neutral-white)]";
+		buttonStateClasses = "bg-[var(--ds-color-blue-10)] text-[color:var(--ds-color-neutral-white)]";
 	} else {
 		buttonStateClasses = "text-[var(--ds-color-neutral-40)] hover:bg-[var(--ds-color-neutral-90)]";
 	}
