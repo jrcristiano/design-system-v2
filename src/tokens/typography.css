@@ -1,0 +1,165 @@
+/* ================================
+   FONT IMPORTS – sempre no topo
+================================ */
+
+/* ================================
+   TOKENS TIPOGRÁFICOS DO DESIGN SYSTEM
+================================ */
+:root {
+	/* === FAMÍLIAS DISPONÍVEIS === */
+	--ds-font-family-fredoka:
+		"Fredoka", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+		"Apple Color Emoji", "Segoe UI Emoji";
+	--ds-font-family-inter:
+		"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+		"Apple Color Emoji", "Segoe UI Emoji";
+	--ds-font-family-poppins:
+		"Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+		"Apple Color Emoji", "Segoe UI Emoji";
+	--ds-font-family-montserrat:
+		"Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+		"Apple Color Emoji", "Segoe UI Emoji";
+
+	/* === PAPÉIS (ROLES) === */
+	--ds-font-family-heading: var(--ds-font-family-fredoka);
+	--ds-font-family-body: var(--ds-font-family-poppins);
+	--ds-font-family-ui: var(--ds-font-family-inter);
+
+	/* === PESOS === */
+	--ds-font-weight-regular: 400;
+	--ds-font-weight-medium: 500;
+	--ds-font-weight-semibold: 600;
+	--ds-font-weight-bold: 700;
+
+	/* === TAMANHOS (rem) === */
+	--ds-font-size-10: 0.625rem;
+	/* 10px */
+	--ds-font-size-12: 0.75rem;
+	/* 12px */
+	--ds-font-size-14: 0.875rem;
+	/* 14px */
+	--ds-font-size-16: 1rem;
+	/* 16px */
+	--ds-font-size-18: 1.125rem;
+	/* 18px */
+	--ds-font-size-20: 1.25rem;
+	/* 20px */
+	--ds-font-size-24: 1.5rem;
+	/* 24px */
+	--ds-font-size-28: 1.75rem;
+	/* 28px */
+	--ds-font-size-32: 2rem;
+	/* 32px */
+	--ds-font-size-40: 2.5rem;
+	/* 40px */
+	--ds-font-size-48: 3rem;
+	/* 48px */
+	--ds-font-size-64: 4rem;
+	/* 64px */
+
+	/* === LINE HEIGHTS (rem) === */
+	--ds-line-10: 0.625rem;
+	/* 10px */
+	--ds-line-15: 0.9375rem;
+	/* 15px */
+	--ds-line-20: 1.25rem;
+	/* 20px */
+	--ds-line-30: 1.875rem;
+	/* 30px */
+	--ds-line-50: 3.125rem;
+	/* 50px */
+	--ds-line-60: 3.75rem;
+	/* 60px */
+	--ds-line-70: 4.375rem;
+	/* 70px */
+	--ds-line-72: 4.5rem;
+	/* 72px */
+	--ds-line-110: 6.875rem;
+	/* 110px */
+	--ds-line-120: 7.5rem;
+	/* 120px */
+	--ds-line-130: 8.125rem;
+	/* 130px */
+
+	/* === HEADLINES === */
+	--ds-headline-1-size: var(--ds-font-size-64);
+	--ds-headline-1-line: var(--ds-line-110);
+	--ds-headline-1-weight: var(--ds-font-weight-bold);
+
+	--ds-headline-2-size: var(--ds-font-size-48);
+	--ds-headline-2-line: var(--ds-line-120);
+	--ds-headline-2-weight: var(--ds-font-weight-bold);
+
+	--ds-headline-3-size: var(--ds-font-size-40);
+	--ds-headline-3-line: var(--ds-line-120);
+	--ds-headline-3-weight: var(--ds-font-weight-semibold);
+
+	--ds-headline-4-size: var(--ds-font-size-24);
+	--ds-headline-4-line: var(--ds-line-120);
+	--ds-headline-4-weight: var(--ds-font-weight-semibold);
+
+	--ds-headline-5-size: var(--ds-font-size-16);
+	--ds-headline-5-line: var(--ds-line-130);
+	--ds-headline-5-weight: var(--ds-font-weight-medium);
+
+	--ds-headline-6-size: var(--ds-font-size-14);
+	--ds-headline-6-line: var(--ds-line-130);
+	--ds-headline-6-weight: var(--ds-font-weight-medium);
+
+	/* === BODY === */
+	--ds-body-1-size: var(--ds-font-size-20);
+	--ds-body-1-line: var(--ds-line-70);
+	--ds-body-1-weight: var(--ds-font-weight-regular);
+
+	--ds-body-2-size: var(--ds-font-size-18);
+	--ds-body-2-line: var(--ds-line-50);
+	--ds-body-2-weight: var(--ds-font-weight-regular);
+
+	--ds-body-3-size: var(--ds-font-size-16);
+	--ds-body-3-line: var(--ds-line-60);
+	--ds-body-3-weight: var(--ds-font-weight-regular);
+
+	--ds-body-4-size: var(--ds-font-size-14);
+	--ds-body-4-line: var(--ds-line-10);
+	--ds-body-4-weight: var(--ds-font-weight-regular);
+
+	/* === CAPTION === */
+	--ds-caption-1-size: var(--ds-font-size-12);
+	--ds-caption-1-line: var(--ds-line-10);
+	--ds-caption-1-weight: var(--ds-font-weight-regular);
+
+	--ds-caption-2-size: var(--ds-font-size-10);
+	--ds-caption-2-line: var(--ds-line-20);
+	--ds-caption-2-weight: var(--ds-font-weight-regular);
+
+	/* === LABEL === */
+	--ds-label-1-size: var(--ds-font-size-14);
+	--ds-label-1-line: var(--ds-line-20);
+	--ds-label-1-weight: var(--ds-font-weight-medium);
+
+	--ds-label-2-size: var(--ds-font-size-12);
+	--ds-label-2-line: var(--ds-line-15);
+	--ds-label-2-weight: var(--ds-font-weight-semibold);
+
+	/* === BUTTON === */
+	--ds-button-lg-size: var(--ds-font-size-16);
+	--ds-button-lg-line: var(--ds-line-10);
+	--ds-button-lg-weight: var(--ds-font-weight-medium);
+
+	--ds-button-md-size: var(--ds-font-size-14);
+	--ds-button-md-line: var(--ds-line-10);
+	--ds-button-md-weight: var(--ds-font-weight-semibold);
+
+	--ds-button-sm-size: var(--ds-font-size-12);
+	--ds-button-sm-line: var(--ds-line-20);
+	--ds-button-sm-weight: var(--ds-font-weight-semibold);
+
+	/* === LINK === */
+	--ds-link-md-size: var(--ds-font-size-16);
+	--ds-link-md-line: var(--ds-line-50);
+	--ds-link-md-weight: var(--ds-font-weight-medium);
+
+	--ds-link-sm-size: var(--ds-font-size-14);
+	--ds-link-sm-line: var(--ds-line-10);
+	--ds-link-sm-weight: var(--ds-font-weight-medium);
+}

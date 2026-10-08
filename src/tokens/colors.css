@@ -1,0 +1,137 @@
+:root {
+	/* === BLUE === */
+	--ds-color-blue-10: #001e4d !important;
+	--ds-color-blue-20: #002766 !important;
+	--ds-color-blue-30: #003b99 !important;
+	--ds-color-blue-40: #004ecc !important;
+	--ds-color-blue-50: #0062ff !important;
+	--ds-color-blue-60: #3381ff !important;
+	--ds-color-blue-70: #66a1ff !important;
+	--ds-color-blue-80: #99c0ff !important;
+	--ds-color-blue-90: #cce0ff !important;
+	--ds-color-blue-95: #e5efff !important;
+	--ds-color-blue-98: #f5f9ff !important;
+
+	/* === NEUTRAL === */
+	--ds-color-neutral-black: #000000 !important;
+	--ds-color-neutral-10: #17191c !important;
+	--ds-color-neutral-20: #2e3238 !important;
+	--ds-color-neutral-30: #454b54 !important;
+	--ds-color-neutral-40: #5c6470 !important;
+	--ds-color-neutral-50: #737d8c !important;
+	--ds-color-neutral-60: #89929e !important;
+	--ds-color-neutral-70: #abb1ba !important;
+	--ds-color-neutral-80: #c7cbd1 !important;
+	--ds-color-neutral-90: #e3e5e8 !important;
+	--ds-color-neutral-95: #f1f2f3 !important;
+	--ds-color-neutral-98: #f9fafa !important;
+	--ds-color-neutral-white: #ffffff !important;
+
+	/* === GREEN === */
+	--ds-color-green-10: #19410c !important;
+	--ds-color-green-20: #296c13 !important;
+	--ds-color-green-30: #338618 !important;
+	--ds-color-green-40: #42ad1f !important;
+	--ds-color-green-50: #53d827 !important;
+	--ds-color-green-60: #75e052 !important;
+	--ds-color-green-70: #98e87d !important;
+	--ds-color-green-80: #baefa9 !important;
+	--ds-color-green-90: #ddf7d4 !important;
+	--ds-color-green-95: #eefbe9 !important;
+	--ds-color-green-98: #f8fdf6 !important;
+
+	/* === RED === */
+	--ds-color-red-10: #480f05 !important;
+	--ds-color-red-20: #611405 !important;
+	--ds-color-red-30: #911f08 !important;
+	--ds-color-red-40: #c1290b !important;
+	--ds-color-red-50: #f23c18 !important;
+	--ds-color-red-60: #f45c3e !important;
+	--ds-color-red-70: #f7856e !important;
+	--ds-color-red-80: #faad9e !important;
+	--ds-color-red-90: #fcd6cf !important;
+	--ds-color-red-95: #feebe7 !important;
+	--ds-color-red-98: #fef7f5 !important;
+
+	/* === SKY === */
+	--ds-color-sky-10: #013a4c !important;
+	--ds-color-sky-20: #014e65 !important;
+	--ds-color-sky-30: #017da2 !important;
+	--ds-color-sky-40: #029cca !important;
+	--ds-color-sky-50: #02c2fc !important;
+	--ds-color-sky-60: #35cffd !important;
+	--ds-color-sky-70: #67dbfe !important;
+	--ds-color-sky-80: #9ae7fe !important;
+	--ds-color-sky-90: #ccf3ff !important;
+	--ds-color-sky-95: #e6f9ff !important;
+	--ds-color-sky-98: #f5fdff !important;
+
+	/* === ORANGE === */
+	--ds-color-orange-10: #4a2902 !important;
+	--ds-color-orange-20: #633603 !important;
+	--ds-color-orange-30: #955104 !important;
+	--ds-color-orange-40: #b36205 !important;
+	--ds-color-orange-50: #f88807 !important;
+	--ds-color-orange-60: #f9a039 !important;
+	--ds-color-orange-70: #fbb76a !important;
+	--ds-color-orange-80: #fccf9c !important;
+	--ds-color-orange-90: #fee7cd !important;
+	--ds-color-orange-95: #fef3e6 !important;
+	--ds-color-orange-98: #fffaf5 !important;
+
+	/* === YELLOW === */
+	--ds-color-yellow-10: #4d3d00 !important;
+	--ds-color-yellow-20: #665200 !important;
+	--ds-color-yellow-30: #856a00 !important;
+	--ds-color-yellow-40: #cca300 !important;
+	--ds-color-yellow-50: #ffcc00 !important;
+	--ds-color-yellow-60: #ffd633 !important;
+	--ds-color-yellow-70: #ffdd57 !important;
+	--ds-color-yellow-80: #ffeb99 !important;
+	--ds-color-yellow-90: #fff5cc !important;
+	--ds-color-yellow-95: #fffae5 !important;
+	--ds-color-yellow-98: #fffdf5 !important;
+
+	/* === CYAN === */
+	--ds-color-cyan-10: #0c413b !important;
+	--ds-color-cyan-20: #0f574e !important;
+	--ds-color-cyan-30: #178275 !important;
+	--ds-color-cyan-40: #22bfac !important;
+	--ds-color-cyan-50: #27d8c3 !important;
+	--ds-color-cyan-60: #52e0cf !important;
+	--ds-color-cyan-70: #7de8db !important;
+	--ds-color-cyan-80: #a8f0e7 !important;
+	--ds-color-cyan-90: #d4f7f3 !important;
+	--ds-color-cyan-95: #e9fbf9 !important;
+	--ds-color-cyan-98: #f6fdfd !important;
+
+	/* === CHERRY === */
+	--ds-color-cherry-10: #400d14 !important;
+	--ds-color-cherry-20: #55111a !important;
+	--ds-color-cherry-30: #7f1a27 !important;
+	--ds-color-cherry-40: #aa2235 !important;
+	--ds-color-cherry-50: #c5283d !important;
+	--ds-color-cherry-60: #dd5568 !important;
+	--ds-color-cherry-70: #e5808d !important;
+	--ds-color-cherry-80: #eeaab3 !important;
+	--ds-color-cherry-90: #f6d5d9 !important;
+	--ds-color-cherry-95: #fbeaec !important;
+	--ds-color-cherry-98: #fdf7f7 !important;
+
+	/* === PURPLE === */
+	--ds-color-purple-10: #210746 !important;
+	--ds-color-purple-20: #2c095d !important;
+	--ds-color-purple-30: #420d8c !important;
+	--ds-color-purple-40: #5812ba !important;
+	--ds-color-purple-50: #6e16e9 !important;
+	--ds-color-purple-60: #8b45ed !important;
+	--ds-color-purple-70: #a873f2 !important;
+	--ds-color-purple-80: #c5a2f6 !important;
+	--ds-color-purple-90: #e2d0fb !important;
+	--ds-color-purple-95: #f0e8fd !important;
+	--ds-color-purple-98: #f9f6fe !important;
+
+	/* Bases usadas pelos tokens semânticos */
+	--ds-surface: #ffffff !important;
+	--ds-bg-secondary: var(--ds-color-neutral-98) !important;
+}

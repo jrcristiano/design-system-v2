@@ -1,0 +1,6 @@
+:root {
+	/* === CONTROL HEIGHTS === */
+	--ds-control-height-sm: 32px;
+	--ds-control-height-md: 40px;
+	--ds-control-height-lg: 48px;
+}

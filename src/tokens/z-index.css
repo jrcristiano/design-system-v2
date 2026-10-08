@@ -1,0 +1,15 @@
+:root {
+	/* ================================
+     Z-INDEX TOKENS
+     Controle de empilhamento visual
+  ================================ */
+
+	--ds-z-behind: -1; /* Elementos atrás de tudo (ex: fundos decorativos) */
+	--ds-z-base: 0; /* Base da UI, conteúdo padrão */
+	--ds-z-fixed: 10; /* Cabeçalhos fixos, rodapés, navbar */
+	--ds-z-dropdown: 20; /* Menus suspensos, selects */
+	--ds-z-tooltip: 30; /* Tooltips, hover infos */
+	--ds-z-modal: 40; /* Modais */
+	--ds-z-overlay: 50; /* Backdrop (atrás de modais) */
+	--ds-z-toast: 60; /* Notificações fixas, alerts, toasts */
+}

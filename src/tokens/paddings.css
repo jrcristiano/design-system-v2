@@ -1,0 +1,82 @@
+:root {
+	/* ================================
+     PADDING TOKENS (rem)
+     base: 1rem = 16px
+  ================================ */
+
+	/* === APP / SEÇÕES === */
+	--ds-pad-app: 2rem;
+	/* 32px  | space.32 */
+	--ds-pad-section: 1.5rem;
+	/* 24px  | space.24 */
+
+	/* === CARD === */
+	--ds-pad-card: 1rem;
+	/* 16px  | space.16 */
+	--ds-pad-card-tight: 0.75rem;
+	/* 12px  | space.12 */
+
+	/* === MODAL / DRAWER === */
+	--ds-pad-modal: 1.5rem;
+	/* 24px  | space.24 */
+	--ds-pad-drawer: 1.5rem;
+	/* 24px  | space.24 */
+
+	/* === TABLES === */
+	--ds-pad-table-cell: 0.75rem;
+	/* 12px  | space.12 */
+	--ds-pad-table-cell-compact: 0.5rem;
+	/* 8px   | space.8 */
+
+	/* === LIST ITEMS === */
+	--ds-pad-list-item: 0.75rem;
+	/* 12px  | space.12 */
+	--ds-pad-list-item-compacta: 0.5rem;
+	/* 8px   | space.8 */
+
+	/* === INPUTS === */
+	--ds-pad-input-x: 0.75rem;
+	/* 12px  | space.12 */
+	--ds-pad-input-y: 0.5rem;
+	/* 8px   | space.8 */
+
+	/* === TEXTAREA === */
+	--ds-pad-textarea-x: 0.75rem;
+	/* 12px  | space.12 */
+	--ds-pad-textarea-y: 0.75rem;
+	/* 12px  | space.12 */
+
+	/* === BUTTONS === */
+	--ds-pad-button-x: 1rem;
+	/* 16px  | space.16 */
+	--ds-pad-button-y: 0.75rem;
+	/* 12px  | space.12 */
+
+	/* === BUTTON SM === */
+	--ds-pad-button-sm-x: 0.75rem;
+	/* 12px  | space.12 */
+	--ds-pad-button-sm-y: 0.5rem;
+	/* 8px   | space.8 */
+
+	/* === CHIP === */
+	--ds-pad-chip-x: 0.5rem;
+	/* 8px   | space.8 */
+	--ds-pad-chip-y: 0.25rem;
+	/* 4px   | space.4 */
+
+	/* === TOAST === */
+	--ds-pad-toast-x: 1rem;
+	/* 16px  | space.16 */
+	--ds-pad-toast-y: 0.75rem;
+	/* 12px  | space.12 */
+
+	/* === FORM GROUP === */
+	--ds-pad-form-group: 1rem;
+	/* 16px  | space.16 */
+
+	/* === TAG === */
+	--ds-pad-tag-x: 0.5rem;
+	/* 8px   | space.8 */
+	--ds-pad-tag-y: 0.75rem;
+	/* 4px   | space.4 */
+}

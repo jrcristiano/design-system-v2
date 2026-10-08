@@ -1,0 +1,40 @@
+image: node:24-alpine
+
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: Lint and Build (develop)
+          caches:
+            - node
+            - pnpm
+          script:
+            - corepack enable
+            - pnpm install --frozen-lockfile
+            - pnpm run lint
+            - pnpm run build
+
+    main:
+      - step:
+          name: Lint and Build (main)
+          caches:
+            - node
+            - pnpm
+          script:
+            - corepack enable
+            - pnpm install --frozen-lockfile
+            - pnpm run lint
+            - pnpm run build
+
+  pull-requests:
+    "**":
+      - step:
+          name: Validate PR
+          caches:
+            - node
+            - pnpm
+          script:
+            - corepack enable
+            - pnpm install --frozen-lockfile
+            - pnpm run lint
+            - pnpm run build

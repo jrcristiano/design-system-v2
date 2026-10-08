@@ -1,0 +1,44 @@
+.tippy-box {
+	border-radius: var(--ds-radius-md) !important;
+}
+
+.tippy-box > .tippy-content {
+	padding: 12px 14px;
+}
+
+.tippy-box[data-placement^="top"] > .tippy-arrow::before {
+	border-top-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-placement^="bottom"] > .tippy-arrow::before {
+	border-bottom-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-placement^="left"] > .tippy-arrow::before {
+	border-left-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-placement^="right"] > .tippy-arrow::before {
+	border-right-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-theme~="ds"] {
+	background: var(--ds-color-neutral-10);
+	color: #fff;
+}
+
+.tippy-box[data-theme~="ds"][data-placement^="top"] > .tippy-arrow::before {
+	border-top-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-theme~="ds"][data-placement^="bottom"] > .tippy-arrow::before {
+	border-bottom-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-theme~="ds"][data-placement^="left"] > .tippy-arrow::before {
+	border-left-color: var(--ds-color-neutral-10);
+}
+
+.tippy-box[data-theme~="ds"][data-placement^="right"] > .tippy-arrow::before {
+	border-right-color: var(--ds-color-neutral-10);
+}

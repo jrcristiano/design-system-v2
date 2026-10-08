@@ -1,0 +1,9 @@
+{
+	"files": [],
+	"references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+	"compilerOptions": {
+		"types": ["@storybook/react-vite", "vite/client", "node"],
+		"typeRoots": ["./node_modules/@types", "./.storybook/types"]
+	},
+	"exclude": ["src/stories", "node_modules", "dist"]
+}

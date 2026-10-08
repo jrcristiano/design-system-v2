@@ -1,0 +1,104 @@
+x-default-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        CI=true pnpm install --frozen-lockfile --store-dir=/tmp/pnpm-store
+        exec su node -s /bin/sh -c 'exec pnpm exec vite --host "$$HOST" --port "$$VITE_PORT" --strictPort'
+    user: "0:0"
+    ports:
+      - "${VITE_PORT:-5173}:${VITE_PORT:-5173}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      HOST: 0.0.0.0
+      CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING:-true}
+      VITE_PORT: ${VITE_PORT:-5173}
+      VITE_BASE_URL: ${VITE_BASE_URL:-/}
+      VITE_PUBLIC_DIR: ${VITE_PUBLIC_DIR:-public}
+      VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-info}
+      HUSKY: "0"
+    env_file:
+      - path: .env
+        required: false
+    init: true
+    restart: unless-stopped
+    logging: *default-logging
+
+  storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        CI=true pnpm install --frozen-lockfile --store-dir=/tmp/pnpm-store
+        exec su node -s /bin/sh -c 'exec pnpm exec storybook dev --host "$$HOST" --port "$$STORYBOOK_PORT" --no-open'
+    user: "0:0"
+    ports:
+      - "${STORYBOOK_PORT:-3000}:${STORYBOOK_PORT:-3000}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      HOST: 0.0.0.0
+      STORYBOOK_PORT: ${STORYBOOK_PORT:-3000}
+      STORYBOOK_ENV: ${STORYBOOK_ENV:-development}
+      STORYBOOK_DISABLE_TELEMETRY: ${STORYBOOK_DISABLE_TELEMETRY:-true}
+      HUSKY: "0"
+    env_file:
+      - path: .env
+        required: false
+    init: true
+    restart: unless-stopped
+    logging: *default-logging
+
+  preview:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: preview
+    ports:
+      - "${PORT:-4173}:8080"
+    restart: unless-stopped
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "test -s /tmp/nginx.pid && kill -0 $$(cat /tmp/nginx.pid)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "test -s /tmp/nginx.pid && kill -0 $$(cat /tmp/nginx.pid)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

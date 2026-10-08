@@ -1,0 +1,21 @@
+:root {
+	/* ================================
+     RADIUS TOKENS
+     (base: 1rem = 16px)
+  ================================ */
+
+	--ds-radius-none: 0rem !important;
+	/* 0px  → sem arredondamento */
+	--ds-radius-xs: 0.125rem !important;
+	/* 2px  → arredondamento sutil */
+	--ds-radius-sm: 0.25rem !important;
+	/* 4px  → bordas discretas */
+	--ds-radius-md: 0.5rem !important;
+	/* 8px  → padrão geral */
+	--ds-radius-lg: 1rem !important;
+	/* 16px → curvas suaves */
+	--ds-radius-xl: 1.5rem !important;
+	/* 24px → estilo bem arredondado */
+	--ds-radius-full: 9999px !important;
+	/* total → pill / círculo */
+}

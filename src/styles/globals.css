@@ -1,0 +1,213 @@
+@import "../tokens/fonts.css";
+@import "tailwindcss";
+@import "../tokens/colors.css";
+@import "../tokens/typography.css";
+@import "../tokens/radius.css";
+@import "../tokens/sizes.css";
+@import "../tokens/paddings.css";
+@import "../tokens/breakpoints.css";
+@import "../tokens/z-index.css";
+@import "../tokens/shadow-effects.css";
+@import "./custom-tippy.css";
+
+/* ================================
+   ANIMAÇÕES CUSTOMIZADAS
+================================ */
+
+@keyframes shimmer {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+/* ================================
+   CLASSES UTILITÁRIAS DE TIPOGRAFIA
+   Para uso direto nas classes Tailwind
+================================ */
+
+@layer utilities {
+	/* === FAMÍLIAS DE FONTES === */
+	.font-fredoka {
+		font-family: var(--ds-font-family-fredoka);
+	}
+
+	.font-poppins {
+		font-family: var(--ds-font-family-poppins);
+	}
+
+	.font-montserrat {
+		font-family: var(--ds-font-family-montserrat);
+	}
+
+	/* Papéis dinâmicos */
+	.font-heading {
+		font-family: var(--ds-font-family-heading);
+	}
+
+	.font-body {
+		font-family: var(--ds-font-family-body) !important;
+	}
+
+	.font-ui {
+		font-family: var(--ds-font-family-ui);
+	}
+
+	/* === HEADLINES === */
+	.text-headline-1 {
+		font-size: var(--ds-headline-1-size);
+		line-height: var(--ds-headline-1-line);
+		font-weight: var(--ds-headline-1-weight);
+		font-family: var(--ds-font-family-heading);
+	}
+
+	.text-headline-2 {
+		font-size: var(--ds-headline-2-size);
+		line-height: var(--ds-headline-2-line);
+		font-weight: var(--ds-headline-2-weight);
+		font-family: var(--ds-font-family-heading);
+	}
+
+	.text-headline-3 {
+		font-size: var(--ds-headline-3-size);
+		line-height: var(--ds-headline-3-line);
+		font-weight: var(--ds-headline-3-weight);
+		font-family: var(--ds-font-family-heading);
+	}
+
+	.text-headline-4 {
+		font-size: var(--ds-headline-4-size);
+		line-height: var(--ds-headline-4-line);
+		font-weight: var(--ds-headline-4-weight);
+		font-family: var(--ds-font-family-heading);
+	}
+
+	.text-headline-5 {
+		font-size: var(--ds-headline-5-size);
+		line-height: var(--ds-headline-5-line);
+		font-weight: var(--ds-headline-5-weight);
+		font-family: var(--ds-font-family-heading);
+	}
+
+	.text-headline-6 {
+		font-size: var(--ds-headline-6-size);
+		line-height: var(--ds-headline-6-line);
+		font-weight: var(--ds-headline-6-weight);
+		font-family: var(--ds-font-family-heading);
+	}
+
+	/* === BODY === */
+	.text-body-1 {
+		font-size: var(--ds-body-1-size);
+		line-height: var(--ds-body-1-line);
+		font-weight: var(--ds-body-1-weight);
+		font-family: var(--ds-font-family-body);
+	}
+
+	.text-body-2 {
+		font-size: var(--ds-body-2-size);
+		line-height: var(--ds-body-2-line);
+		font-weight: var(--ds-body-2-weight);
+		font-family: var(--ds-font-family-body);
+	}
+
+	.text-body-3 {
+		font-size: var(--ds-body-3-size);
+		line-height: var(--ds-body-3-line);
+		font-weight: var(--ds-body-3-weight);
+		font-family: var(--ds-font-family-body);
+	}
+
+	.text-body-4 {
+		font-size: var(--ds-body-4-size);
+		line-height: var(--ds-body-4-line);
+		font-weight: var(--ds-body-4-weight);
+		font-family: var(--ds-font-family-body);
+	}
+
+	/* === CAPTION === */
+	.text-caption-1 {
+		font-size: var(--ds-caption-1-size);
+		line-height: var(--ds-caption-1-line);
+		font-weight: var(--ds-caption-1-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	.text-caption-2 {
+		font-size: var(--ds-caption-2-size);
+		line-height: var(--ds-caption-2-line);
+		font-weight: var(--ds-caption-2-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	/* === LABEL === */
+	.text-label-1 {
+		font-size: var(--ds-label-1-size);
+		line-height: var(--ds-label-1-line);
+		font-weight: var(--ds-label-1-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	.text-label-2 {
+		font-size: var(--ds-label-2-size);
+		line-height: var(--ds-label-2-line);
+		font-weight: var(--ds-label-2-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	/* === BUTTON === */
+	.text-button-lg {
+		font-size: var(--ds-button-lg-size);
+		line-height: var(--ds-button-lg-line);
+		font-weight: var(--ds-button-lg-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	.text-button-md {
+		font-size: var(--ds-button-md-size);
+		line-height: var(--ds-button-md-line);
+		font-weight: var(--ds-button-md-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	.text-button-sm {
+		font-size: var(--ds-button-sm-size);
+		line-height: var(--ds-button-sm-line);
+		font-weight: var(--ds-button-sm-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	/* === LINK === */
+	.text-link-md {
+		font-size: var(--ds-link-md-size);
+		line-height: var(--ds-link-md-line);
+		font-weight: var(--ds-link-md-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+
+	.text-link-sm {
+		font-size: var(--ds-link-sm-size);
+		line-height: var(--ds-link-sm-line);
+		font-weight: var(--ds-link-sm-weight);
+		font-family: var(--ds-font-family-ui);
+	}
+}
+
+@layer base {
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type="number"] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+}
+
+html {
+	font-family: var(--ds-font-family-poppins);
+}

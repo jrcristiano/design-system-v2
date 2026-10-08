@@ -1,0 +1,127 @@
+/* Estilos para o editor Tiptap */
+.editor {
+	outline: none;
+	min-height: 120px;
+	padding: 10px;
+}
+
+.editor :global(p) {
+	margin: 0 0 8px 0;
+}
+
+.editor :global(p:last-child) {
+	margin-bottom: 0;
+}
+
+.editor :global(h1),
+.editor :global(h2),
+.editor :global(h3),
+.editor :global(h4),
+.editor :global(h5),
+.editor :global(h6) {
+	margin: 16px 0 8px 0;
+	font-weight: 600;
+}
+
+.editor :global(h1:first-child),
+.editor :global(h2:first-child),
+.editor :global(h3:first-child),
+.editor :global(h4:first-child),
+.editor :global(h5:first-child),
+.editor :global(h6:first-child) {
+	margin-top: 0;
+}
+
+.editor :global(ul),
+.editor :global(ol) {
+	padding-left: 24px;
+	margin: 8px 0;
+}
+
+.editor :global(ul) {
+	list-style-type: disc;
+}
+
+.editor :global(ol) {
+	list-style-type: decimal;
+}
+
+.editor :global(li) {
+	margin: 4px 0;
+	display: list-item;
+}
+
+.editor :global(strong) {
+	font-weight: 700;
+}
+
+.editor :global(em) {
+	font-style: italic;
+}
+
+.editor :global(s) {
+	text-decoration: line-through;
+}
+
+.editor :global(code) {
+	background-color: #f1f2f3;
+	padding: 2px 4px;
+	border-radius: 3px;
+	font-family: "Courier New", monospace;
+	font-size: 0.9em;
+}
+
+.editor :global(pre) {
+	background-color: #f1f2f3;
+	padding: 12px;
+	border-radius: 4px;
+	overflow-x: auto;
+	margin: 8px 0;
+}
+
+.editor :global(pre code) {
+	background-color: transparent;
+	padding: 0;
+}
+
+.editor :global(blockquote) {
+	border-left: 3px solid #737d8c;
+	padding-left: 12px;
+	margin: 8px 0;
+	color: #5c6470;
+}
+
+/* Placeholder */
+.editor :global(.ProseMirror-focused::before) {
+	content: none;
+}
+
+.toolbarButton {
+	background: transparent;
+	border: none;
+	border-radius: 4px;
+	padding: 4px 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 1;
+	transition: background-color 0.2s ease;
+}
+
+.toolbarButton:hover {
+	background: #f5f5f5;
+}
+
+.toolbarButtonActive {
+	background: #e0e0e0;
+}
+
+.toolbarButtonDisabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.toolbarButtonDisabled:hover {
+	background: transparent;
+}

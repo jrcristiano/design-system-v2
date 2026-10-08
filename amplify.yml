@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Using Node $NODE_VERSION"
+        - corepack enable
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - echo "Building Storybook static site"
+        - pnpm exec storybook build -o storybook-static
+  artifacts:
+    # Amplify Hosting expects the build output folder here
+    baseDirectory: storybook-static
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**
+      - .pnpm-store/**

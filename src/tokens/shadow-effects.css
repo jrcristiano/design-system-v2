@@ -1,0 +1,65 @@
+:root {
+	/* ================================
+     SHADOW TOKENS
+     base: sombra preta com opacidade variável
+  ================================ */
+
+	/* === Ambient Shadow === */
+	--ds-shadow-ambient-color: rgba(0, 0, 0, 0.12);
+	/* black.12 */
+	--ds-shadow-ambient: 0px 2px 4px var(--ds-shadow-ambient-color);
+	/* Sombra suave e ampla (níveis baixos) */
+
+	/* === Key Shadow === */
+	--ds-shadow-key-color: rgba(0, 0, 0, 0.14);
+	/* black.14 */
+	--ds-shadow-key: 0px 4px 8px var(--ds-shadow-key-color);
+	/* Sombra mais marcada (níveis médios/altos) */
+
+	/* === Inset Shadow === */
+	--ds-shadow-inset-color: rgba(0, 0, 0, 0.18);
+	/* black.18 */
+	--ds-shadow-inset: inset 0px 2px 4px var(--ds-shadow-inset-color);
+	/* Inner shadow para inputs/cards recuados */
+
+	/* ================================
+     EFFECT TOKENS — DROP SHADOW
+     Baseadas em color.shadow.ambient e color.shadow.key
+  ================================ */
+
+	/* === SHADOW LEVELS === */
+
+	/* sh.e1 — sombra mínima: chips, ícones flutuantes, hover leve */
+	--ds-shadow-effect-1: 0rem 0rem 0.125rem 0rem var(--ds-shadow-ambient-color);
+	/* (x=0, y=0, blur=2px) */
+
+	/* sh.e2 — sombra sutil: cards pequenos, listas, menus */
+	--ds-shadow-effect-2: 0rem 0.125rem 0.375rem 0rem var(--ds-shadow-ambient-color);
+	/* (x=0, y=2px, blur=6px) */
+
+	/* sh.e3 — sombra padrão: cards médios, popovers, dropdowns */
+	--ds-shadow-effect-3: 0rem 0.25rem 0.75rem 0rem var(--ds-shadow-key-color);
+	/* (x=0, y=4px, blur=12px) */
+
+	/* sh.e4 — sombra profunda: painéis flutuantes, tooltips amplos */
+	--ds-shadow-effect-4: 0rem 0.5rem 1.5rem 0rem var(--ds-shadow-key-color);
+	/* (x=0, y=8px, blur=24px) */
+
+	/* sh.e5 — sombra alta: drawers, side-panels, navegações soltas */
+	--ds-shadow-effect-5: 0rem 0.75rem 2rem 0rem var(--ds-shadow-key-color);
+	/* (x=0, y=12px, blur=32px) */
+
+	/* sh.e6 — sombra máxima: modais e camadas de maior prioridade */
+	--ds-shadow-effect-6: 0rem 1rem 3rem 0rem var(--ds-shadow-key-color);
+	/* (x=0, y=16px, blur=48px) */
+
+	/* ================================
+     EFFECT TOKEN — INNER SHADOW INPUT
+     Sombra interna sutil para campos de entrada (repouso/pressed)
+  ================================ */
+
+	/* sh.inset.input */
+	--ds-shadow-effect-inset-input: inset 0rem 0.0625rem 0.125rem 0rem var(--ds-shadow-inset-color);
+	/* (x=0, y=1px, blur=2px, spread=0)
+     Uso: inputs em repouso ou pressionados com leve profundidade */
+}

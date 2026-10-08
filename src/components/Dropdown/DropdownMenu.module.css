@@ -1,0 +1,21 @@
+.menuItemList {
+	overflow-x: hidden;
+}
+
+.customScroll::-webkit-scrollbar {
+	width: 8px;
+}
+
+.customScroll::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 8px;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+	background: var(--ds-color-neutral-40);
+	border-radius: 8px;
+}
+
+.customScroll::-webkit-scrollbar-thumb:hover {
+	background: var(--ds-color-neutral-50);
+}

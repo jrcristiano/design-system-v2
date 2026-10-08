@@ -1,0 +1,15 @@
+# Pastas de desenvolvimento
+src/stories/
+.storybook/
+storybook-static/
+.vscode/
+node_modules/
+dist/storybook/
+__tests__/
+
+# Arquivos que não precisam no npm
+*.log
+*.md
+tsconfig.json
+vite.config.*
+.storybook/

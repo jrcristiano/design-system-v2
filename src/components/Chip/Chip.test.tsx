@@ -1,0 +1,141 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, it, expect, vi } from "vitest";
+import { Chip } from "./Chip";
+
+describe("Chip", () => {
+	it("renders with children text", () => {
+		render(<Chip>Label</Chip>);
+		expect(screen.getByText("Label")).toBeInTheDocument();
+	});
+
+	it("uses pill radius by default", () => {
+		render(<Chip>Pill</Chip>);
+		const chip = screen.getByRole("button", { name: /pill/i });
+		expect(chip).toHaveStyle({
+			borderRadius: "var(--ds-radius-full, 9999px)",
+		});
+	});
+
+	it("uses rounded radius when pill is false", () => {
+		render(<Chip pill={false}>Rounded</Chip>);
+		const chip = screen.getByRole("button", { name: /rounded/i });
+		expect(chip).toHaveStyle({
+			borderRadius: "var(--ds-radius-md, 8px)",
+		});
+	});
+
+	it("renders with different variants", () => {
+		const { rerender } = render(<Chip variant="primary">Primary</Chip>);
+		expect(screen.getByText("Primary")).toBeInTheDocument();
+
+		rerender(<Chip variant="success">Success</Chip>);
+		expect(screen.getByText("Success")).toBeInTheDocument();
+
+		rerender(<Chip variant="danger">Danger</Chip>);
+		expect(screen.getByText("Danger")).toBeInTheDocument();
+	});
+
+	it("applies outline styles", () => {
+		render(
+			<Chip variant="primary" state="outline">
+				Outline
+			</Chip>,
+		);
+
+		const chip = screen.getByRole("button", { name: /outline/i });
+		expect(chip).toHaveStyle({
+			backgroundColor: "#fff",
+			color: "#004ECC",
+			borderColor: "#004ECC",
+		});
+	});
+
+	it("applies pressed styles", () => {
+		render(
+			<Chip variant="primary" state="pressed">
+				Pressed
+			</Chip>,
+		);
+
+		const chip = screen.getByRole("button", { name: /pressed/i });
+		expect(chip).toHaveStyle({
+			backgroundColor: "#003B99",
+			color: "#fff",
+		});
+	});
+
+	it("applies disabled styles", () => {
+		render(<Chip disabled>Disabled</Chip>);
+		const chip = screen.getByRole("button", { name: /disabled/i });
+		expect(chip).toBeDisabled();
+		expect(chip).toHaveStyle({
+			backgroundColor: "#C7CBD1",
+			color: "#5C6470",
+		});
+	});
+
+	it("renders left and right icons", () => {
+		const IconLeft = () => <span data-testid="icon-left">L</span>;
+		const IconRight = () => <span data-testid="icon-right">R</span>;
+		render(
+			<Chip iconLeft={IconLeft} iconRight={IconRight}>
+				With Icons
+			</Chip>,
+		);
+		expect(screen.getByTestId("icon-left")).toBeInTheDocument();
+		expect(screen.getByTestId("icon-right")).toBeInTheDocument();
+	});
+
+	it("calls onIconLeftClick when left icon is clicked", async () => {
+		const user = userEvent.setup();
+		const handleIconLeftClick = vi.fn();
+		const IconLeft = () => <span data-testid="icon-left">L</span>;
+		render(
+			<Chip iconLeft={IconLeft} onIconLeftClick={handleIconLeftClick}>
+				With Left Icon
+			</Chip>,
+		);
+
+		await user.click(screen.getByTestId("icon-left"));
+		expect(handleIconLeftClick).toHaveBeenCalled();
+	});
+
+	it("calls onIconRightClick when right icon is clicked", async () => {
+		const user = userEvent.setup();
+		const handleIconRightClick = vi.fn();
+		const IconRight = () => <span data-testid="icon-right">R</span>;
+		render(
+			<Chip iconRight={IconRight} onIconRightClick={handleIconRightClick}>
+				With Right Icon
+			</Chip>,
+		);
+
+		await user.click(screen.getByTestId("icon-right"));
+		expect(handleIconRightClick).toHaveBeenCalled();
+	});
+
+	it("does not call icon handlers when disabled", async () => {
+		const user = userEvent.setup();
+		const handleIconLeftClick = vi.fn();
+		const handleIconRightClick = vi.fn();
+		const IconLeft = () => <span data-testid="icon-left">L</span>;
+		const IconRight = () => <span data-testid="icon-right">R</span>;
+		render(
+			<Chip
+				disabled
+				iconLeft={IconLeft}
+				iconRight={IconRight}
+				onIconLeftClick={handleIconLeftClick}
+				onIconRightClick={handleIconRightClick}
+			>
+				Disabled Icons
+			</Chip>,
+		);
+
+		await user.click(screen.getByTestId("icon-left"));
+		await user.click(screen.getByTestId("icon-right"));
+		expect(handleIconLeftClick).not.toHaveBeenCalled();
+		expect(handleIconRightClick).not.toHaveBeenCalled();
+	});
+});

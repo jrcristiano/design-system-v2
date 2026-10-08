@@ -1,0 +1,479 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chart component > matches snapshot (bar) 1`] = `
+<div>
+  <div
+    style="position: relative; width: 500px; background-color: rgb(255, 255, 255); border-radius: 8px;"
+  >
+    <div
+      class="VictoryContainer"
+      style="height: 100%; width: 100%; user-select: none; pointer-events: none; position: relative;"
+    >
+      <svg
+        height="300"
+        role="img"
+        style="width: 100%; height: 100%; pointer-events: all;"
+        viewBox="0 0 500 300"
+        width="500"
+      >
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #D1D5DB; fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="450"
+            y1="250"
+            y2="250"
+          />
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="70"
+              x2="70"
+              y1="250"
+              y2="50"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="70"
+              x2="70"
+              y1="250"
+              y2="255"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-0-tickLabels-0"
+              x="70"
+              y="271.55"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="middle"
+                x="70"
+              >
+                Jan
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="250"
+              x2="250"
+              y1="250"
+              y2="50"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="250"
+              x2="250"
+              y1="250"
+              y2="255"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-0-tickLabels-1"
+              x="250"
+              y="271.55"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="middle"
+                x="250"
+              >
+                Feb
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="430"
+              x2="430"
+              y1="250"
+              y2="50"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="430"
+              x2="430"
+              y1="250"
+              y2="255"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-0-tickLabels-2"
+              x="430"
+              y="271.55"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="middle"
+                x="430"
+              >
+                Mar
+              </tspan>
+            </text>
+          </g>
+        </g>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #D1D5DB; fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="50"
+            y1="50"
+            y2="250"
+          />
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="450"
+              y1="216.66666666666669"
+              y2="216.66666666666669"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="45"
+              y1="216.66666666666669"
+              y2="216.66666666666669"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-0"
+              x="37"
+              y="220.2166666666667"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="end"
+                x="37"
+              >
+                5
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="450"
+              y1="183.33333333333334"
+              y2="183.33333333333334"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="45"
+              y1="183.33333333333334"
+              y2="183.33333333333334"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-1"
+              x="37"
+              y="186.88333333333335"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="end"
+                x="37"
+              >
+                10
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="450"
+              y1="150"
+              y2="150"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="45"
+              y1="150"
+              y2="150"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-2"
+              x="37"
+              y="153.55"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="end"
+                x="37"
+              >
+                15
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="450"
+              y1="116.66666666666667"
+              y2="116.66666666666667"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="45"
+              y1="116.66666666666667"
+              y2="116.66666666666667"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-3"
+              x="37"
+              y="120.21666666666667"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="end"
+                x="37"
+              >
+                20
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="450"
+              y1="83.33333333333333"
+              y2="83.33333333333333"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="45"
+              y1="83.33333333333333"
+              y2="83.33333333333333"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-4"
+              x="37"
+              y="86.88333333333333"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="end"
+                x="37"
+              >
+                25
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="450"
+              y1="50"
+              y2="50"
+            />
+            <line
+              role="presentation"
+              shape-rendering="auto"
+              style="stroke: #90A4AE; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+              vector-effect="non-scaling-stroke"
+              x1="50"
+              x2="45"
+              y1="50"
+              y2="50"
+            />
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-5"
+              x="37"
+              y="53.55"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                text-anchor="end"
+                x="37"
+              >
+                30
+              </tspan>
+            </text>
+          </g>
+        </g>
+        <g
+          role="presentation"
+        >
+          <path
+            d="M 50, 250 
+A 0 0 0 0 1, 50, 250 
+L 50, 183.33333333333334 
+A 0 0 0 0 1, 50, 183.33333333333334 
+L 90, 183.33333333333334 
+A 0 0 0 0 1, 90, 183.33333333333334 
+L 90, 250 
+A 0 0 0 0 1, 90, 250 
+ z"
+            index="0"
+            role="presentation"
+            shape-rendering="auto"
+            style="fill: #017DA2; stroke: none; padding: 8px; stroke-width: 0;"
+          />
+          <path
+            d="M 230, 250 
+A 0 0 0 0 1, 230, 250 
+L 230, 116.66666666666667 
+A 0 0 0 0 1, 230, 116.66666666666667 
+L 270, 116.66666666666667 
+A 0 0 0 0 1, 270, 116.66666666666667 
+L 270, 250 
+A 0 0 0 0 1, 270, 250 
+ z"
+            index="1"
+            role="presentation"
+            shape-rendering="auto"
+            style="fill: #017DA2; stroke: none; padding: 8px; stroke-width: 0;"
+          />
+          <path
+            d="M 410, 250 
+A 0 0 0 0 1, 410, 250 
+L 410, 50 
+A 0 0 0 0 1, 410, 50 
+L 450, 50 
+A 0 0 0 0 1, 450, 50 
+L 450, 250 
+A 0 0 0 0 1, 450, 250 
+ z"
+            index="2"
+            role="presentation"
+            shape-rendering="auto"
+            style="fill: #017DA2; stroke: none; padding: 8px; stroke-width: 0;"
+          />
+        </g>
+      </svg>
+      <div
+        style="width: 100%; height: 100%; z-index: 99; position: absolute; top: 0px; left: 0px;"
+      >
+        <svg
+          height="300"
+          style="width: 100%; height: 100%; overflow: visible;"
+          viewBox="0 0 500 300"
+          width="500"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

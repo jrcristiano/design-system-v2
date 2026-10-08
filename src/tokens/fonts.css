@@ -1,0 +1,74 @@
+/* === FREDOKA (Ensino Fundamental - Headings) === */
+@font-face {
+	font-family: "Fredoka";
+	src: url("../assets/fonts/fredoka/Fredoka-VariableFont_wdth,wght.ttf")
+		format("truetype-variations");
+	font-weight: 400 700;
+	font-stretch: 75% 125%;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* === POPPINS (Ensino Fundamental - Body/UI) === */
+@font-face {
+	font-family: "Poppins";
+	src: url("../assets/fonts/poppins/Poppins-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../assets/fonts/poppins/Poppins-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../assets/fonts/poppins/Poppins-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../assets/fonts/poppins/Poppins-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* === MONTSERRAT (Ensino Médio - All text) === */
+@font-face {
+	font-family: "Montserrat";
+	src: url("../assets/fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+		format("truetype-variations");
+	font-weight: 400 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	src: url("../assets/fonts/montserrat/Montserrat-Italic-VariableFont_wght.ttf")
+		format("truetype-variations");
+	font-weight: 400 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* === DESIGN SYSTEM FONT TOKENS === */
+:root {
+	--ds-font-family-fredoka: "Fredoka", sans-serif;
+	--ds-font-family-poppins: "Poppins", sans-serif;
+	--ds-font-family-montserrat: "Montserrat", sans-serif;
+
+	/* Dynamic tokens (changed by Typography component) */
+	--ds-font-family-heading: var(--ds-font-family-fredoka);
+	--ds-font-family-body: var(--ds-font-family-poppins);
+	--ds-font-family-ui: var(--ds-font-family-poppins);
+}
