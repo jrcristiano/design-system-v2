@@ -16,7 +16,7 @@ export interface CarouselProps {
 	autoplay?: boolean;
 	/** Intervalo do autoplay em milissegundos */
 	autoplayInterval?: number;
-	/** Número de itens visíveis por vez (responsivo) */
+	/** Número de itens visíveis por vez (responsivo; aceita frações para mostrar parte do próximo slide) */
 	itemsPerView?: {
 		mobile?: number;
 		tablet?: number;

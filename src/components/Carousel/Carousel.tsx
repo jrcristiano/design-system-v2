@@ -17,7 +17,7 @@ const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : us
 
 const normalizeCount = (value: number | undefined, fallback: number): number => {
 	if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) return fallback;
-	return Math.max(1, Math.floor(value));
+	return Math.max(1, value);
 };
 
 const normalizeGap = (value: number | undefined): number => {
@@ -190,7 +190,7 @@ export const Carousel = ({
 			let nextIndex: number;
 			if (loop && index < 0) nextIndex = maxIndex;
 			else if (loop && index > maxIndex) nextIndex = 0;
-			else nextIndex = clamp(Math.trunc(index), maxIndex);
+			else nextIndex = clamp(index, maxIndex);
 
 			if (nextIndex === currentIndexRef.current) return;
 			currentIndexRef.current = nextIndex;
@@ -409,7 +409,8 @@ export const Carousel = ({
 						}}
 					>
 						{safeItems.map((item, index) => {
-							const isHidden = index < currentIndex || index >= currentIndex + visibleItems;
+							const isHidden =
+								index < Math.floor(currentIndex) || index >= currentIndex + visibleItems;
 							return (
 								<div
 									key={item.id}
@@ -447,7 +448,7 @@ export const Carousel = ({
 				aria-atomic="true"
 			>
 				{safeItems.length > 0 &&
-					`${currentIndex + 1} a ${Math.min(currentIndex + visibleItems, safeItems.length)} de ${safeItems.length}`}
+					`${Math.floor(currentIndex) + 1} a ${Math.min(Math.ceil(currentIndex + visibleItems), safeItems.length)} de ${safeItems.length}`}
 			</div>
 
 			{showDots && totalPages > 1 && (

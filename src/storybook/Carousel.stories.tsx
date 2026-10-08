@@ -29,7 +29,7 @@ const meta = {
 		showDots: { description: "Mostra os botões de página.", control: { type: "boolean" } },
 		itemsPerView: {
 			description:
-				"Quantidade por largura do container: mobile (<768 px), tablet (768–1023 px), desktop (≥1024 px).",
+				"Quantidade por largura do container (aceita frações para mostrar parte do próximo slide): mobile (<768 px), tablet (768–1023 px), desktop (≥1024 px).",
 			control: { type: "object" },
 		},
 		autoplay: {
@@ -136,6 +136,41 @@ export const DotsOnly: Story = {
 
 export const MultipleVisibleItems: Story = {
 	args: { ...baseArgs, itemsPerView: { mobile: 1, tablet: 2, desktop: 4 }, gap: 16 },
+};
+
+export const FractionalItems12: Story = {
+	args: {
+		...baseArgs,
+		itemsPerView: { mobile: 1.2, tablet: 1.2, desktop: 1.2 },
+		gap: 16,
+		loop: false,
+	},
+};
+
+export const FractionalItems25: Story = {
+	args: {
+		...baseArgs,
+		itemsPerView: { mobile: 2.5, tablet: 2.5, desktop: 2.5 },
+		gap: 24,
+		loop: false,
+	},
+};
+
+export const FractionalItems32: Story = {
+	args: {
+		...baseArgs,
+		itemsPerView: { mobile: 3.2, tablet: 3.2, desktop: 3.2 },
+		gap: 24,
+		loop: false,
+	},
+};
+
+export const ResponsiveFractionalItems: Story = {
+	args: {
+		...baseArgs,
+		itemsPerView: { mobile: 1.2, tablet: 2.2, desktop: 3.2 },
+		loop: false,
+	},
 };
 
 export const Responsive: Story = {

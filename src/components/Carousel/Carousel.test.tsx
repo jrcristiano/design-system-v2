@@ -65,6 +65,43 @@ describe("Carousel", () => {
 		).not.toBeInTheDocument();
 	});
 
+	it.each([1, 1.2, 2.5, 3.2])("preserves fractional itemsPerView=%s in slide sizing", (perView) => {
+		const { container } = render(
+			<Carousel
+				items={createItems(8)}
+				itemsPerView={{ mobile: perView, tablet: perView, desktop: perView }}
+				loop={false}
+			/>,
+		);
+		const item = container.querySelector<HTMLElement>(".carousel-item");
+		const percentage = item?.style.flexBasis.match(/([\d.]+)%/)?.[1];
+		expect(Number(percentage)).toBeCloseTo(100 / perView, 3);
+	});
+
+	it("uses the fractional physical end offset and keeps the partially visible slide available", () => {
+		const onSlideChange = vi.fn();
+		const { container } = render(
+			<Carousel
+				items={createItems(6)}
+				itemsPerView={{ mobile: 3.2, tablet: 3.2, desktop: 3.2 }}
+				loop={false}
+				onSlideChange={onSlideChange}
+			/>,
+		);
+		const next = screen.getByRole("button", { name: "Próximo slide" });
+		fireEvent.click(next);
+		fireEvent.click(next);
+		fireEvent.click(next);
+		expect(onSlideChange).toHaveBeenLastCalledWith(2.8);
+		expect(next).toBeDisabled();
+		expect(
+			screen.getByText("Slide 6").closest('[aria-roledescription="slide"]'),
+		).not.toHaveAttribute("aria-hidden", "true");
+		expect(container.querySelector(".carousel-track")?.getAttribute("style")).toContain(
+			`${2.8 * (100 / 3.2)}%`,
+		);
+	});
+
 	it("moves one item for each rapid click and only reports real index changes", () => {
 		const onSlideChange = vi.fn();
 		render(
