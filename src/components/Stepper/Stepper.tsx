@@ -1,35 +1,59 @@
-import type { FC, ReactNode } from "react";
-import { memo, useMemo } from "react";
+import type { FC, ReactElement, ReactNode } from "react";
+import { isValidElement, memo, useMemo } from "react";
 import clsx from "clsx";
 import { Step } from "./Step";
 import type { StepData, StepStatus } from "./Step.interface";
 import type { StepperProps } from "./Stepper.interface";
 
-// StepLink uses data attributes to store props; parent Stepper accesses them via .props pattern
-const StepLink: FC<{
+type StepItemProps = { children: ReactNode };
+type StepLinkProps = {
 	eventKey?: string | number;
 	href?: string;
 	disabled?: boolean;
 	children: ReactNode;
-}> = ({ eventKey, href, disabled, children }) => (
+};
+
+// StepLink uses data attributes to store props; parent Stepper accesses them via .props pattern
+const StepLink: FC<StepLinkProps> = ({ eventKey, href, disabled, children }) => (
 	<span data-eventkey={eventKey} data-href={href} data-disabled={disabled}>
 		{children}
 	</span>
 );
 StepLink.displayName = "StepLink";
 
-const StepItem: FC<{ children: ReactNode }> = ({ children }) => <>{children}</>;
+const StepItem: FC<StepItemProps> = ({ children }) => <>{children}</>;
 StepItem.displayName = "StepItem";
+
+const hasDisplayName = <Props,>(
+	child: ReactNode,
+	displayName: string,
+): child is ReactElement<Props> => {
+	if (!isValidElement<Props>(child)) return false;
+
+	const elementType = child.type;
+	const canHaveDisplayName =
+		typeof elementType === "function" || (typeof elementType === "object" && elementType !== null);
+
+	return (
+		canHaveDisplayName && "displayName" in elementType && elementType.displayName === displayName
+	);
+};
+
+const isStepItem = (child: ReactNode): child is ReactElement<StepItemProps> =>
+	hasDisplayName<StepItemProps>(child, "StepItem");
+
+const isStepLink = (child: ReactNode): child is ReactElement<StepLinkProps> =>
+	hasDisplayName<StepLinkProps>(child, "StepLink");
 
 const StepperComponent: FC<StepperProps> = memo(({ children, activeKey, onSelect, className }) => {
 	const steps = useMemo(() => {
 		const stepItems = Array.isArray(children) ? children : [children];
 
 		return stepItems
-			.filter((child: any) => child?.type?.displayName === "StepItem")
-			.map((child: any) => {
+			.filter(isStepItem)
+			.map((child) => {
 				const stepLink = child.props.children;
-				if (stepLink?.type?.displayName === "StepLink") {
+				if (isStepLink(stepLink)) {
 					return {
 						key: stepLink.props.eventKey ?? stepLink.props.href,
 						href: stepLink.props.href,
