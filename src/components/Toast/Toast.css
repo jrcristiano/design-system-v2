@@ -5,29 +5,40 @@
 .Toastify__toast {
 	padding: 16px 20px;
 	border-radius: var(--ds-radius-md);
-	color: #fff;
+	color: var(--ds-color-neutral-white);
 	box-shadow: var(--ds-shadow-effect-2);
 }
 
-.Toastify__toast--info {
-	background: #017da2;
+.Toastify__toast.Toastify__toast--info {
+	background: var(--ds-color-sky-30);
 }
 
-.Toastify__toast--success {
-	background: #338618;
+.Toastify__toast.Toastify__toast--success {
+	background: var(--ds-color-green-30);
 }
 
-.Toastify__toast--warning {
-	background: #b36205;
+.Toastify__toast.Toastify__toast--warning {
+	background: var(--ds-color-orange-40);
 }
 
-.Toastify__toast--error {
-	background: #c1290b;
+.Toastify__toast.Toastify__toast--error {
+	background: var(--ds-color-red-40);
+}
+
+.Toastify__toast.Toastify__toast--info,
+.Toastify__toast.Toastify__toast--success,
+.Toastify__toast.Toastify__toast--warning,
+.Toastify__toast.Toastify__toast--error {
+	color: var(--ds-color-neutral-white);
 }
 
 .Toastify__close-button {
-	color: #fff;
+	color: var(--ds-color-neutral-white);
 	opacity: 0.8;
+}
+
+.Toastify__close-button.Toastify__close-button--light {
+	color: var(--ds-color-neutral-white);
 }
 
 .Toastify__close-button:hover {
@@ -35,5 +46,5 @@
 }
 
 .Toastify__progress-bar {
-	background: rgba(255, 255, 255, 0.35);
+	background: color-mix(in srgb, var(--ds-color-neutral-white) 35%, transparent);
 }

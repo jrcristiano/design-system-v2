@@ -105,6 +105,42 @@ export const Playground: Story = {
 	render: (args) => <ToastStory {...args} />,
 };
 
+export const Info: Story = {
+	args: {
+		variant: "info",
+		title: "Existem atualizações pendentes.",
+		icon: iconOptions.InfoIcon,
+	},
+	render: (args) => <ToastStory {...args} />,
+};
+
+export const Success: Story = {
+	args: {
+		variant: "success",
+		title: "Os arquivos foram processados.",
+		icon: iconOptions.CheckCircleIcon,
+	},
+	render: (args) => <ToastStory {...args} />,
+};
+
+export const Warning: Story = {
+	args: {
+		variant: "warning",
+		title: "Revise os dados antes de enviar.",
+		icon: iconOptions.WarningCircleIcon,
+	},
+	render: (args) => <ToastStory {...args} />,
+};
+
+export const Error: Story = {
+	args: {
+		variant: "danger",
+		title: "Não foi possível concluir a operação.",
+		icon: iconOptions.WarningOctagonIcon,
+	},
+	render: (args) => <ToastStory {...args} />,
+};
+
 export const Variants: Story = {
 	render: (args) => {
 		const { ...containerProps } = args;
