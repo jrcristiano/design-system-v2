@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Formik, Form } from "formik";
 import { RichText } from "./RichText";
@@ -18,6 +18,7 @@ const mockChain = {
 // Store transaction handler and onUpdate callback
 let transactionHandler: (() => void) | null = null;
 let onUpdateCallback: ((params: { editor: typeof mockEditor }) => void) | null = null;
+let editorAttributes: Record<string, string> = {};
 
 // Mock @tiptap/react
 const mockEditor = {
@@ -40,14 +41,31 @@ const mockEditor = {
 };
 
 vi.mock("@tiptap/react", () => ({
-	useEditor: vi.fn((config: { onUpdate?: (params: { editor: typeof mockEditor }) => void }) => {
-		if (config?.onUpdate) {
-			onUpdateCallback = config.onUpdate;
-		}
-		return mockEditor;
-	}),
+	useEditor: vi.fn(
+		(config: {
+			onUpdate?: (params: { editor: typeof mockEditor }) => void;
+			editorProps?: { attributes?: Record<string, string> };
+		}) => {
+			editorAttributes = config?.editorProps?.attributes ?? {};
+			if (config?.onUpdate) {
+				onUpdateCallback = config.onUpdate;
+			}
+			return mockEditor;
+		},
+	),
 	EditorContent: ({ editor }: { editor: unknown }) => (
-		<div data-testid="editor-content">{editor ? "Editor loaded" : "No editor"}</div>
+		<div
+			id={editorAttributes.id}
+			role={editorAttributes.role}
+			aria-labelledby={editorAttributes["aria-labelledby"]}
+			aria-label={editorAttributes["aria-label"]}
+			aria-required={editorAttributes["aria-required"] === "true"}
+			aria-multiline={editorAttributes["aria-multiline"] === "true"}
+			contentEditable
+			data-testid="editor-content"
+		>
+			{editor ? "Editor loaded" : "No editor"}
+		</div>
 	),
 }));
 
@@ -61,19 +79,28 @@ describe("RichText", () => {
 		mockEditor.getText.mockReturnValue("Test content");
 		mockEditor.getHTML.mockReturnValue("<p>Test content</p>");
 		onUpdateCallback = null;
+		editorAttributes = {};
 	});
 
 	describe("rendering", () => {
 		it("renders without label", () => {
 			render(<RichText onChange={vi.fn()} />);
 
-			expect(screen.getByTestId("editor-content")).toBeInTheDocument();
+			expect(screen.getByRole("textbox", { name: "Editor de texto" })).toBeInTheDocument();
 		});
 
 		it("renders with label", () => {
 			render(<RichText label="Description" onChange={vi.fn()} />);
 
 			expect(screen.getByText("Description")).toBeInTheDocument();
+			expect(screen.getByLabelText("Description")).toBe(screen.getByTestId("editor-content"));
+		});
+
+		it("exposes required multiline textbox semantics", () => {
+			render(<RichText label="Description" required onChange={vi.fn()} />);
+			const editor = screen.getByRole("textbox", { name: "Description" });
+			expect(editor).toHaveAttribute("aria-required", "true");
+			expect(editor).toHaveAttribute("aria-multiline", "true");
 		});
 
 		it("renders with required indicator", () => {
@@ -174,7 +201,7 @@ describe("RichText", () => {
 			render(<RichText onChange={vi.fn()} />);
 
 			const boldButton = screen.getByTitle("Negrito");
-			fireEvent.mouseDown(boldButton);
+			fireEvent.click(boldButton);
 
 			expect(mockChain.toggleBold).toHaveBeenCalled();
 			expect(mockChain.run).toHaveBeenCalled();
@@ -184,7 +211,7 @@ describe("RichText", () => {
 			render(<RichText onChange={vi.fn()} />);
 
 			const italicButton = screen.getByTitle("Itálico");
-			fireEvent.mouseDown(italicButton);
+			fireEvent.click(italicButton);
 
 			expect(mockChain.toggleItalic).toHaveBeenCalled();
 		});
@@ -193,7 +220,7 @@ describe("RichText", () => {
 			render(<RichText onChange={vi.fn()} />);
 
 			const bulletButton = screen.getByTitle("Lista com marcadores");
-			fireEvent.mouseDown(bulletButton);
+			fireEvent.click(bulletButton);
 
 			expect(mockChain.toggleBulletList).toHaveBeenCalled();
 		});
@@ -202,7 +229,7 @@ describe("RichText", () => {
 			render(<RichText onChange={vi.fn()} />);
 
 			const orderedButton = screen.getByTitle("Lista numerada");
-			fireEvent.mouseDown(orderedButton);
+			fireEvent.click(orderedButton);
 
 			expect(mockChain.toggleOrderedList).toHaveBeenCalled();
 		});
@@ -211,7 +238,7 @@ describe("RichText", () => {
 			render(<RichText onChange={vi.fn()} />);
 
 			const strikeButton = screen.getByTitle("Tachado");
-			fireEvent.mouseDown(strikeButton);
+			fireEvent.click(strikeButton);
 
 			expect(mockChain.toggleStrike).toHaveBeenCalled();
 		});
@@ -268,6 +295,19 @@ describe("RichText", () => {
 			const hiddenInput = document.querySelector('input[name="description"]');
 			expect(hiddenInput).toBeInTheDocument();
 			expect(hiddenInput).toHaveAttribute("type", "hidden");
+		});
+
+		it("submits the latest formatted HTML when the character count is unchanged", () => {
+			render(<RichText name="description" onChange={vi.fn()} />);
+			const hiddenInput = document.querySelector<HTMLInputElement>('input[name="description"]')!;
+			mockEditor.getHTML.mockReturnValue("<p><strong>Test</strong> content</p>");
+			mockEditor.getText.mockReturnValue("Test content");
+
+			act(() => {
+				onUpdateCallback?.({ editor: mockEditor });
+			});
+
+			expect(hiddenInput).toHaveValue("<p><strong>Test</strong> content</p>");
 		});
 
 		it("does not render hidden input without name prop", () => {

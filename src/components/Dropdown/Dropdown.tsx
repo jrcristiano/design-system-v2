@@ -12,6 +12,7 @@ export function Dropdown({ children, direction = "down" }: Readonly<DropdownProp
 	const [open, setOpen] = useState(false);
 	const [searchQuery, setSearchQuery] = useState("");
 	const containerRef = useRef<HTMLDivElement | null>(null);
+	const triggerRef = useRef<HTMLElement | null>(null);
 
 	// Hooks combinados para menos funções recreadas
 	const close = useCallback(() => {
@@ -19,9 +20,17 @@ export function Dropdown({ children, direction = "down" }: Readonly<DropdownProp
 		setSearchQuery("");
 	}, []);
 
-	const toggle = useCallback(() => {
-		setOpen((prev) => !prev);
-	}, []);
+	const toggle = useCallback(
+		(trigger?: HTMLElement | null) => {
+			if (open) {
+				close();
+				return;
+			}
+			triggerRef.current = trigger ?? (document.activeElement as HTMLElement | null);
+			setOpen(true);
+		},
+		[close, open],
+	);
 
 	// Centraliza todos os eventos fora do DOM
 	const handleClickOutside = useCallback(
@@ -36,9 +45,13 @@ export function Dropdown({ children, direction = "down" }: Readonly<DropdownProp
 
 	const handleEscape = useCallback(
 		(event: KeyboardEvent) => {
-			if (event.key === "Escape") close();
+			if (event.key === "Escape" && open) {
+				event.preventDefault();
+				close();
+				triggerRef.current?.focus();
+			}
 		},
-		[close],
+		[close, open],
 	);
 
 	// Adiciona e remove listeners de forma eficiente

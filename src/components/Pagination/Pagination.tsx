@@ -168,8 +168,8 @@ export const Pagination: React.FC<IPaginationProps> = memo(
 			handleInputSubmit();
 		};
 
-		const startItem = (currentPage - 1) * perPage + 1;
-		const endItem = Math.min(currentPage * perPage, total);
+		const startItem = total === 0 ? 0 : (currentPage - 1) * perPage + 1;
+		const endItem = total === 0 ? 0 : Math.min(currentPage * perPage, total);
 
 		// ---------- Page Numbers ----------
 		const pageNumbers = (() => {

@@ -18,6 +18,18 @@ describe("ProgressBar", () => {
 		expect(screen.getByText("Enviando arquivo...")).toBeInTheDocument();
 		expect(screen.getByText("64%")).toBeInTheDocument();
 		expect(screen.getByTestId("progressbar-icon")).toBeInTheDocument();
+		const progressbar = screen.getByRole("progressbar", { name: "Lista_Presenca_7ano_EF.xlsx" });
+		expect(progressbar).toHaveAttribute("aria-valuemin", "0");
+		expect(progressbar).toHaveAttribute("aria-valuemax", "100");
+		expect(progressbar).toHaveAttribute("aria-valuenow", "64.4");
+	});
+
+	it("provides a fallback name for unnamed progress", () => {
+		render(<ProgressBar progress={25} ariaLabel="Import progress" />);
+		expect(screen.getByRole("progressbar", { name: "Import progress" })).toHaveAttribute(
+			"aria-valuenow",
+			"25",
+		);
 	});
 
 	it("shows default status labels when message is not provided", () => {

@@ -120,7 +120,7 @@ describe("Stepper", () => {
 			</Stepper>,
 		);
 
-		expect(screen.getByText("Step 1")).toBeInTheDocument();
+		expect(screen.getByRole("link", { name: /Step 1/ })).toHaveAttribute("href", "/step1");
 	});
 
 	it("renders step numbers", () => {
@@ -152,7 +152,7 @@ describe("Stepper", () => {
 		);
 
 		// Verify the step is rendered with the label from StepLink
-		expect(screen.getByText("Test Step")).toBeInTheDocument();
+		expect(screen.getByRole("link", { name: /Test Step/ })).toHaveAttribute("href", "/test-href");
 	});
 
 	it("uses href as key when eventKey is not provided", () => {

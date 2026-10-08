@@ -113,8 +113,11 @@ export const Chip: React.FC<IChipProps> = React.memo(
 		};
 
 		// Função genérica para ícones interativos
-		const handleIconClick = (callback?: () => void) => () => {
-			if (!disabled) callback?.();
+		const handleIconClick = (callback?: () => void) => (event: React.MouseEvent<HTMLElement>) => {
+			if (!disabled) {
+				event.stopPropagation();
+				callback?.();
+			}
 		};
 
 		return (
@@ -130,8 +133,6 @@ export const Chip: React.FC<IChipProps> = React.memo(
 					<IconSlot
 						as="span"
 						onClick={onIconLeftClick ? handleIconClick(onIconLeftClick) : undefined}
-						role={onIconLeftClick ? "button" : undefined}
-						tabIndex={onIconLeftClick ? 0 : undefined}
 					>
 						<IconLeft size={16} />
 					</IconSlot>
@@ -141,8 +142,6 @@ export const Chip: React.FC<IChipProps> = React.memo(
 					<IconSlot
 						as="span"
 						onClick={onIconRightClick ? handleIconClick(onIconRightClick) : undefined}
-						role={onIconRightClick ? "button" : undefined}
-						tabIndex={onIconRightClick ? 0 : undefined}
 					>
 						<IconRight size={16} />
 					</IconSlot>

@@ -48,7 +48,7 @@ const getNumberColor = (status: StepStatus, disabled: boolean): string => {
 };
 
 export const Step: FC<StepProps> = memo(
-	({ stepKey, disabled = false, children, isLast = false, status = "default", onClick }) => {
+	({ stepKey, href, disabled = false, children, isLast = false, status = "default", onClick }) => {
 		const circleClasses = useMemo(
 			() => clsx(BASE_CIRCLE_CLASSES, CIRCLE_STATUS_CLASSES[status]),
 			[status],
@@ -85,26 +85,53 @@ export const Step: FC<StepProps> = memo(
 
 		return (
 			<div className="flex w-full flex-col md:flex-row md:items-center md:flex-1">
-				<button
-					type="button"
-					className={`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`}
-					style={{ padding: "8px 16px" }}
-					disabled={disabled}
-					onClick={handleClick}
-					onKeyDown={handleKeyDown}
-				>
-					<div className={circleClasses}>
-						{status === "completed" ? (
-							<CheckIcon size={22} weight="bold" color={numberColor} />
-						) : (
-							<span style={{ color: numberColor }}>{stepKey}</span>
-						)}
-					</div>
-
-					<span className={LABEL_CLASSES} style={{ color: labelColor }}>
-						{children}
-					</span>
-				</button>
+				{href ? (
+					<a
+						href={disabled ? undefined : href}
+						className={`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`}
+						style={{ padding: "8px 16px" }}
+						aria-disabled={disabled || undefined}
+						aria-current={status === "active" ? "step" : undefined}
+						tabIndex={disabled ? -1 : undefined}
+						onClick={(event) => {
+							if (disabled) {
+								event.preventDefault();
+								return;
+							}
+							handleClick();
+						}}
+					>
+						<StepContent
+							stepKey={stepKey}
+							status={status}
+							circleClasses={circleClasses}
+							numberColor={numberColor}
+							labelColor={labelColor}
+						>
+							{children}
+						</StepContent>
+					</a>
+				) : (
+					<button
+						type="button"
+						className={`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`}
+						style={{ padding: "8px 16px" }}
+						disabled={disabled}
+						aria-current={status === "active" ? "step" : undefined}
+						onClick={handleClick}
+						onKeyDown={handleKeyDown}
+					>
+						<StepContent
+							stepKey={stepKey}
+							status={status}
+							circleClasses={circleClasses}
+							numberColor={numberColor}
+							labelColor={labelColor}
+						>
+							{children}
+						</StepContent>
+					</button>
+				)}
 
 				{!isLast && (
 					<>
@@ -118,3 +145,25 @@ export const Step: FC<StepProps> = memo(
 );
 
 Step.displayName = "Step";
+
+const StepContent: FC<{
+	stepKey: string | number;
+	status: StepStatus;
+	circleClasses: string;
+	numberColor: string;
+	labelColor: string;
+	children: ReactNode;
+}> = ({ stepKey, status, circleClasses, numberColor, labelColor, children }) => (
+	<>
+		<div className={circleClasses}>
+			{status === "completed" ? (
+				<CheckIcon size={22} weight="bold" color={numberColor} />
+			) : (
+				<span style={{ color: numberColor }}>{stepKey}</span>
+			)}
+		</div>
+		<span className={LABEL_CLASSES} style={{ color: labelColor }}>
+			{children}
+		</span>
+	</>
+);

@@ -6,6 +6,7 @@ import { useInteractionState } from "../../hooks/useInteractionState";
 export const Radio: React.FC<IRadioProps> = ({
 	label,
 	disabled = false,
+	className,
 	fontLabelStyle = {},
 	...props
 }) => {
@@ -22,38 +23,16 @@ export const Radio: React.FC<IRadioProps> = ({
   `;
 
 	const stateStyles = {
-		default: `
-      ${props.checked ? "bg-[var(--ds-color-blue-40)] border-none" : "border-[var(--ds-color-neutral-50)] bg-transparent"}
-    `,
-		hover: `
-      ${
-				props.checked
-					? "bg-[var(--ds-color-blue-20)] border-none"
-					: "border-[var(--ds-color-neutral-30)] bg-transparent"
-			}
-    `,
-		pressed: `
-      ${
-				props.checked
-					? "bg-[var(--ds-color-blue-10)] border-none"
-					: "border-[var(--ds-color-neutral-40)] bg-transparent"
-			}
-    `,
-		focused: `
-      ${
-				props.checked
-					? "bg-[var(--ds-color-blue-30)] border-none"
-					: "border-[var(--ds-color-neutral-50)] bg-transparent"
-			}
-    `,
-		disabled: `
-      ${
-				props.checked
-					? "bg-[var(--ds-color-neutral-80)] border-none"
-					: "border-[var(--ds-color-neutral-50)] bg-transparent"
-			}
-      cursor-not-allowed
-    `,
+		default:
+			"border-[var(--ds-color-neutral-50)] bg-transparent checked:border-none checked:bg-[var(--ds-color-blue-40)]",
+		hover:
+			"border-[var(--ds-color-neutral-30)] bg-transparent checked:border-none checked:bg-[var(--ds-color-blue-20)]",
+		pressed:
+			"border-[var(--ds-color-neutral-40)] bg-transparent checked:border-none checked:bg-[var(--ds-color-blue-10)]",
+		focused:
+			"border-[var(--ds-color-neutral-50)] bg-transparent checked:border-none checked:bg-[var(--ds-color-blue-30)]",
+		disabled:
+			"border-[var(--ds-color-neutral-50)] bg-transparent checked:border-none checked:bg-[var(--ds-color-neutral-80)] cursor-not-allowed",
 	};
 
 	const getLabelStyles = () => {
@@ -97,13 +76,11 @@ export const Radio: React.FC<IRadioProps> = ({
 							disabled={disabled}
 							onFocus={handlers.onFocus}
 							onBlur={handlers.onBlur}
-							className={clsx(baseStyles, stateStyles[finalState])}
+							className={clsx(baseStyles, "peer", stateStyles[finalState], className)}
 							{...props}
 						/>
 
-						{props.checked && (
-							<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--ds-color-neutral-white)] pointer-events-none" />
-						)}
+						<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--ds-color-neutral-white)] pointer-events-none opacity-0 peer-checked:opacity-100" />
 					</div>
 				</div>
 			</div>

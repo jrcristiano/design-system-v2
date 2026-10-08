@@ -269,6 +269,7 @@ export const MenuItem: React.FC<IMenuItemProps> = React.memo(
 				return (
 					<a
 						href={href}
+						{...(props as unknown as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
 						{...commonProps}
 						onClick={(e) => {
 							if (disabled) {
@@ -277,8 +278,9 @@ export const MenuItem: React.FC<IMenuItemProps> = React.memo(
 							}
 							onClick?.();
 						}}
-						aria-disabled={disabled}
-						style={disabled ? { pointerEvents: "none" } : undefined}
+						aria-disabled={disabled || undefined}
+						tabIndex={disabled ? -1 : props.tabIndex}
+						style={disabled ? { ...props.style, pointerEvents: "none" } : props.style}
 					>
 						<MenuItemContent {...contentProps} />
 					</a>
@@ -307,6 +309,8 @@ export const MenuItem: React.FC<IMenuItemProps> = React.memo(
 				{children && (
 					<nav
 						aria-label={`Submenu de ${label}`}
+						aria-hidden={!isExpanded}
+						inert={!isExpanded}
 						className={clsx(
 							"overflow-hidden transition-all duration-300 ease-in-out",
 							"flex flex-col gap-2",

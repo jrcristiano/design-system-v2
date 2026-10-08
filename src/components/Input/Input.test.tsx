@@ -19,6 +19,27 @@ describe("Input", () => {
 		expect(screen.getByText("*")).toBeInTheDocument();
 	});
 
+	it("associates required, invalid, and message state with the native input", () => {
+		render(
+			<Input
+				label="Email"
+				required
+				state="error"
+				message="Enter a valid email"
+				aria-describedby="hint-id"
+			/>,
+		);
+
+		const input = document.querySelector("input") as HTMLInputElement;
+		expect(input).toBeRequired();
+		expect(input).toHaveAttribute("aria-required", "true");
+		expect(input).toHaveAttribute("aria-invalid", "true");
+		expect(input).toHaveAttribute("aria-errormessage");
+		expect(input.getAttribute("aria-describedby")).toContain("hint-id");
+		const messageId = input.getAttribute("aria-describedby")?.split(" ").at(-1);
+		expect(document.getElementById(messageId ?? "")).toHaveTextContent("Enter a valid email");
+	});
+
 	it("shows required indicator even when disabled", () => {
 		render(<Input label="Email" required disabled />);
 		expect(screen.getByText("*")).toBeInTheDocument();
@@ -60,13 +81,22 @@ describe("Input", () => {
 	it("provides rawValue without mask characters", async () => {
 		const user = userEvent.setup();
 		const handleChange = vi.fn();
-		render(<Input label="CPF" mask="000.000.000-00" onChange={handleChange} />);
+		const handleRawChange = vi.fn();
+		render(
+			<Input
+				label="CPF"
+				mask="000.000.000-00"
+				onChange={handleChange}
+				onChangeRaw={handleRawChange}
+			/>,
+		);
 
 		const input = screen.getByLabelText("CPF");
 		await user.type(input, "12345678901");
 
 		const lastCall = handleChange.mock.calls.at(-1)?.[0];
 		expect(lastCall?.target?.rawValue).toBe("12345678901");
+		expect(handleRawChange).toHaveBeenLastCalledWith("12345678901");
 	});
 
 	it("renders with icon left", () => {
@@ -100,6 +130,19 @@ describe("Input", () => {
 	it("accepts controlled value", () => {
 		render(<Input label="Email" value="test@example.com" onChange={() => {}} />);
 		expect(screen.getByLabelText("Email")).toHaveValue("test@example.com");
+	});
+
+	it("respects defaultValue and keeps a controlled value owned by the consumer", async () => {
+		const user = userEvent.setup();
+		const onChange = vi.fn();
+		const { rerender } = render(<Input label="Name" defaultValue="Initial" />);
+		expect(screen.getByLabelText("Name")).toHaveValue("Initial");
+
+		rerender(<Input label="Name" value="Controlled" onChange={onChange} />);
+		const input = screen.getByLabelText("Name");
+		await user.type(input, " text");
+		expect(onChange).toHaveBeenCalled();
+		expect(input).toHaveValue("Controlled");
 	});
 
 	it("renders iconRight as native button without wrapping", () => {

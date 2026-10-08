@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement } from "react";
+import React, { cloneElement, isValidElement, useId } from "react";
 import { FolderIcon, XIcon } from "@phosphor-icons/react";
 import type {
 	ProgressBarProps,
@@ -27,12 +27,14 @@ const STATUS_LABELS: Record<Exclude<ProgressBarStatus, "in-progress">, string> =
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
 	progress,
+	ariaLabel,
 	variant = "primary",
 	status = "in-progress",
 	fileName = "",
 	message,
 	icon,
 }) => {
+	const fileNameId = useId();
 	const clampedProgress = Math.max(0, Math.min(100, progress));
 	const completedStatus = status === "in-progress" ? null : status;
 	const resolvedColor = VARIANT_COLORS[variant];
@@ -62,13 +64,25 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 					<span data-testid="progressbar-icon" className="inline-flex items-center">
 						{resolvedIcon}
 					</span>
-					<span className="text-[var(--ds-color-neutral-10)] text-sm font-[var(--ds-font-family-body)] font-normal">
+					<span
+						id={fileNameId}
+						className="text-[var(--ds-color-neutral-10)] text-sm font-[var(--ds-font-family-body)] font-normal"
+					>
 						{fileName}
 					</span>
 				</div>
 			)}
 
-			<div className="w-full flex items-center gap-2">
+			<div
+				role="progressbar"
+				aria-label={!fileName ? ariaLabel || "Progresso" : undefined}
+				aria-labelledby={fileName ? fileNameId : undefined}
+				aria-valuemin={0}
+				aria-valuemax={100}
+				aria-valuenow={clampedProgress}
+				aria-valuetext={`${Math.round(clampedProgress)}%`}
+				className="w-full flex items-center gap-2"
+			>
 				<div className="flex-1 h-2 bg-[var(--ds-color-neutral-white)] rounded-full overflow-hidden">
 					<div
 						data-testid="progressbar-fill"

@@ -383,6 +383,33 @@ describe("useFileUpload", () => {
 		expect(onUploadComplete).toHaveBeenCalled();
 	});
 
+	it("cancels a simulated upload when its file is removed", () => {
+		const onUploadComplete = vi.fn();
+		const { result } = renderHook(() => useFileUpload({ onUploadComplete }));
+		const file = createMockFile("removed.pdf", 1024, "application/pdf");
+
+		act(() => result.current.addFiles([file]));
+		const fileId = result.current.files[0].id;
+		act(() => result.current.removeFile(fileId));
+		act(() => vi.advanceTimersByTime(5000));
+
+		expect(result.current.files).toHaveLength(0);
+		expect(onUploadComplete).not.toHaveBeenCalled();
+	});
+
+	it("cleans up simulated uploads when the hook unmounts", () => {
+		const onUploadComplete = vi.fn();
+		const { result, unmount } = renderHook(() => useFileUpload({ onUploadComplete }));
+		const file = createMockFile("unmounted.pdf", 1024, "application/pdf");
+
+		act(() => result.current.addFiles([file]));
+		unmount();
+		act(() => vi.advanceTimersByTime(5000));
+
+		expect(onUploadComplete).not.toHaveBeenCalled();
+		expect(vi.getTimerCount()).toBe(0);
+	});
+
 	describe("createFileId with different crypto availability", () => {
 		afterEach(() => {
 			// Restore original crypto after each test

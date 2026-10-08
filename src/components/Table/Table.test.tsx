@@ -23,6 +23,28 @@ describe("Table", () => {
 		expect(screen.getByRole("table")).toBeInTheDocument();
 		expect(screen.getByText("Name")).toBeInTheDocument();
 		expect(screen.getByText("John")).toBeInTheDocument();
+		expect(screen.getByRole("region", { name: "Tabela rolável" })).toHaveAttribute("tabindex", "0");
+	});
+
+	it("keeps native table layout on rows and cells", () => {
+		const { container } = render(
+			<Table>
+				<TableHeader>
+					<TableRow>
+						<TableHeadCell>Heading</TableHeadCell>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					<TableRow>
+						<TableCell>Value</TableCell>
+					</TableRow>
+				</TableBody>
+			</Table>,
+		);
+
+		for (const element of container.querySelectorAll("tr, th, td")) {
+			expect(element.className).not.toMatch(/inline-flex/);
+		}
 	});
 
 	it("renders table header", () => {

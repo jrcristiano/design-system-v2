@@ -14,6 +14,9 @@ describe("Chart component", () => {
 		render(<Chart type="bar" data={baseData} title="Sales" />);
 
 		expect(screen.getByText("Sales")).toBeInTheDocument();
+		expect(screen.getByRole("img", { name: "Sales" })).toHaveAccessibleDescription(
+			"Dados do gráfico: Jan: 10; Feb: 20; Mar: 30.",
+		);
 	});
 
 	it("does not render title when not provided", () => {
@@ -77,7 +80,7 @@ describe("Chart component", () => {
 			/>,
 		);
 
-		const wrapper = screen.getByRole("img", { hidden: true }) || document.body;
+		const wrapper = screen.getByRole("img", { name: "Gráfico" });
 		expect(wrapper).toBeInTheDocument();
 	});
 
@@ -183,6 +186,18 @@ describe("Chart component", () => {
 			/>,
 		);
 		expect(container.querySelector("svg")).toBeInTheDocument();
+	});
+
+	it("scales bullet ticks to a custom maxValue", () => {
+		const { container } = render(
+			<Chart
+				type="bullet"
+				data={[{ x: "Score", y: 160 }]}
+				config={{ bullet: { maxValue: 200 } }}
+			/>,
+		);
+		expect(container.querySelector("svg")?.textContent).toContain("200");
+		expect(container.querySelector("svg")?.textContent).toContain("40");
 	});
 
 	it("handles bullet chart with empty data", () => {

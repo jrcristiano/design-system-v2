@@ -17,6 +17,8 @@ export interface TreeViewContextValue {
 	toggleExpanded: (id: string) => void;
 	toggleSelected: (id: string) => void;
 	selectMultiple: (id: string, checked: boolean) => void;
+	focusedId?: string | null;
+	setFocusedId?: (id: string) => void;
 	multiSelect: boolean;
 	withCheckbox: boolean;
 }

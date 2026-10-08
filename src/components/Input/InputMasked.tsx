@@ -1,14 +1,11 @@
-import React, { useCallback, useRef, useMemo } from "react";
+import React, { useCallback, useEffect, useRef, useMemo, useState } from "react";
 import { Input } from "./Input";
 import { useMask } from "../../hooks/useMask";
 import type { InputProps } from "./Input.interface";
 
 export const InputMasked: React.FC<InputProps> = React.memo(
-	({ mask = "", onChangeRaw, onChange, value, ...props }) => {
+	({ mask = "", onChangeRaw, onChange, value, defaultValue, ...props }) => {
 		const { applyMask, stripMask } = useMask();
-		const previousRawRef = useRef<string>("");
-		const isControlled = value !== undefined;
-
 		const maskUtils = useMemo(
 			() => ({
 				applyMask: (val: string) => applyMask(val, mask),
@@ -16,6 +13,14 @@ export const InputMasked: React.FC<InputProps> = React.memo(
 			}),
 			[mask, applyMask, stripMask],
 		);
+		const isControlled = value !== undefined;
+		const [uncontrolledRawValue, setUncontrolledRawValue] = useState(() =>
+			maskUtils.stripMask(String(value ?? defaultValue ?? "")),
+		);
+		const currentRawValue = isControlled
+			? maskUtils.stripMask(String(value ?? ""))
+			: uncontrolledRawValue;
+		const previousRawRef = useRef(currentRawValue);
 
 		const handleChange = useCallback(
 			(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +30,7 @@ export const InputMasked: React.FC<InputProps> = React.memo(
 				if (rawValue === previousRawRef.current) return;
 
 				previousRawRef.current = rawValue;
+				if (!isControlled) setUncontrolledRawValue(rawValue);
 				const formattedValue = maskUtils.applyMask(rawValue);
 
 				onChangeRaw?.(rawValue);
@@ -47,20 +53,14 @@ export const InputMasked: React.FC<InputProps> = React.memo(
 					onChange(syntheticEvent);
 				}
 			},
-			[maskUtils, onChangeRaw, onChange],
+			[isControlled, maskUtils, onChangeRaw, onChange],
 		);
 
-		const displayValue = useMemo(() => {
-			if (!isControlled) {
-				return previousRawRef.current ? maskUtils.applyMask(previousRawRef.current) : "";
-			}
+		useEffect(() => {
+			if (isControlled) previousRawRef.current = currentRawValue;
+		}, [currentRawValue, isControlled, maskUtils]);
 
-			if (value == null) return "";
-
-			const rawValue = maskUtils.stripMask(String(value));
-			previousRawRef.current = rawValue;
-			return maskUtils.applyMask(rawValue);
-		}, [value, isControlled, maskUtils]);
+		const displayValue = maskUtils.applyMask(currentRawValue);
 
 		return <Input {...props} value={displayValue} onChange={handleChange} />;
 	},

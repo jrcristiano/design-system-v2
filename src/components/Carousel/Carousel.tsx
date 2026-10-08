@@ -52,6 +52,9 @@ export const Carousel = ({
 
 	const maxIndex = Math.max(0, items.length - visibleItems);
 	const totalSlides = Math.ceil(items.length / visibleItems);
+	const dotStartIndices = Array.from({ length: totalSlides }, (_, index) =>
+		index === totalSlides - 1 ? maxIndex : index * visibleItems,
+	);
 
 	const goToSlide = useCallback(
 		(index: number) => {
@@ -203,6 +206,7 @@ export const Carousel = ({
 								aria-roledescription="slide"
 								aria-label={`${index + 1} de ${items.length}`}
 								aria-hidden={index < currentIndex || index >= currentIndex + visibleItems}
+								inert={index < currentIndex || index >= currentIndex + visibleItems}
 							>
 								{item.content}
 							</div>
@@ -227,14 +231,17 @@ export const Carousel = ({
 
 			{showDots && (
 				<div className="carousel-dots" role="tablist" aria-label="Navegação do carrossel">
-					{Array.from({ length: totalSlides }).map((_, slideIndex) => {
-						const isActive = Math.floor(currentIndex / visibleItems) === slideIndex;
+					{dotStartIndices.map((startIndex, slideIndex) => {
+						const nextStartIndex = dotStartIndices[slideIndex + 1];
+						const isActive =
+							currentIndex >= startIndex &&
+							(nextStartIndex === undefined || currentIndex < nextStartIndex);
 
-						const handleClick = () => goToSlide(slideIndex * visibleItems);
+						const handleClick = () => goToSlide(startIndex);
 
 						return (
 							<button
-								key={`dot-${items[slideIndex * visibleItems]?.id ?? slideIndex}`}
+								key={`dot-${items[startIndex]?.id ?? slideIndex}`}
 								type="button"
 								className={clsx("carousel-dot", {
 									"carousel-dot-active": isActive,

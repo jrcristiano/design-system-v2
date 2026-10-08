@@ -71,9 +71,12 @@ describe("MenuItem", () => {
 
 		const parent = screen.getByRole("button", { name: /parent/i });
 		expect(parent).toHaveAttribute("aria-expanded", "false");
+		const submenu = document.querySelector('nav[aria-label="Submenu de Parent"]')!;
+		expect(submenu).toHaveAttribute("inert");
 
 		await user.click(parent);
 		expect(parent).toHaveAttribute("aria-expanded", "true");
+		expect(submenu).not.toHaveAttribute("inert");
 		expect(screen.getByText("Child 1")).toBeInTheDocument();
 	});
 
@@ -197,6 +200,7 @@ describe("MenuItem", () => {
 		);
 
 		const link = screen.getByRole("link");
+		expect(link).toHaveAttribute("tabindex", "-1");
 		// Use fireEvent as userEvent respects pointer-events: none
 		fireEvent.click(link);
 		expect(handleClick).not.toHaveBeenCalled();
@@ -210,6 +214,22 @@ describe("MenuItem", () => {
 		const link = screen.getByRole("link");
 		await user.click(link);
 		expect(handleClick).toHaveBeenCalled();
+	});
+
+	it("forwards anchor attributes to links", () => {
+		renderWithContext(
+			<MenuItem
+				label="External link"
+				href="/docs"
+				target="_blank"
+				rel="noreferrer"
+				data-source="menu"
+			/>,
+		);
+		const link = screen.getByRole("link");
+		expect(link).toHaveAttribute("target", "_blank");
+		expect(link).toHaveAttribute("rel", "noreferrer");
+		expect(link).toHaveAttribute("data-source", "menu");
 	});
 
 	it("handles non-element children in submenu", async () => {

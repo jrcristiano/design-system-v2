@@ -8,6 +8,8 @@ type ToolbarButtonProps = {
 	children: React.ReactNode;
 	title: string;
 	disabled?: boolean;
+	tabIndex: number;
+	onFocus: () => void;
 };
 
 const ToolbarButton: React.FC<ToolbarButtonProps> = ({
@@ -16,16 +18,18 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
 	children,
 	title,
 	disabled = false,
+	tabIndex,
+	onFocus,
 }) => (
 	<button
 		type="button"
-		onMouseDown={(e) => {
-			e.preventDefault();
-			onClick();
-		}}
+		onMouseDown={(event) => event.preventDefault()}
+		onClick={onClick}
 		disabled={disabled}
 		title={title}
-		tabIndex={-1}
+		aria-label={title}
+		tabIndex={tabIndex}
+		onFocus={onFocus}
 		aria-pressed={isActive}
 		className={`${styles.toolbarButton} ${
 			isActive ? styles.toolbarButtonActive : ""
@@ -42,6 +46,34 @@ type RichTextToolbarProps = {
 
 export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabled = false }) => {
 	const [editorTick, setEditorTick] = useState(0);
+	const [activeButtonIndex, setActiveButtonIndex] = useState(0);
+
+	const handleToolbarKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+		const buttons = Array.from(
+			event.currentTarget.querySelectorAll<HTMLButtonElement>("button:not(:disabled)"),
+		);
+		const currentIndex = buttons.indexOf(document.activeElement as HTMLButtonElement);
+		let nextIndex: number;
+		switch (event.key) {
+			case "ArrowRight":
+				nextIndex = (currentIndex + 1 + buttons.length) % buttons.length;
+				break;
+			case "ArrowLeft":
+				nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+				break;
+			case "Home":
+				nextIndex = 0;
+				break;
+			case "End":
+				nextIndex = buttons.length - 1;
+				break;
+			default:
+				return;
+		}
+		if (!buttons.length) return;
+		event.preventDefault();
+		buttons[nextIndex]?.focus();
+	};
 
 	useEffect(() => {
 		if (!editor) return;
@@ -59,6 +91,9 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 
 	return (
 		<div
+			role="toolbar"
+			aria-label="Ferramentas de formatação"
+			onKeyDown={handleToolbarKeyDown}
 			style={{
 				display: "flex",
 				gap: "12px",
@@ -74,6 +109,8 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 				onClick={() => editor?.chain().focus().toggleBold().run()}
 				isActive={editor?.isActive("bold")}
 				title="Negrito"
+				tabIndex={activeButtonIndex === 0 ? 0 : -1}
+				onFocus={() => setActiveButtonIndex(0)}
 				disabled={disabled}
 			>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -91,6 +128,8 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 				onClick={() => editor?.chain().focus().toggleItalic().run()}
 				isActive={editor?.isActive("italic")}
 				title="Itálico"
+				tabIndex={activeButtonIndex === 1 ? 0 : -1}
+				onFocus={() => setActiveButtonIndex(1)}
 				disabled={disabled}
 			>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -108,6 +147,8 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 				onClick={() => editor?.chain().focus().toggleBulletList().run()}
 				isActive={editor?.isActive("bulletList")}
 				title="Lista com marcadores"
+				tabIndex={activeButtonIndex === 2 ? 0 : -1}
+				onFocus={() => setActiveButtonIndex(2)}
 				disabled={disabled}
 			>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -125,6 +166,8 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 				onClick={() => editor?.chain().focus().toggleOrderedList().run()}
 				isActive={editor?.isActive("orderedList")}
 				title="Lista numerada"
+				tabIndex={activeButtonIndex === 3 ? 0 : -1}
+				onFocus={() => setActiveButtonIndex(3)}
 				disabled={disabled}
 			>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -142,6 +185,8 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 				onClick={() => editor?.chain().focus().toggleStrike().run()}
 				isActive={editor?.isActive("strike")}
 				title="Tachado"
+				tabIndex={activeButtonIndex === 4 ? 0 : -1}
+				onFocus={() => setActiveButtonIndex(4)}
 				disabled={disabled}
 			>
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none">

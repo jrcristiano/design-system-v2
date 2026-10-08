@@ -144,6 +144,7 @@ describe("Button", () => {
 
 			const iconButton = screen.getByTestId("left-icon").parentElement;
 			expect(iconButton).toBeInTheDocument();
+			expect(screen.getAllByRole("button")).toHaveLength(1);
 			await user.click(iconButton!);
 			expect(handleIconLeftClick).toHaveBeenCalledTimes(1);
 		});

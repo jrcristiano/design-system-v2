@@ -143,7 +143,7 @@ export const Button: React.FC<IButtonProps> = React.memo(
 
 		// CORREÇÃO: O evento 'e' é opcional para satisfazer a interface do IconSlot,
 		// mas usamos propagation se ele existir.
-		const createIconHandler = (handler?: () => void) => (e?: React.MouseEvent) => {
+		const createIconHandler = (handler?: () => void) => (e?: React.MouseEvent<HTMLElement>) => {
 			if (!disabled && !isLoading && handler) {
 				// Optional chaining garante segurança se IconSlot não passar o evento
 				e?.stopPropagation();
@@ -165,13 +165,10 @@ export const Button: React.FC<IButtonProps> = React.memo(
 			);
 
 			if (onClickHandler) {
-				// CORREÇÃO: Type Assertion (as unknown as ...) resolve o erro TS2322.
-				// O IconSlot espera () => void, mas nós passamos uma função que aceita argumentos opcionais.
-				// O cast força o TS a aceitar.
 				return (
 					<IconSlot
 						as="span"
-						onClick={createIconHandler(onClickHandler) as unknown as () => void}
+						onClick={createIconHandler(onClickHandler)}
 						className={clsx("cursor-pointer", extraClass)}
 					>
 						{content}

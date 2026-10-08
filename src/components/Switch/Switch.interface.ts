@@ -1,8 +1,8 @@
-export interface SwitchProps {
+import type { ChangeEvent, LabelHTMLAttributes } from "react";
+
+export interface SwitchProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, "onChange"> {
 	disabled?: boolean;
 	defaultChecked?: boolean;
-	checked?: any; // Torna opcional
-	onChange?: any; // Torna opcional
-	className?: string;
-	[x: string]: any;
+	checked?: boolean;
+	onChange?: (checked: boolean, event: ChangeEvent<HTMLInputElement>) => void;
 }

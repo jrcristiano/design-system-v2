@@ -143,6 +143,7 @@ const InputLabel: React.FC<
 			{label}
 			{shouldShowRequiredMarker(required ?? false) && (
 				<span
+					aria-hidden="true"
 					className={disabled ? "text-[var(--ds-color-red-90)]" : "text-[var(--ds-color-red-40)]"}
 				>
 					*
@@ -154,13 +155,15 @@ const InputLabel: React.FC<
 
 export const InputMessage: React.FC<
 	Pick<InputProps, "message" | "disabled" | "state" | "size"> & {
+		id?: string;
 		iconSizes: Record<InputSize, number>;
 	}
-> = ({ message, disabled, state, iconSizes, size = "md" }) => {
+> = ({ id, message, disabled, state, iconSizes, size = "md" }) => {
 	if (!message) return null;
 
 	return (
 		<div
+			id={id}
 			className={`flex items-center gap-1 mt-[2px] text-[var(--ds-font-size-12)] ${getMessageToneClass(
 				disabled ?? false,
 				state ?? "default",
@@ -247,12 +250,16 @@ export const Input: React.FC<InputProps> = ({
 	onChange,
 	style = {},
 	type = "text",
+	value: controlledValue,
+	defaultValue,
+	onChangeRaw,
 	...props
 }) => {
 	const inputId = useId();
+	const messageId = useId();
 	const finalId = id || inputId;
 	const { applyMask, stripMask } = useMask();
-	const [value, setValue] = useState(props.value ?? "");
+	const [value, setValue] = useState(controlledValue ?? defaultValue ?? "");
 
 	const {
 		isPasswordToggle,
@@ -268,7 +275,7 @@ export const Input: React.FC<InputProps> = ({
 		(e: ChangeEvent<HTMLInputElement>) => {
 			const rawValue = stripMask(e.target.value, mask);
 			const maskedValue = getMaskedValue(rawValue, mask, applyMask);
-			setValue(maskedValue);
+			if (controlledValue === undefined) setValue(maskedValue);
 			if (onChange) {
 				const syntheticEvent = {
 					...e,
@@ -276,8 +283,9 @@ export const Input: React.FC<InputProps> = ({
 				};
 				onChange(syntheticEvent as ChangeEvent<HTMLInputElement>);
 			}
+			onChangeRaw?.(rawValue);
 		},
-		[mask, applyMask, stripMask, onChange],
+		[mask, applyMask, stripMask, controlledValue, onChange, onChangeRaw],
 	);
 
 	const handleIconLeftClick = useCallback(() => {
@@ -289,12 +297,6 @@ export const Input: React.FC<InputProps> = ({
 		handlePasswordToggle();
 		onIconRightClick?.();
 	}, [disabled, handlePasswordToggle, onIconRightClick]);
-
-	useEffect(() => {
-		if (props.value !== undefined) {
-			setValue(props.value as string);
-		}
-	}, [props.value]);
 
 	const sizeStyles: Record<InputSize, string> = {
 		sm: "h-[var(--ds-control-height-sm)] px-3",
@@ -336,6 +338,11 @@ export const Input: React.FC<InputProps> = ({
 
 	const iconRightIsNativeButton = isValidElement(iconRight) && iconRight.type === "button";
 	const hasRightIconAction = isPasswordToggle || !!onIconRightClick || iconRightIsNativeButton;
+	const describedBy =
+		[props["aria-describedby"], message ? messageId : undefined].filter(Boolean).join(" ") ||
+		undefined;
+	const ariaInvalid = props["aria-invalid"] ?? (state === "error" ? true : undefined);
+	const ariaErrorMessage = state === "error" && message ? messageId : props["aria-errormessage"];
 
 	return (
 		<div className="flex flex-col gap-[2px]">
@@ -360,7 +367,12 @@ export const Input: React.FC<InputProps> = ({
 				<input
 					{...props}
 					id={finalId}
-					value={value}
+					required={required}
+					aria-required={required ? true : props["aria-required"]}
+					aria-invalid={ariaInvalid}
+					aria-describedby={describedBy}
+					aria-errormessage={ariaErrorMessage}
+					value={controlledValue ?? value}
 					onChange={handleChange}
 					autoComplete={autoComplete}
 					disabled={disabled}
@@ -384,6 +396,7 @@ export const Input: React.FC<InputProps> = ({
 			</div>
 
 			<InputMessage
+				id={messageId}
 				message={message}
 				disabled={disabled}
 				state={state}

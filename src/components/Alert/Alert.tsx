@@ -1,6 +1,6 @@
-import { memo, useCallback, useMemo, type ReactNode } from "react";
+import { memo, useCallback, useMemo, isValidElement, type ReactNode } from "react";
 import { WarningIcon, XCircleIcon, InfoIcon, CheckCircleIcon, XIcon } from "@phosphor-icons/react";
-import type { AlertProps, AlertVariant } from "./alert.types";
+import type { AlertAction, AlertProps, AlertVariant } from "./alert.types";
 import { Chip } from "../Chip/Chip";
 
 /**
@@ -56,30 +56,49 @@ const defaultIcons: Record<AlertVariant, ReactNode> = {
 	info: <InfoIcon size={20} weight="light" aria-hidden="true" />,
 };
 
-/**
- * Handler acessível de teclado
- * Extraído para evitar recriação por render
- */
-const handleKeyboardActivation = (event: React.KeyboardEvent, callback: () => void): void => {
-	if (event.key === "Enter" || event.key === " ") {
-		event.preventDefault();
-		callback();
-	}
+const isAlertAction = (action: AlertProps["action"]): action is AlertAction => {
+	if (typeof action !== "object" || action === null || isValidElement(action)) return false;
+	const candidate = action as Partial<AlertAction>;
+	return typeof candidate.label === "string" && typeof candidate.onClick === "function";
 };
+
+const radiusClasses = {
+	sm: "rounded-sm",
+	md: "rounded-md",
+	lg: "rounded-lg",
+	full: "rounded-full",
+} as const;
 
 /**
  * Componente Alert
  */
 export const Alert = memo<AlertProps>(
-	({ variant, title, message, icon, dismissible = false, onDismiss, action, className = "" }) => {
+	({
+		variant,
+		title,
+		message,
+		icon,
+		hideIcon = false,
+		dismissible,
+		onDismiss,
+		closable,
+		onClose,
+		action,
+		className = "",
+		radius,
+	}) => {
 		const styles = variantStyles[variant];
 		const isError = variant === "error";
+		const dismissCallback = onDismiss ?? onClose;
+		const canDismiss = (dismissible ?? closable ?? false) && Boolean(dismissCallback);
+		const actionConfig = isAlertAction(action) ? action : undefined;
+		const actionNode = actionConfig ? undefined : (action as ReactNode);
 
 		/**
 		 * Resolve ícone com tipagem correta para React
 		 */
 		const resolvedIcon = useMemo<ReactNode>(() => {
-			if (icon === null) {
+			if (hideIcon || icon === null) {
 				return null;
 			}
 
@@ -88,16 +107,16 @@ export const Alert = memo<AlertProps>(
 			}
 
 			return defaultIcons[variant];
-		}, [icon, variant]);
+		}, [hideIcon, icon, variant]);
 
 		/**
 		 * Callback estável para dismiss
 		 */
 		const handleDismiss = useCallback((): void => {
-			if (onDismiss) {
-				onDismiss();
+			if (dismissCallback) {
+				dismissCallback();
 			}
-		}, [onDismiss]);
+		}, [dismissCallback]);
 
 		return (
 			<section
@@ -106,7 +125,7 @@ export const Alert = memo<AlertProps>(
 				className={`
 					${styles.bg}
 					${styles.border}
-					rounded-xl
+					${radius ? radiusClasses[radius] : "rounded-xl"}
 					border
 					${message ? "p-3 md:p-4" : "px-3 py-1"}
 					${className}
@@ -118,30 +137,29 @@ export const Alert = memo<AlertProps>(
 
 					{/* Conteúdo */}
 					<div className="flex-1 min-w-0">
-						<h3 className={`text-sm ${styles.text}`}>{title}</h3>
+						{title && <h3 className={`text-sm ${styles.text}`}>{title}</h3>}
 
 						{message && <p className={`text-sm mt-1 ${styles.text} opacity-90`}>{message}</p>}
 					</div>
 
 					{/* Action */}
-					{action && (
+					{actionConfig && (
 						<Chip
-							iconLeft={action.iconLeft}
-							iconRight={action.iconRight}
-							onClick={action.onClick}
-							variant={action.variant || "primary"}
-							onKeyDown={(e) => handleKeyboardActivation(e, action.onClick)}
+							iconLeft={actionConfig.iconLeft}
+							iconRight={actionConfig.iconRight}
+							onClick={actionConfig.onClick}
+							variant={actionConfig.variant || "primary"}
 						>
-							{action.label}
+							{actionConfig.label}
 						</Chip>
 					)}
+					{actionNode && <div className="flex-shrink-0">{actionNode}</div>}
 
 					{/* Dismissible */}
-					{dismissible && onDismiss && (
+					{canDismiss && (
 						<button
 							type="button"
 							onClick={handleDismiss}
-							onKeyDown={(e) => handleKeyboardActivation(e, handleDismiss)}
 							aria-label="Fechar alerta"
 							className={`
 								cursor-pointer

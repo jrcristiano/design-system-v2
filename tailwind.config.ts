@@ -15,12 +15,13 @@ const config: Config = {
 				container: "var(--ds-maxwidth-container)",
 			},
 			screens: {
-				xs: "var(--ds-breakpoint-xs)", // 0px
-				sm: "var(--ds-breakpoint-sm)", // 480px
-				md: "var(--ds-breakpoint-md)", // 768px
-				lg: "var(--ds-breakpoint-lg)", // 1024px
-				xl: "var(--ds-breakpoint-xl)", // 1280px
-				"2xl": "var(--ds-breakpoint-2xl)", // 1536px
+				// Keep these static values synchronized with src/tokens/breakpoints.css.
+				xs: "0px",
+				sm: "480px",
+				md: "768px",
+				lg: "1024px",
+				xl: "1280px",
+				"2xl": "1536px",
 			},
 		},
 	},

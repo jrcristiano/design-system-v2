@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { ChipVariant } from "../Chip/Chip.interface";
 import type { IconWeight } from "@phosphor-icons/react";
+import type { AlertInterface } from "./Alert.interface";
 
 export type AlertVariant = "success" | "warning" | "error" | "info";
 
@@ -8,12 +9,12 @@ export interface AlertAction {
 	label: string;
 	variant?: ChipVariant;
 	iconWeight?: IconWeight;
-	iconLeft?: React.ElementType<any>;
-	iconRight?: React.ElementType<any>;
+	iconLeft?: React.ElementType;
+	iconRight?: React.ElementType;
 	onClick: () => void;
 }
 
-export interface AlertProps {
+export interface AlertProps extends Omit<AlertInterface, "action" | "icon"> {
 	/**
 	 * Variante visual do alerta que define cor, ícone e hierarquia
 	 */
@@ -22,7 +23,7 @@ export interface AlertProps {
 	/**
 	 * Título principal do alerta (obrigatório)
 	 */
-	title: string;
+	title?: string;
 
 	/**
 	 * Mensagem complementar opcional
@@ -34,6 +35,7 @@ export interface AlertProps {
 	 * @default Ícone padrão baseado na variante
 	 */
 	icon?: ReactNode | null;
+	hideIcon?: boolean;
 
 	/**
 	 * Habilita botão de fechar (X)
@@ -45,11 +47,15 @@ export interface AlertProps {
 	 * Callback executado ao fechar o alerta
 	 */
 	onDismiss?: () => void;
+	/** @deprecated Use `dismissible` and `onDismiss`. */
+	closable?: boolean;
+	/** @deprecated Use `onDismiss`. */
+	onClose?: () => void;
 
 	/**
 	 * Botão de ação secundária
 	 */
-	action?: AlertAction;
+	action?: AlertAction | ReactNode;
 
 	/**
 	 * Classes Tailwind customizadas

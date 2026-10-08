@@ -24,6 +24,24 @@ describe("Checkbox", () => {
 		expect(screen.getByRole("checkbox")).not.toBeChecked();
 	});
 
+	it("supports defaultChecked and uncontrolled interaction", async () => {
+		const user = userEvent.setup();
+		render(<Checkbox defaultChecked />);
+		const checkbox = screen.getByRole("checkbox");
+		expect(checkbox).toBeChecked();
+
+		await user.click(checkbox);
+		expect(checkbox).not.toBeChecked();
+	});
+
+	it("keeps checked state controlled when checked is provided", async () => {
+		const user = userEvent.setup();
+		render(<Checkbox checked={false} onChange={() => {}} />);
+		const checkbox = screen.getByRole("checkbox");
+		await user.click(checkbox);
+		expect(checkbox).not.toBeChecked();
+	});
+
 	it("calls onChange when clicked", async () => {
 		const user = userEvent.setup();
 		const handleChange = vi.fn();

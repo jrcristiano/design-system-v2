@@ -4,7 +4,10 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 import type { IAccordionProps } from "./Accordion.interface";
 
 export const Accordion: React.FC<IAccordionProps> = React.memo(
-	({ title, children, isOpen: controlledIsOpen, className, ...props }) => {
+	({ title, children, isOpen: controlledIsOpen, state, onToggle, className, ...props }) => {
+		// Retain these legacy props in the public type without leaking them onto the DOM.
+		void state;
+		void onToggle;
 		const panelId = useId();
 		const headerId = `${panelId}-header`;
 
@@ -71,10 +74,14 @@ export const Accordion: React.FC<IAccordionProps> = React.memo(
 				</button>
 
 				{/* Substituído role="region" por <section> com aria-labelledby */}
-				<section id={panelId} aria-labelledby={headerId} className={contentStyles}>
-					<div className={contentLayout} aria-hidden={!isOpen}>
-						{shouldRenderChildren}
-					</div>
+				<section
+					id={panelId}
+					aria-labelledby={headerId}
+					aria-hidden={!isOpen}
+					inert={!isOpen}
+					className={contentStyles}
+				>
+					<div className={contentLayout}>{shouldRenderChildren}</div>
 				</section>
 			</div>
 		);

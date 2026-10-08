@@ -14,6 +14,7 @@ const SimpleCard: React.FC<SimpleCardProps & { className?: string }> = ({
 	className,
 	...rest
 }) => {
+	const titleId = React.useId();
 	const baseStyles: React.CSSProperties = {
 		paddingLeft: "16px",
 		paddingRight: "16px",
@@ -65,7 +66,7 @@ const SimpleCard: React.FC<SimpleCardProps & { className?: string }> = ({
 	};
 
 	return (
-		<article style={baseStyles} className={className} aria-labelledby="card-title" {...rest}>
+		<article style={baseStyles} className={className} aria-labelledby={titleId} {...rest}>
 			<div
 				style={{
 					display: "flex",
@@ -96,7 +97,7 @@ const SimpleCard: React.FC<SimpleCardProps & { className?: string }> = ({
 								gap: "8px",
 							}}
 						>
-							<h2 id="card-title" style={{ ...titleStyles, flex: 1, minWidth: 0 }}>
+							<h2 id={titleId} style={{ ...titleStyles, flex: 1, minWidth: 0 }}>
 								{title}
 							</h2>
 							<div
@@ -137,7 +138,7 @@ const SimpleCard: React.FC<SimpleCardProps & { className?: string }> = ({
 							</div>
 						</div>
 					) : (
-						<h2 id="card-title" style={titleStyles}>
+						<h2 id={titleId} style={titleStyles}>
 							{title}
 						</h2>
 					)}
@@ -180,6 +181,7 @@ const ComplexCard: React.FC<ComplexCardProps & { className?: string }> = ({
 	className,
 	...rest
 }) => {
+	const titleId = React.useId();
 	const isType2 = variant === "type2";
 
 	const dotStyles: React.CSSProperties = {
@@ -209,7 +211,7 @@ const ComplexCard: React.FC<ComplexCardProps & { className?: string }> = ({
 				flexWrap: "wrap",
 			}}
 			className={className}
-			aria-labelledby="complex-card-title"
+			aria-labelledby={titleId}
 			{...rest}
 		>
 			<div
@@ -254,7 +256,7 @@ const ComplexCard: React.FC<ComplexCardProps & { className?: string }> = ({
 							}}
 						>
 							<h2
-								id="complex-card-title"
+								id={titleId}
 								style={{
 									color: "var(--ds-color-neutral-10, #17191C)",
 									fontSize: "24px",

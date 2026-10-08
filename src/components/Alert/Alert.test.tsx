@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { Alert } from "./Alert";
 import type { AlertVariant } from "./alert.types";
+import type { AlertInterface } from "./Alert.interface";
 import { CheckCircleIcon } from "@phosphor-icons/react";
 
 describe("Alert component", () => {
@@ -13,6 +14,29 @@ describe("Alert component", () => {
 
 		expect(screen.getByText("Success title")).toBeInTheDocument();
 		expect(screen.getByText("Success message")).toBeInTheDocument();
+	});
+
+	it("keeps the legacy AlertInterface props working", async () => {
+		const onClose = vi.fn();
+		const legacyProps: AlertInterface = {
+			variant: "info",
+			message: "Legacy message",
+			hideIcon: true,
+			closable: true,
+			onClose,
+			action: <span>Legacy action</span>,
+			radius: "sm",
+		};
+		const user = userEvent.setup();
+		render(<Alert {...legacyProps} />);
+		const alert = screen.getByRole("status");
+
+		expect(screen.getByText("Legacy message")).toBeInTheDocument();
+		expect(screen.getByText("Legacy action")).toBeInTheDocument();
+		expect(alert).toHaveClass("rounded-sm");
+		expect(alert.querySelector("div.flex-shrink-0 svg")).not.toBeInTheDocument();
+		await user.click(screen.getByRole("button", { name: /fechar alerta/i }));
+		expect(onClose).toHaveBeenCalledTimes(1);
 	});
 
 	it("renders without message when message is not provided", () => {

@@ -101,6 +101,29 @@ describe("SidebarFilter", () => {
 		});
 	});
 
+	it.each(["left", "right"] as const)(
+		"restores trigger focus after Escape (%s)",
+		async (position) => {
+			const user = userEvent.setup();
+			render(
+				<SidebarFilter position={position}>
+					<SidebarFilterTrigger>
+						<Button>Filtrar</Button>
+					</SidebarFilterTrigger>
+					<SidebarFilterPanel>
+						<SidebarFilterHeader />
+						<SidebarFilterContent>Conteúdo do filtro</SidebarFilterContent>
+					</SidebarFilterPanel>
+				</SidebarFilter>,
+			);
+
+			const trigger = screen.getByRole("button", { name: "Filtrar" });
+			await user.click(trigger);
+			await user.keyboard("{Escape}");
+			expect(trigger).toHaveFocus();
+		},
+	);
+
 	it("closes panel when overlay is clicked", async () => {
 		const user = userEvent.setup();
 		render(

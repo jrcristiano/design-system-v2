@@ -24,6 +24,13 @@ describe("Radio", () => {
 		expect(screen.getByRole("radio")).not.toBeChecked();
 	});
 
+	it("renders defaultChecked state using the native radio state", () => {
+		render(<Radio name="option" defaultChecked />);
+		const radio = screen.getByRole("radio");
+		expect(radio).toBeChecked();
+		expect(radio).toHaveClass("peer");
+	});
+
 	it("calls onChange when clicked", async () => {
 		const user = userEvent.setup();
 		const handleChange = vi.fn();
@@ -59,6 +66,25 @@ describe("Radio", () => {
 		expect(radios).toHaveLength(2);
 		expect(radios[0]).toHaveAttribute("name", "group");
 		expect(radios[1]).toHaveAttribute("name", "group");
+	});
+
+	it("keeps group selection native and restores defaultChecked on form reset", async () => {
+		const user = userEvent.setup();
+		render(
+			<form>
+				<Radio label="First" name="group" value="first" defaultChecked />
+				<Radio label="Second" name="group" value="second" />
+				<button type="reset">Reset</button>
+			</form>,
+		);
+		const radios = screen.getAllByRole("radio");
+		await user.click(radios[1]);
+		expect(radios[1]).toBeChecked();
+		expect(radios[0]).not.toBeChecked();
+
+		await user.click(screen.getByRole("button", { name: "Reset" }));
+		expect(radios[0]).toBeChecked();
+		expect(radios[1]).not.toBeChecked();
 	});
 
 	it("applies fontLabelStyle to label", () => {

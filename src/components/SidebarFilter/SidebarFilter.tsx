@@ -4,10 +4,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { SidebarFilterContext } from "./SidebarFilterContext";
 import type { SidebarFilterProps } from "./SidebarFilter.interface";
 import type { FilterValue } from "./SidebarFilter.type";
-
-// Contador global de modals abertos para gerenciar scroll lock
-let openModalsCount = 0;
-const originalBodyOverflow = typeof document === "undefined" ? "" : document.body.style.overflow;
+import { acquireBodyScrollLock } from "../shared/bodyScrollLock";
 
 export function SidebarFilter({
 	children,
@@ -26,21 +23,26 @@ export function SidebarFilter({
 	const isControlled = controlledFilters !== undefined;
 	const filters = isControlled ? controlledFilters : internalFilters;
 
-	const open = useCallback(() => {
-		// Salva referência ao elemento ativo antes de abrir
-		triggerRef.current = document.activeElement as HTMLElement;
+	const open = useCallback((trigger?: HTMLElement | null) => {
+		triggerRef.current = trigger ?? (document.activeElement as HTMLElement);
 		setIsOpen(true);
 	}, []);
 
 	const close = useCallback(() => {
 		setIsOpen(false);
-		// Retorna foco ao trigger após fechar
-		setTimeout(() => {
-			triggerRef.current?.focus();
-		}, 100);
+		triggerRef.current?.focus();
 	}, []);
 
-	const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
+	const toggle = useCallback(
+		(trigger?: HTMLElement | null) => {
+			if (isOpen) {
+				close();
+				return;
+			}
+			open(trigger);
+		},
+		[close, isOpen, open],
+	);
 
 	const setFilter = useCallback(
 		(key: string, value: unknown) => {
@@ -82,22 +84,10 @@ export function SidebarFilter({
 		return () => document.removeEventListener("keydown", handleEscape);
 	}, [isOpen, close]);
 
-	// Previne scroll do body quando aberto - com contador para múltiplos modals
+	// Share the page scroll lock with other modal overlays.
 	useEffect(() => {
-		if (isOpen) {
-			openModalsCount++;
-			if (openModalsCount === 1) {
-				// Primeiro modal abrindo - salva e bloqueia scroll
-				document.body.style.overflow = "hidden";
-			}
-			return () => {
-				openModalsCount--;
-				if (openModalsCount === 0) {
-					// Último modal fechando - restaura scroll
-					document.body.style.overflow = originalBodyOverflow;
-				}
-			};
-		}
+		if (!isOpen) return undefined;
+		return acquireBodyScrollLock();
 	}, [isOpen]);
 
 	const contextValue = useMemo(

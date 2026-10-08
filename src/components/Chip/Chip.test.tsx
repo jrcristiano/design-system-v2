@@ -90,15 +90,19 @@ describe("Chip", () => {
 	it("calls onIconLeftClick when left icon is clicked", async () => {
 		const user = userEvent.setup();
 		const handleIconLeftClick = vi.fn();
+		const handleChipClick = vi.fn();
 		const IconLeft = () => <span data-testid="icon-left">L</span>;
 		render(
-			<Chip iconLeft={IconLeft} onIconLeftClick={handleIconLeftClick}>
+			<Chip iconLeft={IconLeft} onIconLeftClick={handleIconLeftClick} onClick={handleChipClick}>
 				With Left Icon
 			</Chip>,
 		);
 
 		await user.click(screen.getByTestId("icon-left"));
-		expect(handleIconLeftClick).toHaveBeenCalled();
+		expect(handleIconLeftClick).toHaveBeenCalledTimes(1);
+		expect(handleChipClick).not.toHaveBeenCalled();
+		expect(screen.getAllByRole("button")).toHaveLength(1);
+		expect(screen.getByTestId("icon-left").parentElement).not.toHaveAttribute("tabindex");
 	});
 
 	it("calls onIconRightClick when right icon is clicked", async () => {

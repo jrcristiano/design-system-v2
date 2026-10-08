@@ -4,6 +4,7 @@ export type ProgressBarStatus = "in-progress" | "success" | "error";
 
 export interface ProgressBarProps {
 	progress: number;
+	ariaLabel?: string;
 	variant?: ProgressBarVariant;
 	status?: ProgressBarStatus;
 	fileName?: string;

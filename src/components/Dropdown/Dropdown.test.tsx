@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Dropdown } from "./Dropdown";
 import { DropdownItem } from "./DropdownItem";
 import { DropdownMenu } from "./DropdownMenu";
@@ -26,7 +27,8 @@ describe("Dropdown components", () => {
 		expect(screen.getByRole("menu")).toBeTruthy();
 	});
 
-	it("toggles menu with keyboard Enter and Space", () => {
+	it("toggles menu with native Enter and Space activation", async () => {
+		const user = userEvent.setup();
 		render(
 			<Dropdown>
 				<DropdownTrigger>Open Menu</DropdownTrigger>
@@ -36,15 +38,35 @@ describe("Dropdown components", () => {
 			</Dropdown>,
 		);
 
-		const trigger = screen.getByText("Open Menu");
+		const trigger = screen.getByRole("button", { name: "Open Menu" });
 
-		// Press Enter
-		fireEvent.keyDown(trigger, { key: "Enter" });
+		trigger.focus();
+		await user.keyboard("{Enter}");
 		expect(screen.getByText("Item A")).toBeVisible();
 
-		// Press Space
-		fireEvent.keyDown(trigger, { key: " " });
+		trigger.focus();
+		await user.keyboard(" ");
 		expect(screen.queryByText("Item A")).toBeNull();
+	});
+
+	it("gives non-native trigger elements button semantics", async () => {
+		const user = userEvent.setup();
+		render(
+			<Dropdown>
+				<DropdownTrigger>
+					<div>Custom trigger</div>
+				</DropdownTrigger>
+				<DropdownMenu>
+					<DropdownItem>Custom item</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>,
+		);
+
+		const trigger = screen.getByRole("button", { name: "Custom trigger" });
+		expect(trigger).toHaveAttribute("tabindex", "0");
+		trigger.focus();
+		await user.keyboard("{Enter}");
+		expect(screen.getByText("Custom item")).toBeVisible();
 	});
 
 	it("closes menu on Escape", () => {
@@ -82,6 +104,36 @@ describe("Dropdown components", () => {
 
 		fireEvent.click(item);
 		expect(onSelect).toHaveBeenCalledWith(true);
+	});
+
+	it("uses one interactive element for checkbox menu items and supports arrow keys", async () => {
+		const user = userEvent.setup();
+		const onSelect = vi.fn();
+		render(
+			<Dropdown>
+				<DropdownTrigger>Open</DropdownTrigger>
+				<DropdownMenu>
+					<DropdownItem variant="checkbox" checked onSelect={onSelect}>
+						First
+					</DropdownItem>
+					<DropdownItem>Second</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>,
+		);
+
+		await user.click(screen.getByRole("button", { name: "Open" }));
+		const first = screen.getByRole("menuitemcheckbox", { name: "First" });
+		const second = screen.getByRole("menuitem", { name: "Second" });
+		expect(first.querySelector("button, input")).toBeNull();
+		expect(first).toHaveAttribute("aria-checked", "true");
+
+		await user.keyboard("{ArrowDown}");
+		expect(second).toHaveFocus();
+		await user.keyboard("{ArrowUp}");
+		expect(first).toHaveFocus();
+		await user.keyboard("{Enter}");
+		expect(onSelect).toHaveBeenCalledTimes(1);
+		expect(onSelect).toHaveBeenCalledWith(false);
 	});
 
 	it("DropdownSearch updates query", () => {

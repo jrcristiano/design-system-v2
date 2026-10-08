@@ -217,7 +217,9 @@ describe("Card", () => {
 
 			const article = screen.getByRole("article");
 			expect(article).toBeInTheDocument();
-			expect(article).toHaveAttribute("aria-labelledby", "card-title");
+			const titleId = article.getAttribute("aria-labelledby");
+			expect(titleId).toBeTruthy();
+			expect(document.getElementById(titleId!)).toHaveTextContent("Accessible Title");
 		});
 
 		it("renders complex card as article", () => {
@@ -234,7 +236,35 @@ describe("Card", () => {
 
 			const article = screen.getByRole("article");
 			expect(article).toBeInTheDocument();
-			expect(article).toHaveAttribute("aria-labelledby", "complex-card-title");
+			const titleId = article.getAttribute("aria-labelledby");
+			expect(titleId).toBeTruthy();
+			expect(document.getElementById(titleId!)).toHaveTextContent("Title");
+		});
+
+		it("uses unique title IDs for multiple cards", () => {
+			render(
+				<>
+					<Card variant="simple" title="First" label="First label" />
+					<Card variant="simple" title="Second" label="Second label" />
+					<Card
+						variant="type1"
+						title="Third"
+						chipLabel="Active"
+						subtitle="Subtitle"
+						progress={50}
+						primaryButtonText="Open"
+					/>
+				</>,
+			);
+
+			const articles = screen.getAllByRole("article");
+			const labelledBy = articles.map((article) => article.getAttribute("aria-labelledby"));
+			expect(new Set(labelledBy).size).toBe(articles.length);
+			articles.forEach((article) => {
+				expect(
+					document.getElementById(article.getAttribute("aria-labelledby")!),
+				).toBeInTheDocument();
+			});
 		});
 	});
 

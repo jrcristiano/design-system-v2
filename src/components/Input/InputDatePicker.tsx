@@ -15,11 +15,14 @@ export const InputDatePicker: React.FC<InputProps> = ({
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 	const [inputValue, setInputValue] = useState("");
+	const confirmedInputValueRef = useRef("");
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const handleClickOutside = (e: MouseEvent) => {
 			if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+				setInputValue(confirmedInputValueRef.current);
+				setSelectedDate(null);
 				setIsOpen(false);
 			}
 		};
@@ -35,14 +38,21 @@ export const InputDatePicker: React.FC<InputProps> = ({
 
 	const handleOkClick = useCallback(() => {
 		if (selectedDate) {
+			confirmedInputValueRef.current = inputValue;
 			setIsOpen(false);
 		}
-	}, [selectedDate]);
+	}, [inputValue, selectedDate]);
 
 	const handleToggle = useCallback(() => {
 		if (disabled) return;
-		setIsOpen((prev) => !prev);
-	}, [disabled]);
+		if (isOpen) {
+			setInputValue(confirmedInputValueRef.current);
+			setSelectedDate(null);
+			setIsOpen(false);
+		} else {
+			setIsOpen(true);
+		}
+	}, [disabled, isOpen]);
 
 	const handleOpen = useCallback(() => {
 		if (disabled) return;
@@ -64,6 +74,8 @@ export const InputDatePicker: React.FC<InputProps> = ({
 
 	const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value);
+		confirmedInputValueRef.current = e.target.value;
+		setSelectedDate(null);
 	}, []);
 
 	const handleCalendarClick = useCallback(
@@ -78,13 +90,10 @@ export const InputDatePicker: React.FC<InputProps> = ({
 	);
 
 	const handleCancelClick = useCallback(() => {
-		if (inputValue === "") {
-			setInputValue("");
-		}
-
+		setInputValue(confirmedInputValueRef.current);
 		setSelectedDate(null);
 		setIsOpen(false);
-	}, [inputValue]);
+	}, []);
 
 	const handleKeyDown = useCallback(
 		(e: React.KeyboardEvent) => {

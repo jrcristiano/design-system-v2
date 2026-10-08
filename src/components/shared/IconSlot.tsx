@@ -1,4 +1,9 @@
-import React, { type ReactNode, type KeyboardEvent, type HTMLAttributes } from "react";
+import React, {
+	type ReactNode,
+	type KeyboardEvent,
+	type HTMLAttributes,
+	type MouseEvent,
+} from "react";
 import clsx from "clsx";
 
 type DataAttributes = {
@@ -8,7 +13,7 @@ type DataAttributes = {
 export type IconSlotProps = {
 	children: ReactNode;
 	className?: string;
-	onClick?: () => void;
+	onClick?: (event: MouseEvent<HTMLElement>) => void;
 	onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void;
 	as?: "button" | "span";
 	role?: string;
@@ -42,14 +47,6 @@ export const IconSlot: React.FC<IconSlotProps> = ({
 		Object.entries(rest).filter(([key]) => key.startsWith("data-")),
 	) as Record<string, string | undefined>;
 
-	const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-		if (event.key === "Enter" || event.key === " ") {
-			event.preventDefault();
-			onClick?.();
-		}
-		onKeyDown?.(event);
-	};
-
 	const Element = as || (onClick ? "button" : "span");
 
 	const commonProps: HTMLAttributes<HTMLElement> & { role?: string; tabIndex?: number } = {
@@ -59,7 +56,7 @@ export const IconSlot: React.FC<IconSlotProps> = ({
 			className,
 		),
 		onClick,
-		onKeyDown: onClick ? handleKeyDown : onKeyDown,
+		onKeyDown,
 		role,
 		tabIndex,
 		...dataAttributes,

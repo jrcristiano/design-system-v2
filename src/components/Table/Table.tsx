@@ -49,7 +49,12 @@ const IconSlot: React.FC<IconSlotProps> = ({ onClick, children, className }) => 
 
 export const Table: React.FC<ITableProps> = React.memo(({ children, className, ...props }) => {
 	return (
-		<div className="bg-white inline-flex flex-col w-full  overflow-x-auto">
+		<div
+			role="region"
+			aria-label="Tabela rolável"
+			tabIndex={0}
+			className="bg-white inline-flex flex-col w-full  overflow-x-auto"
+		>
 			<table
 				className={clsx("w-full border-collapse bg-[var(--ds-surface)]", className)}
 				{...props}
@@ -90,7 +95,7 @@ export const TableRow: React.FC<ITableRowProps> = React.memo(
 	({ children, isClickable = false, isSelected = false, className, ...props }) => {
 		const rowStyles = useMemo(() => {
 			return clsx(
-				"inline-flex w-full",
+				"w-full",
 				isClickable && "cursor-pointer hover:bg-[var(--ds-color-neutral-98)]",
 				isSelected && "bg-[var(--ds-color-blue-95)]",
 				className,
@@ -189,11 +194,7 @@ export const TableHeadCell: React.FC<ITableHeadCellProps> = React.memo(
 
 		return (
 			<th
-				className={clsx(
-					"h-12 inline-flex flex-col justify-start items-start gap-px",
-					SIZE_STYLES[columnSize],
-					className,
-				)}
+				className={clsx("h-12 p-0", SIZE_STYLES[columnSize], className)}
 				aria-sort={getAriaSortValue(sortable, sortDirection)}
 				{...props}
 			>
@@ -224,11 +225,7 @@ export const TableCell: React.FC<ITableCellProps> = React.memo(
 	({ children, columnSize = "md", align = "left", className, ...props }) => {
 		return (
 			<td
-				className={clsx(
-					"h-14 inline-flex flex-col justify-start items-start gap-px overflow-visible",
-					SIZE_STYLES[columnSize],
-					className,
-				)}
+				className={clsx("h-14 p-0 overflow-visible", SIZE_STYLES[columnSize], className)}
 				{...props}
 			>
 				<div

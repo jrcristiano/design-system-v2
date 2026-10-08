@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FileUploadItem } from "../components/Input/InputUpload.type";
 
 let fallbackIdSequence = 0;
@@ -52,21 +52,35 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 
 	const [files, setFiles] = useState<FileUploadItem[]>([]);
 	const [isDragging, setIsDragging] = useState(false);
+	const filesRef = useRef<FileUploadItem[]>([]);
+	const uploadTimersRef = useRef(new Map<string, ReturnType<typeof setInterval>>());
 
 	const updateFileProgress = useCallback(
 		(fileId: string, progress: number, uploadedSize: number) => {
-			setFiles((prev) => prev.map((f) => (f.id === fileId ? { ...f, progress, uploadedSize } : f)));
+			const next = filesRef.current.map((file) =>
+				file.id === fileId ? { ...file, progress, uploadedSize } : file,
+			);
+			filesRef.current = next;
+			setFiles(next);
 		},
 		[],
 	);
 
 	const markFileCompleted = useCallback((fileId: string) => {
-		setFiles((prev) =>
-			prev.map<FileUploadItem>((f) =>
-				f.id === fileId ? { ...f, state: "completed", progress: 100 } : f,
-			),
+		const next = filesRef.current.map<FileUploadItem>((file) =>
+			file.id === fileId ? { ...file, state: "completed", progress: 100 } : file,
 		);
+		filesRef.current = next;
+		setFiles(next);
 	}, []);
+
+	useEffect(
+		() => () => {
+			for (const timer of uploadTimersRef.current.values()) clearInterval(timer);
+			uploadTimersRef.current.clear();
+		},
+		[],
+	);
 
 	const validateFile = useCallback(
 		(file: File): { valid: boolean; error?: string } => {
@@ -96,6 +110,7 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 				if (progress >= 100) {
 					progress = 100;
 					clearInterval(interval);
+					uploadTimersRef.current.delete(fileItem.id);
 					markFileCompleted(fileItem.id);
 					onUploadComplete?.({ ...fileItem, state: "completed", progress: 100 });
 				} else {
@@ -104,6 +119,7 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 					updateFileProgress(fileItem.id, roundedProgress, uploadedSize);
 				}
 			}, 300);
+			uploadTimersRef.current.set(fileItem.id, interval);
 		},
 		[onUploadComplete, markFileCompleted, updateFileProgress],
 	);
@@ -124,11 +140,14 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 				};
 			});
 
-			setFiles((prev) => {
-				const updated = multiple ? [...prev, ...fileItems] : fileItems;
-				onFilesChange?.(updated);
-				return updated;
-			});
+			if (!multiple) {
+				for (const timer of uploadTimersRef.current.values()) clearInterval(timer);
+				uploadTimersRef.current.clear();
+			}
+			const updated = multiple ? [...filesRef.current, ...fileItems] : fileItems;
+			filesRef.current = updated;
+			setFiles(updated);
+			onFilesChange?.(updated);
 
 			fileItems.forEach((fileItem) => {
 				if (fileItem.state === "uploading") {
@@ -143,11 +162,14 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 
 	const removeFile = useCallback(
 		(fileId: string) => {
-			setFiles((prev) => {
-				const updated = prev.filter((f) => f.id !== fileId);
-				onFilesChange?.(updated);
-				return updated;
-			});
+			const timer = uploadTimersRef.current.get(fileId);
+			if (timer !== undefined) clearInterval(timer);
+			uploadTimersRef.current.delete(fileId);
+
+			const updated = filesRef.current.filter((file) => file.id !== fileId);
+			filesRef.current = updated;
+			setFiles(updated);
+			onFilesChange?.(updated);
 		},
 		[onFilesChange],
 	);

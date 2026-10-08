@@ -251,11 +251,30 @@ describe("InputDatePicker", () => {
 		const input = screen.getByLabelText(/Date/) as HTMLInputElement;
 		expect(input.value).toMatch(/15\/\d{2}\/\d{4}/);
 
-		// Click cancel - should close calendar and clear selection
+		// Cancel restores the value confirmed before this calendar session.
 		await user.click(screen.getByText("Cancelar"));
 		await waitFor(() => {
 			expect(screen.queryByText("Cancelar")).not.toBeInTheDocument();
 		});
+		expect(input).toHaveValue("");
+	});
+
+	it("keeps an applied date when a later calendar selection is cancelled", async () => {
+		const user = userEvent.setup();
+		render(<InputDatePicker label="Date" />);
+		const input = screen.getByLabelText(/Date/);
+		const calendarButton = screen.getByRole("button", { name: "Open calendar" });
+
+		await user.click(calendarButton);
+		await user.click(screen.getByText("20"));
+		await user.click(screen.getByText("Ok"));
+		const appliedValue = (input as HTMLInputElement).value;
+
+		await user.click(calendarButton);
+		await user.click(screen.getByText("15"));
+		await user.click(screen.getByText("Cancelar"));
+
+		expect(input).toHaveValue(appliedValue);
 	});
 
 	it("does not close calendar when handleOkClick is called with no selectedDate", async () => {

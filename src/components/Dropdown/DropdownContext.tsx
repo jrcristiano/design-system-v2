@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 
 export interface DropdownContextValue {
 	open: boolean;
-	toggle: () => void;
+	toggle: (trigger?: HTMLElement | null) => void;
 	close: () => void;
 
 	searchQuery: string;

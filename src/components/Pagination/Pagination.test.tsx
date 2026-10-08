@@ -138,6 +138,14 @@ describe("Pagination", () => {
 		expect(screen.getByText("11-20")).toBeInTheDocument();
 	});
 
+	it("shows a valid empty range when there are no items", () => {
+		render(<Pagination {...defaultProps} total={0} currentPage={1} positionLabel="left" />);
+		expect(screen.getByText("0-0")).toBeInTheDocument();
+		expect(screen.getByText("Mostrando").parentElement).toHaveTextContent(
+			"Mostrando 0-0 de 0 Itens",
+		);
+	});
+
 	it("disables all buttons when disabled", () => {
 		render(<Pagination {...defaultProps} disabled />);
 		expect(screen.getByLabelText("Página anterior")).toBeDisabled();

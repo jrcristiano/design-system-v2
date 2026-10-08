@@ -5,9 +5,9 @@ export interface FilterValue {
 export interface SidebarFilterContextValue {
 	isOpen: boolean;
 	position: "left" | "right";
-	open: () => void;
+	open: (trigger?: HTMLElement | null) => void;
 	close: () => void;
-	toggle: () => void;
+	toggle: (trigger?: HTMLElement | null) => void;
 	filters: FilterValue;
 	setFilter: (key: string, value: unknown) => void;
 	clearFilters: () => void;

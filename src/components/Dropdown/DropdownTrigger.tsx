@@ -22,10 +22,16 @@ export function DropdownTrigger({
 	// Determina o ícone correto
 	const resolvedIcon = open ? iconOpen : iconClosed;
 
-	// Handler de teclado unificado para Enter e Space
+	// Native buttons already turn Enter and Space into click events.
 	const handleKeyDown = useCallback(
 		(e: React.KeyboardEvent) => {
-			if (e.key === "Enter" || e.key === " ") {
+			const target = e.target;
+			if (
+				(e.key === "Enter" || e.key === " ") &&
+				target instanceof HTMLElement &&
+				!target.matches("button, a, input, select, textarea") &&
+				!target.isContentEditable
+			) {
 				e.preventDefault();
 				toggle();
 			}
@@ -38,8 +44,7 @@ export function DropdownTrigger({
 		return (
 			<button
 				type="button"
-				onClick={toggle}
-				onKeyDown={handleKeyDown}
+				onClick={(event) => toggle(event.currentTarget)}
 				className={`${styles.trigger} ${
 					applyOpenCloseColors ? styles.triggerStateColors : ""
 				} cursor-pointer select-none bg-transparent border-0 p-0 m-0 text-left`}
@@ -59,7 +64,12 @@ export function DropdownTrigger({
 		onClick?: (e: React.MouseEvent) => void;
 		onKeyDown?: (e: React.KeyboardEvent) => void;
 		className?: string;
+		role?: string;
+		tabIndex?: number;
 	};
+	const childTag = typeof children.type === "string" ? children.type : undefined;
+	const needsButtonSemantics =
+		childTag !== undefined && !["button", "a", "input", "select", "textarea"].includes(childTag);
 
 	// Novas props injetadas no filho
 	const nextProps: {
@@ -71,14 +81,16 @@ export function DropdownTrigger({
 		"data-open": boolean;
 		"aria-expanded": boolean;
 		"aria-haspopup": string;
+		role?: string;
+		tabIndex?: number;
 	} = {
 		onClick: (e: React.MouseEvent) => {
 			childProps.onClick?.(e);
-			toggle();
+			toggle(e.currentTarget as HTMLElement);
 		},
 		onKeyDown: (e: React.KeyboardEvent) => {
 			childProps.onKeyDown?.(e);
-			handleKeyDown(e);
+			if (needsButtonSemantics) handleKeyDown(e);
 		},
 		className: `${styles.trigger} ${applyOpenCloseColors ? styles.triggerStateColors : ""} ${
 			childProps.className ?? ""
@@ -86,6 +98,9 @@ export function DropdownTrigger({
 		"data-open": open,
 		"aria-expanded": open,
 		"aria-haspopup": "menu",
+		...(needsButtonSemantics
+			? { role: childProps.role ?? "button", tabIndex: childProps.tabIndex ?? 0 }
+			: {}),
 	};
 
 	// Adiciona ícones corretamente

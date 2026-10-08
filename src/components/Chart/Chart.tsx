@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import {
 	VictoryChart,
 	VictoryBar,
@@ -269,9 +269,23 @@ export const Chart: React.FC<ChartProps> = ({
 	containerStyle,
 	className,
 }) => {
+	const titleId = useId();
 	// Merge tokens e config com defaults
 	const mergedTokens = mergeTokens(DEFAULT_TOKENS, tokens);
 	const mergedConfig = { ...DEFAULT_CONFIG, ...config };
+	const accessibleContainer = (
+		<VictoryContainer
+			responsive
+			{...(title ? { "aria-labelledby": titleId } : { title: "Gráfico" })}
+			desc={
+				type === "gauge"
+					? `Valor atual ${data[0]?.y ?? 0} de ${mergedConfig.gauge?.maxValue ?? 100}.`
+					: data.length > 0
+						? `Dados do gráfico: ${data.map((datum) => `${datum.x}: ${datum.y}`).join("; ")}.`
+						: "Gráfico sem dados."
+			}
+		/>
+	);
 
 	// Estilos baseados em tokens
 	const styles = createStyles(mergedTokens);
@@ -298,6 +312,7 @@ export const Chart: React.FC<ChartProps> = ({
 
 		return (
 			<VictoryPie
+				containerComponent={accessibleContainer}
 				data={data}
 				height={height}
 				width={width}
@@ -332,6 +347,7 @@ export const Chart: React.FC<ChartProps> = ({
 		return (
 			<div style={{ position: "relative", width, height, ...styles.container }}>
 				<VictoryPie
+					containerComponent={accessibleContainer}
 					height={height}
 					width={width}
 					startAngle={mergedConfig.gauge?.startAngle}
@@ -345,7 +361,7 @@ export const Chart: React.FC<ChartProps> = ({
 					labels={() => null}
 				/>
 
-				<div style={styles.gaugeLabel}>
+				<div style={styles.gaugeLabel} aria-hidden="true">
 					<span style={styles.gaugeLabelSmall}>Valor atual</span>
 					<strong style={styles.gaugeLabelLarge}>{value.toFixed(1).replace(".", ",")}</strong>
 				</div>
@@ -359,6 +375,7 @@ export const Chart: React.FC<ChartProps> = ({
 
 		const value = Math.min(datum.y, mergedConfig.bullet?.maxValue ?? 100);
 		const max = mergedConfig.bullet?.maxValue ?? 100;
+		const tickValues = Array.from({ length: 6 }, (_, index) => (max * index) / 5);
 
 		return (
 			<VictoryChart
@@ -368,11 +385,11 @@ export const Chart: React.FC<ChartProps> = ({
 				domain={{ y: [0, max] }}
 				padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
 				theme={theme}
-				containerComponent={<VictoryContainer responsive />}
+				containerComponent={accessibleContainer}
 			>
 				<VictoryAxis
 					dependentAxis
-					tickValues={[0, 20, 40, 60, 80, 100]}
+					tickValues={tickValues}
 					style={{
 						axis: { stroke: mergedTokens.colors.border?.default },
 						tickLabels: {
@@ -422,7 +439,7 @@ export const Chart: React.FC<ChartProps> = ({
 			domainPadding={{ x: 20 }}
 			height={height}
 			width={width}
-			containerComponent={<VictoryContainer responsive />}
+			containerComponent={accessibleContainer}
 		>
 			<VictoryAxis
 				style={{
@@ -525,7 +542,7 @@ export const Chart: React.FC<ChartProps> = ({
 			}}
 		>
 			{title && (
-				<small className="font-semibold" style={styles.title}>
+				<small id={titleId} className="font-semibold" style={styles.title}>
 					{title}
 				</small>
 			)}

@@ -23,6 +23,9 @@ export interface IMenuItemProps extends React.HTMLAttributes<HTMLButtonElement> 
 	disabled?: boolean;
 	onClick?: () => void;
 	href?: string;
+	target?: React.HTMLAttributeAnchorTarget;
+	rel?: string;
+	download?: boolean | string;
 	children?: ReactNode;
 	isSubmenuItem?: boolean;
 }

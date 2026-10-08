@@ -64,6 +64,44 @@ describe("InputMasked", () => {
 		expect(input).toHaveValue("");
 	});
 
+	it("uses defaultValue and keeps the masked value in uncontrolled mode", async () => {
+		const user = userEvent.setup();
+		const onChangeRaw = vi.fn();
+		render(
+			<InputMasked
+				label="Phone"
+				mask="(##) #####-####"
+				defaultValue="12"
+				onChangeRaw={onChangeRaw}
+			/>,
+		);
+
+		const input = screen.getByLabelText("Phone");
+		expect(input).toHaveValue("(12");
+
+		await user.type(input, "3");
+
+		expect(input).toHaveValue("(12) 3");
+		expect(onChangeRaw).toHaveBeenLastCalledWith("123");
+	});
+
+	it("keeps controlled values owned by the parent", async () => {
+		const user = userEvent.setup();
+		const onChange = vi.fn();
+		const { rerender } = render(
+			<InputMasked label="Phone" mask="(##) #####-####" value="12" onChange={onChange} />,
+		);
+		const input = screen.getByLabelText("Phone");
+
+		expect(input).toHaveValue("(12");
+		await user.type(input, "3");
+		expect(onChange).toHaveBeenCalled();
+		expect(input).toHaveValue("(12");
+
+		rerender(<InputMasked label="Phone" mask="(##) #####-####" value="123" onChange={onChange} />);
+		expect(input).toHaveValue("(12) 3");
+	});
+
 	it("handles null controlled value", () => {
 		render(
 			<InputMasked

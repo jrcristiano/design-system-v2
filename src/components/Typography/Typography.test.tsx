@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { renderToString } from "react-dom/server";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 import { Typography } from "./Typography";
@@ -30,6 +31,19 @@ describe("Typography", () => {
 		render(<Typography />);
 		expect(screen.getByText("Tipografia")).toBeInTheDocument();
 		expect(screen.getByText("Estados, tamanhos e variantes")).toBeInTheDocument();
+	});
+
+	it("does not read localStorage during server rendering", () => {
+		const originalStorage = globalThis.localStorage;
+		Object.defineProperty(globalThis, "localStorage", { value: undefined, configurable: true });
+		try {
+			expect(() => renderToString(<Typography />)).not.toThrow();
+		} finally {
+			Object.defineProperty(globalThis, "localStorage", {
+				value: originalStorage,
+				configurable: true,
+			});
+		}
 	});
 
 	it("renders typography toggle buttons", () => {

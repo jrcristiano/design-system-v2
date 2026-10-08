@@ -50,6 +50,24 @@ describe("Carousel", () => {
 			expect(dots.length).toBeGreaterThan(0);
 		});
 
+		it("navigates to the final valid index when the item count is not divisible by visibleItems", async () => {
+			const onSlideChange = vi.fn();
+			render(
+				<Carousel
+					items={mockItems}
+					onSlideChange={onSlideChange}
+					itemsPerView={{ mobile: 3, tablet: 3, desktop: 3 }}
+				/>,
+			);
+
+			const lastDot = screen.getByRole("tab", { name: "Ir para slide 2" });
+			fireEvent.click(lastDot);
+			await vi.runAllTimersAsync();
+
+			expect(onSlideChange).toHaveBeenCalledWith(1);
+			expect(lastDot).toHaveAttribute("aria-selected", "true");
+		});
+
 		it("não deve renderizar setas quando showArrows é false", () => {
 			render(<Carousel items={mockItems} showArrows={false} />);
 			expect(screen.queryByLabelText("Slide anterior")).not.toBeInTheDocument();
@@ -393,5 +411,20 @@ describe("Carousel", () => {
 			const track = container.querySelector(".carousel-track") as HTMLElement;
 			expect(track?.style.gap).toBe("20px");
 		});
+	});
+
+	it("removes controls in hidden slides from the focus order", () => {
+		const items: CarouselItem[] = [
+			{ id: 10, content: <button type="button">First slide action</button> },
+			{ id: 11, content: <button type="button">Second slide action</button> },
+		];
+		render(<Carousel items={items} itemsPerView={{ mobile: 1, tablet: 1, desktop: 1 }} />);
+		const secondAction = screen.getByText("Second slide action");
+		const secondSlide = secondAction.closest('[aria-roledescription="slide"]');
+		expect(secondSlide).toHaveAttribute("aria-hidden", "true");
+		expect(secondSlide).toHaveAttribute("inert");
+
+		fireEvent.click(screen.getByLabelText("Próximo slide"));
+		expect(secondSlide).not.toHaveAttribute("inert");
 	});
 });

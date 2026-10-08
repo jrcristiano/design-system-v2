@@ -13,6 +13,16 @@ describe("RichTextLabel", () => {
 		expect(screen.getByText("Test Label")).toBeInTheDocument();
 	});
 
+	it("associates the label with the editor element", () => {
+		render(
+			<RichTextLabel label="Description" id="description-label" htmlFor="description-editor" />,
+		);
+		expect(screen.getByText("Description").closest("label")).toHaveAttribute(
+			"for",
+			"description-editor",
+		);
+	});
+
 	it("renders required indicator when required is true", () => {
 		render(<RichTextLabel label="Required Field" required />);
 		expect(screen.getByText("*")).toBeInTheDocument();

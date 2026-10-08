@@ -15,6 +15,24 @@ type TypographyRow = {
 
 type ActiveTypography = "ef" | "em" | null;
 
+const readTypographyStorage = (key: string): string | null => {
+	if (typeof window === "undefined") return null;
+	try {
+		return window.localStorage.getItem(key);
+	} catch {
+		return null;
+	}
+};
+
+const writeTypographyStorage = (key: string, value: string): void => {
+	if (typeof window === "undefined") return;
+	try {
+		window.localStorage.setItem(key, value);
+	} catch {
+		// The showcase still works when browser storage is unavailable.
+	}
+};
+
 interface PlaygroundHeaderProps {
 	pretitle: string;
 	title: string;
@@ -352,8 +370,9 @@ export const Typography: React.FC = () => {
 			target.style.setProperty("--ds-font-family-body", bodyVal);
 			target.style.setProperty("--ds-font-family-ui", bodyVal);
 
-			localStorage.setItem("ds-typography", "ef");
-			localStorage.setItem("ds-font-token", "--ds-font-family-fredoka");
+			writeTypographyStorage("ds-typography", "ef");
+			writeTypographyStorage("ds-font-token", "--ds-font-family-fredoka");
+			setFontToken("--ds-font-family-fredoka");
 
 			setActive("ef");
 		} else {
@@ -362,24 +381,23 @@ export const Typography: React.FC = () => {
 			target.style.setProperty("--ds-font-family-body", val);
 			target.style.setProperty("--ds-font-family-ui", val);
 
-			localStorage.setItem("ds-typography", "em");
-			localStorage.setItem("ds-font-token", "--ds-font-family-montserrat");
+			writeTypographyStorage("ds-typography", "em");
+			writeTypographyStorage("ds-font-token", "--ds-font-family-montserrat");
+			setFontToken("--ds-font-family-montserrat");
 
 			setActive("em");
 		}
 	}, []);
 
-	useEffect(() => {
-		const saved = localStorage.getItem("ds-typography") as ActiveTypography;
-		if (saved) {
-			applyTypography(saved);
-		}
-	}, [applyTypography]);
+	const [fontToken, setFontToken] = useState("--ds-font-family-body");
 
-	const fontToken = useMemo(
-		() => localStorage.getItem("ds-font-token") || "--ds-font-family-body",
-		[],
-	);
+	useEffect(() => {
+		const savedToken = readTypographyStorage("ds-font-token");
+		if (savedToken) setFontToken(savedToken);
+
+		const saved = readTypographyStorage("ds-typography");
+		if (saved === "ef" || saved === "em") applyTypography(saved);
+	}, [applyTypography]);
 
 	const containerStyle = useMemo(
 		() => ({

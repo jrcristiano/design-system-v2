@@ -89,9 +89,9 @@ const meta: Meta<typeof Accordion> = {
 			description: "Título exibido no cabeçalho do accordion",
 		},
 		state: {
-			control: "select",
-			options: ["default", "hover", "pressed", "focused", "selected"],
-			description: "Estado visual do accordion (opcional - automático por padrão)",
+			control: false,
+			table: { disable: true },
+			description: "Prop legado mantido por compatibilidade; os estados visuais são automáticos.",
 		},
 		isOpen: {
 			control: "boolean",

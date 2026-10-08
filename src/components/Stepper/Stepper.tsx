@@ -13,7 +13,7 @@ type StepLinkProps = {
 	children: ReactNode;
 };
 
-// StepLink uses data attributes to store props; parent Stepper accesses them via .props pattern
+// StepLink keeps navigation metadata until Stepper turns it into a semantic control.
 const StepLink: FC<StepLinkProps> = ({ eventKey, href, disabled, children }) => (
 	<span data-eventkey={eventKey} data-href={href} data-disabled={disabled}>
 		{children}

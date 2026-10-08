@@ -6,6 +6,6 @@ export const parameters = {
 	layout: "centered",
 
 	a11y: {
-		test: "todo",
+		test: "error",
 	},
 };

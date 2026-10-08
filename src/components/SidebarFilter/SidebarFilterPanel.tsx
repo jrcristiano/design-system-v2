@@ -42,14 +42,14 @@ export function SidebarFilterPanel({ children, position }: Readonly<SidebarFilte
 
 	// Focus trap
 	useEffect(() => {
-		if (isOpen && panelRef.current) {
+		if (isOpen && shouldRender && panelRef.current) {
 			const focusableElements = panelRef.current.querySelectorAll<HTMLElement>(
 				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
 			);
 			const firstElement = focusableElements[0];
 			const lastElement = focusableElements[focusableElements.length - 1];
 
-			setTimeout(() => firstElement?.focus(), 50);
+			const focusTimer = setTimeout(() => firstElement?.focus(), 50);
 
 			const handleTab = (e: KeyboardEvent) => {
 				if (e.key !== "Tab") return;
@@ -66,9 +66,12 @@ export function SidebarFilterPanel({ children, position }: Readonly<SidebarFilte
 			};
 
 			document.addEventListener("keydown", handleTab);
-			return () => document.removeEventListener("keydown", handleTab);
+			return () => {
+				clearTimeout(focusTimer);
+				document.removeEventListener("keydown", handleTab);
+			};
 		}
-	}, [isOpen]);
+	}, [isOpen, shouldRender]);
 
 	const handleOverlayClick = useCallback(() => {
 		close();
@@ -107,7 +110,9 @@ export function SidebarFilterPanel({ children, position }: Readonly<SidebarFilte
 			<dialog
 				ref={panelRef}
 				open
-				aria-modal="true"
+				aria-modal={isOpen}
+				aria-hidden={!isOpen}
+				inert={!isOpen}
 				aria-labelledby={headerId}
 				className={clsx(
 					"fixed inset-y-0 w-[360px] z-[999] p-0 border-none bg-white",

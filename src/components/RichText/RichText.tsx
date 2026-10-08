@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useId, useMemo, useState } from "react";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { FormikContext } from "formik";
@@ -23,6 +23,8 @@ export const RichText: React.FC<RichTextProps> = ({
 	name,
 	className = "",
 }) => {
+	const labelId = useId();
+	const editorId = useId();
 	const [isFocused, setIsFocused] = useState(false);
 	const [charCount, setCharCount] = useState(0);
 	const formik = useContext(FormikContext);
@@ -71,6 +73,7 @@ export const RichText: React.FC<RichTextProps> = ({
 	const formikValue =
 		hasFormik && name ? (getFormikValue(formik.values, name) as string | undefined) : undefined;
 	const resolvedValue = typeof formikValue === "string" ? formikValue : value;
+	const [htmlValue, setHtmlValue] = useState(resolvedValue);
 
 	const editor = useEditor({
 		extensions: [StarterKit],
@@ -79,6 +82,7 @@ export const RichText: React.FC<RichTextProps> = ({
 		onUpdate: ({ editor }) => {
 			const html = editor.getHTML();
 			const text = editor.getText();
+			setHtmlValue(html);
 			setCharCount(text.length);
 			onChange?.(html);
 			if (hasFormik && name) {
@@ -88,6 +92,11 @@ export const RichText: React.FC<RichTextProps> = ({
 		},
 		editorProps: {
 			attributes: {
+				id: editorId,
+				role: "textbox",
+				...(label ? { "aria-labelledby": labelId } : { "aria-label": "Editor de texto" }),
+				...(required ? { "aria-required": "true" } : {}),
+				"aria-multiline": "true",
 				class: styles.editor,
 				style: "min-height: 120px; padding: 10px; outline: none;",
 			},
@@ -98,6 +107,7 @@ export const RichText: React.FC<RichTextProps> = ({
 		if (editor && resolvedValue !== editor.getHTML()) {
 			editor.commands.setContent(resolvedValue);
 		}
+		setHtmlValue(resolvedValue);
 	}, [resolvedValue, editor]);
 
 	useEffect(() => {
@@ -154,7 +164,13 @@ export const RichText: React.FC<RichTextProps> = ({
 					}
 				}}
 			>
-				<RichTextLabel label={label} required={required} disabled={disabled} />
+				<RichTextLabel
+					id={labelId}
+					htmlFor={editorId}
+					label={label}
+					required={required}
+					disabled={disabled}
+				/>
 				<RichTextToolbar editor={editor} disabled={disabled} />
 				<RichTextEditor
 					editor={editor}
@@ -173,7 +189,7 @@ export const RichText: React.FC<RichTextProps> = ({
 			</fieldset>
 
 			{/* Hidden input for form submission */}
-			{name && <input type="hidden" name={name} value={editor?.getHTML() || ""} />}
+			{name && <input type="hidden" name={name} value={htmlValue} />}
 		</div>
 	);
 };

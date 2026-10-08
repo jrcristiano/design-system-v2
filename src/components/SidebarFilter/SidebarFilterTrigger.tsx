@@ -8,17 +8,22 @@ export function SidebarFilterTrigger({ children }: Readonly<SidebarFilterTrigger
 	const { toggle } = useSidebarFilter();
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Enter" || e.key === " ") {
-			e.preventDefault();
-			toggle();
-		}
+		const target = e.target;
+		if (
+			(target instanceof HTMLElement &&
+				(target.matches("button, a, input, select, textarea") || target.isContentEditable)) ||
+			(e.key !== "Enter" && e.key !== " ")
+		)
+			return;
+		e.preventDefault();
+		toggle(e.currentTarget as HTMLElement);
 	};
 
 	if (!isValidElement(children)) {
 		return (
 			<button
 				type="button"
-				onClick={toggle}
+				onClick={(event) => toggle(event.currentTarget)}
 				onKeyDown={handleKeyDown}
 				className="cursor-pointer"
 				aria-label="Abrir filtros"
@@ -36,7 +41,7 @@ export function SidebarFilterTrigger({ children }: Readonly<SidebarFilterTrigger
 	const nextProps = {
 		onClick: (e: React.MouseEvent) => {
 			childProps.onClick?.(e);
-			toggle();
+			toggle(e.currentTarget as HTMLElement);
 		},
 		onKeyDown: (e: React.KeyboardEvent) => {
 			childProps.onKeyDown?.(e);

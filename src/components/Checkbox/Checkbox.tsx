@@ -5,7 +5,8 @@ import { useInteractionState } from "../../hooks/useInteractionState";
 
 export const Checkbox: React.FC<ICheckboxProps> = ({
 	label,
-	checked = false,
+	checked,
+	defaultChecked = false,
 	indeterminate = false,
 	disabled = false,
 	state = "default",
@@ -19,6 +20,13 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 	const { isFocused, handlers } = useInteractionState({ disabled });
 	const checkboxRef = useRef<HTMLInputElement>(null);
 	const labelId = useId();
+	const isControlled = checked !== undefined;
+	const [internalChecked, setInternalChecked] = React.useState(defaultChecked);
+	const currentChecked = isControlled ? checked : internalChecked;
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (!isControlled) setInternalChecked(event.target.checked);
+		onChange?.(event);
+	};
 
 	useEffect(() => {
 		if (checkboxRef.current) {
@@ -37,35 +45,35 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 	const stateStyles = {
 		default: `
       ${
-				checked || indeterminate
+				currentChecked || indeterminate
 					? "bg-[var(--ds-color-blue-40)] border-[var(--ds-color-blue-40)]"
 					: "bg-transparent border-[var(--ds-color-neutral-50)]"
 			}
     `,
 		hover: `
       ${
-				checked || indeterminate
+				currentChecked || indeterminate
 					? "bg-[var(--ds-color-blue-20)] border-[var(--ds-color-blue-20)]"
 					: "bg-transparent border-[var(--ds-color-neutral-30)]"
 			}
     `,
 		pressed: `
       ${
-				checked || indeterminate
+				currentChecked || indeterminate
 					? "bg-[var(--ds-color-blue-10)] border-[var(--ds-color-blue-10)]"
 					: "bg-transparent border-[var(--ds-color-neutral-40)]"
 			}
     `,
 		focused: `
       ${
-				checked || indeterminate
+				currentChecked || indeterminate
 					? "bg-[var(--ds-color-blue-30)] border-[var(--ds-color-blue-30)]"
 					: "bg-transparent border-[var(--ds-color-neutral-50)]"
 			}
     `,
 		disabled: `
       ${
-				checked || indeterminate
+				currentChecked || indeterminate
 					? "bg-[var(--ds-color-neutral-80)] border-[var(--ds-color-neutral-80)]"
 					: "bg-transparent border-[var(--ds-color-neutral-80)]"
 			}
@@ -109,9 +117,9 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 							ref={checkboxRef}
 							id={labelId}
 							type="checkbox"
-							checked={checked}
+							checked={currentChecked}
 							disabled={disabled}
-							onChange={onChange}
+							onChange={handleChange}
 							onFocus={handlers.onFocus}
 							onBlur={handlers.onBlur}
 							className={clsx(baseStyles, stateStyles[finalState])}
@@ -119,7 +127,7 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 							{...props}
 						/>
 
-						{checked && !indeterminate && (
+						{currentChecked && !indeterminate && (
 							<svg
 								className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
 								width={iconSizes.width}

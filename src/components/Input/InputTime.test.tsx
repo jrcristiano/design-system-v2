@@ -15,6 +15,11 @@ describe("InputTime", () => {
 		expect(screen.getByText("Duration")).toBeInTheDocument();
 	});
 
+	it("uses the available neutral text token when enabled", () => {
+		const { container } = render(<InputTime />);
+		expect(getTimeInput(container)).toHaveClass("text-[var(--ds-color-neutral-30)]");
+	});
+
 	it("renders without label", () => {
 		const { container } = render(<InputTime />);
 		const input = getTimeInput(container);

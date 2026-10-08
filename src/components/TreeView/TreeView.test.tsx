@@ -35,17 +35,40 @@ describe("TreeView", () => {
 			/>,
 		);
 
-		// click expand button for Node 1
-		const expandButtons = screen.getAllByRole("button", { name: /Expandir|Recolher/i });
-		// find first visible expand button (for node with children)
-		const btn =
-			expandButtons.find((b) => b.getAttribute("aria-label")?.includes("Expand")) ||
-			expandButtons[0];
-		fireEvent.click(btn);
+		// Expand from the roving tree item using the recommended arrow key.
+		const firstNode = screen.getByText("Node 1").closest('[role="treeitem"]');
+		if (!firstNode) throw new Error("Expected the first tree item");
+		fireEvent.keyDown(firstNode, { key: "ArrowRight" });
 		expect(onExpandChange).toHaveBeenCalled();
 
 		// click Node 2 to select
 		fireEvent.click(screen.getByText("Node 2"));
 		expect(onSelectionChange).toHaveBeenCalled();
+	});
+
+	it("exposes groups and keeps one enabled item in the tab order", () => {
+		render(<TreeView data={sampleData} defaultExpandedIds={["n1"]} />);
+		const tree = screen.getByRole("tree");
+		const items = screen.getAllByRole("treeitem");
+
+		expect(tree.tagName).toBe("UL");
+		expect(tree).not.toHaveAttribute("aria-multiselectable", "true");
+		expect(items[0]).toHaveAttribute("aria-level", "1");
+		expect(items[1]).toHaveAttribute("aria-level", "2");
+		expect(tree.querySelector('[role="group"]')).toContainElement(items[1]);
+		expect(items.filter((item) => item.getAttribute("tabindex") === "0")).toHaveLength(1);
+	});
+
+	it("moves roving focus through visible items with arrow keys", () => {
+		render(<TreeView data={sampleData} defaultExpandedIds={["n1"]} />);
+		const [parent, child, sibling] = screen.getAllByRole("treeitem");
+
+		parent.focus();
+		fireEvent.keyDown(parent, { key: "ArrowRight" });
+		expect(child).toHaveFocus();
+		fireEvent.keyDown(child, { key: "ArrowDown" });
+		expect(sibling).toHaveFocus();
+		fireEvent.keyDown(sibling, { key: "Home" });
+		expect(parent).toHaveFocus();
 	});
 });

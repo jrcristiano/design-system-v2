@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, cleanup, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { RichTextToolbar } from "./RichTextToolbar";
 
@@ -49,6 +50,25 @@ describe("RichTextToolbar", () => {
 		expect(screen.getByTitle("Lista com marcadores")).toBeInTheDocument();
 		expect(screen.getByTitle("Lista numerada")).toBeInTheDocument();
 		expect(screen.getByTitle("Tachado")).toBeInTheDocument();
+	});
+
+	it("supports roving keyboard focus and keyboard activation", async () => {
+		const user = userEvent.setup();
+		const { editor, mockChain } = createMockEditor();
+		render(<RichTextToolbar editor={editor as any} />);
+
+		const toolbar = screen.getByRole("toolbar", { name: "Ferramentas de formatação" });
+		const bold = screen.getByRole("button", { name: "Negrito" });
+		const italic = screen.getByRole("button", { name: "Itálico" });
+		expect(bold).toHaveAttribute("tabindex", "0");
+
+		await user.tab();
+		expect(bold).toHaveFocus();
+		await user.keyboard("{ArrowRight}");
+		expect(italic).toHaveFocus();
+		await user.keyboard("{Enter}");
+		expect(mockChain.toggleItalic).toHaveBeenCalledTimes(1);
+		expect(toolbar).toBeInTheDocument();
 	});
 
 	it("handles null editor without crashing", () => {
@@ -115,7 +135,7 @@ describe("RichTextToolbar", () => {
 		render(<RichTextToolbar editor={editor as any} />);
 
 		const boldButton = screen.getByTitle("Negrito");
-		fireEvent.mouseDown(boldButton);
+		fireEvent.click(boldButton);
 
 		expect(editor.chain).toHaveBeenCalled();
 		expect(mockChain.focus).toHaveBeenCalled();
@@ -128,7 +148,7 @@ describe("RichTextToolbar", () => {
 		render(<RichTextToolbar editor={editor as any} />);
 
 		const italicButton = screen.getByTitle("Itálico");
-		fireEvent.mouseDown(italicButton);
+		fireEvent.click(italicButton);
 
 		expect(mockChain.toggleItalic).toHaveBeenCalled();
 	});
@@ -138,7 +158,7 @@ describe("RichTextToolbar", () => {
 		render(<RichTextToolbar editor={editor as any} />);
 
 		const bulletButton = screen.getByTitle("Lista com marcadores");
-		fireEvent.mouseDown(bulletButton);
+		fireEvent.click(bulletButton);
 
 		expect(mockChain.toggleBulletList).toHaveBeenCalled();
 	});
@@ -148,7 +168,7 @@ describe("RichTextToolbar", () => {
 		render(<RichTextToolbar editor={editor as any} />);
 
 		const orderedButton = screen.getByTitle("Lista numerada");
-		fireEvent.mouseDown(orderedButton);
+		fireEvent.click(orderedButton);
 
 		expect(mockChain.toggleOrderedList).toHaveBeenCalled();
 	});
@@ -158,7 +178,7 @@ describe("RichTextToolbar", () => {
 		render(<RichTextToolbar editor={editor as any} />);
 
 		const strikeButton = screen.getByTitle("Tachado");
-		fireEvent.mouseDown(strikeButton);
+		fireEvent.click(strikeButton);
 
 		expect(mockChain.toggleStrike).toHaveBeenCalled();
 	});
@@ -195,7 +215,7 @@ describe("RichTextToolbar", () => {
 
 		const boldButton = screen.getByTitle("Negrito");
 		// Should not throw when clicking with null editor
-		fireEvent.mouseDown(boldButton);
+		fireEvent.click(boldButton);
 
 		expect(boldButton).toBeInTheDocument();
 	});

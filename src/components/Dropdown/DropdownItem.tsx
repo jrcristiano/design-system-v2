@@ -1,10 +1,9 @@
 "use client";
 
 import clsx from "clsx";
-import type { ReactNode, MouseEvent, KeyboardEvent } from "react";
+import type { ReactNode, MouseEvent } from "react";
 import { useCallback, useMemo } from "react";
 import { useDropdown } from "./DropdownContext";
-import { Checkbox } from "../Checkbox/Checkbox";
 
 export type DropdownItemVariant =
 	| "default"
@@ -68,23 +67,13 @@ export function DropdownItem({
 	);
 
 	const handleSelect = useCallback(
-		(e: MouseEvent | KeyboardEvent) => {
+		(e: MouseEvent<HTMLButtonElement>) => {
 			if (disabled) return;
 			e.stopPropagation();
 			onSelect?.(!checked);
 			focusSearch?.();
 		},
 		[disabled, onSelect, checked, focusSearch],
-	);
-
-	const handleKeyDown = useCallback(
-		(e: KeyboardEvent<HTMLButtonElement>) => {
-			if (e.key === "Enter" || e.key === " ") {
-				e.preventDefault();
-				handleSelect(e);
-			}
-		},
-		[handleSelect],
 	);
 
 	// Render condicional após todos os hooks
@@ -95,9 +84,9 @@ export function DropdownItem({
 			type="button"
 			role={isCheckboxVariant ? "menuitemcheckbox" : "menuitem"}
 			aria-checked={isCheckboxVariant ? checked : undefined}
+			tabIndex={-1}
 			disabled={disabled}
 			onClick={handleSelect}
-			onKeyDown={handleKeyDown}
 			className={clsx(
 				"px-2 py-2 w-full flex items-center gap-3 rounded-md",
 				"text-[var(--ds-color-neutral-10)] text-left bg-transparent border-none",
@@ -108,12 +97,50 @@ export function DropdownItem({
 			style={fontStyle}
 		>
 			{isCheckboxVariant && (
-				<Checkbox
-					checked={checked}
-					disabled={disabled}
-					onChange={(e) => e.stopPropagation()}
-					label={undefined}
-				/>
+				<span
+					className="w-[44px] h-[44px] inline-flex justify-center items-center"
+					aria-hidden="true"
+				>
+					<span
+						className={clsx(
+							"w-10 h-10 rounded-full relative inline-flex justify-center items-center transition-all duration-150 group",
+							!disabled && "group-hover:bg-[var(--ds-color-neutral-90)]",
+						)}
+					>
+						<span className="rounded-[6px] inline-flex justify-center items-center transition-all duration-150 relative">
+							<span
+								className={clsx(
+									"rounded-[4px] border-[1px] transition-all duration-150 appearance-none relative flex items-center justify-center w-5 h-5",
+									checked
+										? disabled
+											? "bg-[var(--ds-color-neutral-80)] border-[var(--ds-color-neutral-80)]"
+											: "bg-[var(--ds-color-blue-40)] border-[var(--ds-color-blue-40)]"
+										: disabled
+											? "bg-transparent border-[var(--ds-color-neutral-80)]"
+											: "bg-transparent border-[var(--ds-color-neutral-50)]",
+								)}
+							>
+								{checked && (
+									<svg
+										className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+										width="10"
+										height="8"
+										viewBox="0 0 10 8"
+										fill="none"
+									>
+										<path
+											d="M1.25 4L3.75 6.5L8.75 1.5"
+											stroke="var(--ds-color-neutral-white)"
+											strokeWidth="1.5"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										/>
+									</svg>
+								)}
+							</span>
+						</span>
+					</span>
+				</span>
 			)}
 
 			{isCheckboxVariant && children && (

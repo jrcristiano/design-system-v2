@@ -9,6 +9,15 @@ describe("Accordion", () => {
 		expect(screen.getByText("Section Title")).toBeInTheDocument();
 	});
 
+	it("accepts the legacy state prop without forwarding it to the DOM", () => {
+		const { container } = render(
+			<Accordion title="Legacy props" state="hover">
+				Content
+			</Accordion>,
+		);
+		expect(container.firstElementChild).not.toHaveAttribute("state");
+	});
+
 	it("is closed by default", () => {
 		render(<Accordion title="Section">Content</Accordion>);
 		const button = screen.getByRole("button");
@@ -108,6 +117,26 @@ describe("Accordion", () => {
 		expect(screen.getByTestId("child-content")).toBeInTheDocument();
 		expect(screen.getByText("Paragraph 1")).toBeInTheDocument();
 		expect(screen.getByText("Paragraph 2")).toBeInTheDocument();
+	});
+
+	it("keeps opened content mounted but removes it from focus order when collapsed", async () => {
+		const user = userEvent.setup();
+		render(
+			<Accordion title="Focusable content">
+				<button type="button">Inner action</button>
+			</Accordion>,
+		);
+
+		const toggle = screen.getByRole("button", { name: "Focusable content" });
+		await user.click(toggle);
+		const panel = document.getElementById(toggle.getAttribute("aria-controls") ?? "");
+		const innerAction = screen.getByRole("button", { name: "Inner action" });
+		expect(panel).not.toHaveAttribute("inert");
+
+		await user.click(toggle);
+		expect(innerAction).toBeInTheDocument();
+		expect(panel).toHaveAttribute("inert");
+		expect(panel).toHaveAttribute("aria-hidden", "true");
 	});
 
 	it("handles mouse events for styling", async () => {

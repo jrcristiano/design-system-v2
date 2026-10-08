@@ -120,7 +120,7 @@ export const InputTime: React.FC<InputTimeProps> = ({
 								"flex-1 border-0 bg-transparent font-poppins text-base font-normal",
 								"leading-[15px] outline-none focus:ring-0",
 								{
-									"text-[var(--ds-color-secondary-on-secondary-container)]": !disabled,
+									"text-[var(--ds-color-neutral-30)]": !disabled,
 									"text-[var(--ds-color-neutral-40)]": disabled,
 									"placeholder:text-[var(--ds-color-neutral-50)]": true,
 								},
