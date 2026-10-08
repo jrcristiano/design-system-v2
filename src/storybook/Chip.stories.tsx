@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CheckIcon, PlusIcon, WarningCircleIcon, XIcon } from "@phosphor-icons/react";
 import { Chip } from "../components/Chip/Chip";
+import "./Chip.stories.inline.css";
 
 const meta: Meta<typeof Chip> = {
 	title: "Components/Chip",
@@ -91,10 +92,10 @@ type Story = StoryObj<typeof Chip>;
 
 export const Examples: Story = {
 	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+		<div className="chip-stories-inline-1">
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Variantes</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+				<h3 className="chip-stories-inline-2">Variantes</h3>
+				<div className="chip-stories-inline-3">
 					<Chip variant="primary">Primary</Chip>
 					<Chip variant="success">Success</Chip>
 					<Chip variant="danger">Danger</Chip>
@@ -102,8 +103,8 @@ export const Examples: Story = {
 				</div>
 			</div>
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Com Ícones</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+				<h3 className="chip-stories-inline-4">Com Ícones</h3>
+				<div className="chip-stories-inline-5">
 					<Chip variant="primary" iconLeft={PlusIcon}>
 						Create
 					</Chip>

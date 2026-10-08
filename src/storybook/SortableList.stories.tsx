@@ -4,6 +4,7 @@ import { SortableList } from "../components/SortableList/SortableList";
 import type { ISortableItem } from "../components/SortableList/SortableList.interface";
 import { DotsSixVerticalIcon, ClockIcon, PlusIcon, TrashIcon } from "@phosphor-icons/react";
 import { Button } from "../components/Button/Button";
+import "./SortableList.stories.inline.css";
 
 interface LessonData {
 	number: number;
@@ -82,10 +83,7 @@ const LessonCard: React.FC<{ item: ISortableItem<LessonData> }> = ({ item }) => 
 				<DotsSixVerticalIcon size={20} weight="bold" />
 			</div>
 
-			<div
-				className="flex items-center justify-center w-7 h-7 rounded-full text-white font-bold text-sm"
-				style={{ backgroundColor: "#5bbad5" }}
-			>
+			<div className="flex items-center justify-center w-7 h-7 rounded-full text-white font-bold text-sm sortablelist-stories-inline-1">
 				{number}
 			</div>
 

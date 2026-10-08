@@ -1,0 +1,21 @@
+.richtext-inline-1 {
+	width: 100%;
+}
+
+.richtext-fieldset {
+	border-radius: 8px;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	border: none;
+	margin: 0;
+}
+.richtext-fieldset--error {
+	outline-color: var(--ds-color-red-40);
+}
+.richtext-fieldset--focused {
+	outline-color: var(--ds-color-blue-10);
+}

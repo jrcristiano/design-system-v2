@@ -37,13 +37,13 @@ describe("<Avatar />", () => {
 		const container = screen.getByLabelText("Avatar do usuário User");
 
 		const statusSpan = container.querySelector("span[aria-hidden='true']:last-child");
-		expect(statusSpan).toHaveStyle(`background-color: ${"#C1290B"}`);
+		expect(statusSpan).toHaveClass("avatar-inline__status--away");
 	});
 
 	it("renders different sizes correctly", () => {
 		render(<Avatar avatarUserName="User" iconSize="xl" />);
 		const container = screen.getByLabelText("Avatar do usuário User");
-		expect(container).toHaveStyle({ width: "56px", height: "56px" });
+		expect(container).toHaveClass("avatar-inline--xl");
 	});
 
 	it("forwards additional props to container", () => {

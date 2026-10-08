@@ -1,0 +1,12 @@
+.sidebarfilterheader-inline-1 {
+	height: 64.8px;
+	border-bottom-width: 0.8px;
+	flex-shrink: 0;
+}
+
+.sidebarfilterheader-inline-2 {
+	font-size: var(--ds-font-size-20);
+	font-weight: var(--ds-font-weight-medium);
+	line-height: 30px;
+	color: var(--ds-color-neutral-10);
+}

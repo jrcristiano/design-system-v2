@@ -6,10 +6,11 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/shift-away.css";
 import styles from "./Tooltip.module.css";
 import type { TooltipProps } from "./Tooltip.interface";
+import "./Tooltip.inline.css";
 
 const TooltipWrapper = forwardRef<HTMLSpanElement, { children: React.ReactNode }>(
 	({ children }, ref) => (
-		<span ref={ref} style={{ display: "inline" }}>
+		<span ref={ref} className="tooltip-inline-1">
 			{children}
 		</span>
 	),

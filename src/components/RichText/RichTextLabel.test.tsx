@@ -36,24 +36,24 @@ describe("RichTextLabel", () => {
 	it("applies disabled color when disabled is true", () => {
 		render(<RichTextLabel label="Disabled Label" disabled />);
 		const labelSpan = screen.getByText("Disabled Label");
-		expect(labelSpan).toHaveStyle({ color: "var(--ds-color-neutral-40)" });
+		expect(labelSpan).toHaveClass("rich-text-label__text--disabled");
 	});
 
 	it("applies normal color when disabled is false", () => {
 		render(<RichTextLabel label="Enabled Label" disabled={false} />);
 		const labelSpan = screen.getByText("Enabled Label");
-		expect(labelSpan).toHaveStyle({ color: "var(--ds-color-neutral-10)" });
+		expect(labelSpan).toHaveClass("rich-text-label__text");
 	});
 
 	it("applies normal color by default when disabled is not specified", () => {
 		render(<RichTextLabel label="Default Label" />);
 		const labelSpan = screen.getByText("Default Label");
-		expect(labelSpan).toHaveStyle({ color: "var(--ds-color-neutral-10)" });
+		expect(labelSpan).toHaveClass("rich-text-label__text");
 	});
 
 	it("renders both label and required indicator with correct styles", () => {
 		render(<RichTextLabel label="Full Label" required disabled />);
-		expect(screen.getByText("Full Label")).toHaveStyle({ color: "var(--ds-color-neutral-40)" });
-		expect(screen.getByText("*")).toHaveStyle({ color: "var(--ds-color-red-40)" });
+		expect(screen.getByText("Full Label")).toHaveClass("rich-text-label__text--disabled");
+		expect(screen.getByText("*")).toHaveClass("rich-text-label__required");
 	});
 });

@@ -11,6 +11,7 @@ import {
 	LightbulbIcon,
 } from "@phosphor-icons/react";
 import { Card } from "../components/Card";
+import "./Card.stories.inline.css";
 
 const meta: Meta<typeof Card> = {
 	title: "EJA/Cards",
@@ -213,7 +214,7 @@ export const Type2Complete: Story = {
  */
 export const MultipleSimpleCards: Story = {
 	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "400px" }}>
+		<div className="card-stories-inline-1">
 			<Card variant="simple" title="Status Azul" label="Informação" leftBorderColor="#017DA2" />
 			<Card variant="simple" title="Status Verde" label="Concluído" leftBorderColor="#338618" />
 			<Card variant="simple" title="Status Vermelho" label="Erro" leftBorderColor="#C1290B" />

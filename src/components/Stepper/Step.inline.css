@@ -1,0 +1,32 @@
+.step-inline-1 {
+	padding: 8px 16px;
+}
+
+.step-inline-2 {
+	padding: 8px 16px;
+}
+
+.step-number-color[data-disabled="true"] {
+	color: var(--ds-color-neutral-40);
+}
+.step-number-color[data-disabled="false"][data-status="default"] {
+	color: var(--ds-color-neutral-40);
+}
+.step-number-color[data-disabled="false"][data-status="completed"] {
+	color: var(--ds-surface);
+}
+.step-number-color[data-disabled="false"][data-status="focused"],
+.step-number-color[data-disabled="false"][data-status="active"] {
+	color: #ffffff;
+}
+.step-label-color[data-disabled="true"] {
+	color: var(--ds-color-neutral-80);
+}
+.step-label-color[data-disabled="false"][data-status="default"],
+.step-label-color[data-disabled="false"][data-status="completed"] {
+	color: var(--ds-color-neutral-40);
+}
+.step-label-color[data-disabled="false"][data-status="focused"],
+.step-label-color[data-disabled="false"][data-status="active"] {
+	color: var(--ds-color-neutral-10);
+}

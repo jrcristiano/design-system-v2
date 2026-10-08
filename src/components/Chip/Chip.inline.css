@@ -1,0 +1,95 @@
+.chip-inline {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--ds-pad-chip-y, 8px);
+	padding: var(--ds-pad-chip-y, 8px) var(--ds-pad-chip-x, 8px);
+	height: 34px;
+	font-size: var(--ds-font-size-14, 14px);
+	font-family: var(--ds-font-family-ui, var(--ds-font-family-poppins, Poppins));
+	font-style: normal;
+	font-weight: var(--ds-label-1-weight, var(--ds-font-weight-medium, 500));
+	line-height: var(--ds-label-1-line, 20px);
+	letter-spacing: var(--font-letter-spacing-default, 0);
+	border-width: 1px;
+	border-style: solid;
+	outline: none;
+	user-select: none;
+	transition:
+		background-color 0.15s ease,
+		color 0.15s ease,
+		border-color 0.15s ease;
+	cursor: pointer;
+}
+.chip-inline[data-pill="true"] {
+	border-radius: var(--ds-radius-full, 9999px);
+}
+.chip-inline[data-pill="false"] {
+	border-radius: var(--ds-radius-md, 8px);
+}
+.chip-inline[data-visual-state="disabled"] {
+	background-color: #c7cbd1;
+	color: #5c6470;
+	border-color: transparent;
+	cursor: not-allowed;
+}
+.chip-inline[data-variant="primary"][data-visual-state="default"] {
+	background-color: #cce0ff;
+	color: #004ecc;
+	border-color: transparent;
+}
+.chip-inline[data-variant="primary"][data-visual-state="pressed"] {
+	background-color: #003b99;
+	color: #fff;
+	border-color: transparent;
+}
+.chip-inline[data-variant="primary"][data-visual-state="focused"] {
+	background-color: #cce0ff;
+	color: #003b99;
+	border-color: #001e4d;
+}
+.chip-inline[data-variant="primary"][data-visual-state="outline"] {
+	background-color: #fff;
+	color: #004ecc;
+	border-color: #004ecc;
+}
+.chip-inline[data-variant="success"][data-visual-state="default"] {
+	background-color: #ddf7d4;
+	color: #338618;
+	border-color: transparent;
+}
+.chip-inline[data-variant="success"][data-visual-state="pressed"] {
+	background-color: #296c13;
+	color: #fff;
+	border-color: transparent;
+}
+.chip-inline[data-variant="success"][data-visual-state="focused"] {
+	background-color: #ddf7d4;
+	color: #296c13;
+	border-color: #19410c;
+}
+.chip-inline[data-variant="success"][data-visual-state="outline"] {
+	background-color: #fff;
+	color: #338618;
+	border-color: #338618;
+}
+.chip-inline[data-variant="danger"][data-visual-state="default"] {
+	background-color: #fcd6cf;
+	color: #c1290b;
+	border-color: transparent;
+}
+.chip-inline[data-variant="danger"][data-visual-state="pressed"] {
+	background-color: #911f08;
+	color: #fff;
+	border-color: transparent;
+}
+.chip-inline[data-variant="danger"][data-visual-state="focused"] {
+	background-color: #fcd6cf;
+	color: #911f08;
+	border-color: #480f05;
+}
+.chip-inline[data-variant="danger"][data-visual-state="outline"] {
+	background-color: #fff;
+	color: #c1290b;
+	border-color: #c1290b;
+}

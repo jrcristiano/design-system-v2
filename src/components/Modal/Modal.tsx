@@ -8,6 +8,7 @@ import type { Size } from "../../types/Commons.type";
 import { Button } from "../Button/Button";
 import { acquireBodyScrollLock } from "../shared/bodyScrollLock";
 import "./Modal.css";
+import "./Modal.inline.css";
 
 const focusableSelector =
 	'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
@@ -309,8 +310,8 @@ export const Modal: React.FC<IModalProps> = React.memo(
 						type="button"
 						aria-hidden="true"
 						tabIndex={-1}
-						className="absolute inset-0"
-						style={{ background: "rgba(0, 0, 0, 0.50)" }}
+						className="absolute inset-0 modal-inline-1"
+
 						onClick={handleOverlayClick}
 						onKeyDown={(event) => {
 							if (event.key === "Enter" || event.key === " ") {
@@ -350,11 +351,7 @@ export const Modal: React.FC<IModalProps> = React.memo(
 										</div>
 									)}
 									{title && (
-										<h2
-											id={titleId}
-											className={titleClasses}
-											style={{ fontSize: "var(--ds-font-size-24)" }}
-										>
+										<h2 id={titleId} className={clsx(titleClasses, "modal-inline-2")}>
 											{title}
 										</h2>
 									)}

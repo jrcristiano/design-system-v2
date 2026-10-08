@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { Pagination } from "../components/Pagination/Pagination";
 import { useState, useEffect } from "react";
+import "./Pagination.stories.inline.css";
 
 const meta: Meta<typeof Pagination> = {
 	title: "Components/Paginations",
@@ -81,7 +82,7 @@ const meta: Meta<typeof Pagination> = {
 	},
 	decorators: [
 		(Story) => (
-			<div style={{ width: "100%", maxWidth: "100%", padding: "24px" }}>
+			<div className="pagination-stories-inline-1">
 				<Story />
 			</div>
 		),

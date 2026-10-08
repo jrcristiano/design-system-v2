@@ -1,6 +1,7 @@
 import React from "react";
 import { EditorContent } from "@tiptap/react";
 import type { Editor } from "@tiptap/react";
+import "./RichTextEditor.inline.css";
 
 type RichTextEditorProps = {
 	editor: Editor | null;
@@ -15,53 +16,16 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
 	placeholder,
 	backgroundColor,
 }) => (
-	<div
-		style={{
-			display: "flex",
-			flexDirection: "column",
-			borderRadius: "8px",
-			outline: "1px solid var(--ds-color-neutral-50)",
-			outlineOffset: "-1px",
-			backgroundColor,
-			overflow: "hidden",
-		}}
-	>
-		<div
-			style={{
-				minHeight: "120px",
-				position: "relative",
-			}}
-		>
+	<div className="richtexteditor-shell" style={{ backgroundColor }}>
+		<div className="richtexteditor-inline-1">
 			{editor && (
 				<EditorContent
 					editor={editor}
-					style={{
-						color: disabled ? "var(--ds-color-neutral-40)" : "var(--ds-color-neutral-10)",
-						fontSize: "14px",
-						fontFamily: "Inter, sans-serif",
-						fontWeight: 400,
-						lineHeight: "17.6px",
-					}}
+					className={`richtexteditor-content ${disabled ? "richtexteditor-content--disabled" : ""}`}
 				/>
 			)}
 
-			{!editor?.getText() && (
-				<div
-					style={{
-						position: "absolute",
-						top: "10px",
-						left: "10px",
-						color: "var(--ds-color-neutral-40)",
-						fontSize: "14px",
-						fontFamily: "Poppins, sans-serif",
-						fontWeight: 400,
-						lineHeight: "20px",
-						pointerEvents: "none",
-					}}
-				>
-					{placeholder}
-				</div>
-			)}
+			{!editor?.getText() && <div className="richtexteditor-inline-2">{placeholder}</div>}
 		</div>
 	</div>
 );

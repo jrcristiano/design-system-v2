@@ -480,13 +480,13 @@ describe("RichText", () => {
 		it("renders label with disabled styling", () => {
 			render(<RichText label="Test Label" disabled onChange={vi.fn()} />);
 			const labelSpan = screen.getByText("Test Label");
-			expect(labelSpan).toHaveStyle({ color: "var(--ds-color-neutral-40)" });
+			expect(labelSpan).toHaveClass("rich-text-label__text--disabled");
 		});
 
 		it("renders label with normal styling when not disabled", () => {
 			render(<RichText label="Test Label" onChange={vi.fn()} />);
 			const labelSpan = screen.getByText("Test Label");
-			expect(labelSpan).toHaveStyle({ color: "var(--ds-color-neutral-10)" });
+			expect(labelSpan).toHaveClass("rich-text-label__text");
 		});
 	});
 });

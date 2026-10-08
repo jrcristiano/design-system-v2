@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useId } from "react";
 import clsx from "clsx";
 import type { ICheckboxProps } from "./Checkbox.interface";
 import { useInteractionState } from "../../hooks/useInteractionState";
+import "./Checkbox.inline.css";
 
 export const Checkbox: React.FC<ICheckboxProps> = ({
 	label,
@@ -122,8 +123,8 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 							onChange={handleChange}
 							onFocus={handlers.onFocus}
 							onBlur={handlers.onBlur}
-							className={clsx(baseStyles, stateStyles[finalState])}
-							style={{ cursor: "pointer" }}
+							className={clsx(clsx(baseStyles, stateStyles[finalState]), "checkbox-inline-1")}
+
 							{...props}
 						/>
 

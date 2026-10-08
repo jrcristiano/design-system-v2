@@ -12,17 +12,13 @@ describe("Chip", () => {
 	it("uses pill radius by default", () => {
 		render(<Chip>Pill</Chip>);
 		const chip = screen.getByRole("button", { name: /pill/i });
-		expect(chip).toHaveStyle({
-			borderRadius: "var(--ds-radius-full, 9999px)",
-		});
+		expect(chip).toHaveAttribute("data-pill", "true");
 	});
 
 	it("uses rounded radius when pill is false", () => {
 		render(<Chip pill={false}>Rounded</Chip>);
 		const chip = screen.getByRole("button", { name: /rounded/i });
-		expect(chip).toHaveStyle({
-			borderRadius: "var(--ds-radius-md, 8px)",
-		});
+		expect(chip).toHaveAttribute("data-pill", "false");
 	});
 
 	it("renders with different variants", () => {
@@ -44,11 +40,8 @@ describe("Chip", () => {
 		);
 
 		const chip = screen.getByRole("button", { name: /outline/i });
-		expect(chip).toHaveStyle({
-			backgroundColor: "#fff",
-			color: "#004ECC",
-			borderColor: "#004ECC",
-		});
+		expect(chip).toHaveAttribute("data-variant", "primary");
+		expect(chip).toHaveAttribute("data-visual-state", "outline");
 	});
 
 	it("applies pressed styles", () => {
@@ -59,20 +52,15 @@ describe("Chip", () => {
 		);
 
 		const chip = screen.getByRole("button", { name: /pressed/i });
-		expect(chip).toHaveStyle({
-			backgroundColor: "#003B99",
-			color: "#fff",
-		});
+		expect(chip).toHaveAttribute("data-variant", "primary");
+		expect(chip).toHaveAttribute("data-visual-state", "pressed");
 	});
 
 	it("applies disabled styles", () => {
 		render(<Chip disabled>Disabled</Chip>);
 		const chip = screen.getByRole("button", { name: /disabled/i });
 		expect(chip).toBeDisabled();
-		expect(chip).toHaveStyle({
-			backgroundColor: "#C7CBD1",
-			color: "#5C6470",
-		});
+		expect(chip).toHaveAttribute("data-visual-state", "disabled");
 	});
 
 	it("renders left and right icons", () => {

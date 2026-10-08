@@ -16,6 +16,7 @@ import type { FileUploadItem } from "./InputUpload.type";
 import { useFileUpload } from "../../hooks/useFileUpload";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { IconSlot } from "../shared/IconSlot";
+import "./InputUpload.inline.css";
 
 type IconCloneProps = {
 	size?: number;
@@ -103,22 +104,8 @@ const FileItem = memo<FileItemProps>(
 
 					<div className="flex-1 flex flex-col gap-2">
 						<div className="flex flex-col">
-							<p
-								className={nameClasses}
-								style={{
-									fontFamily: "var(--ds-font-family-body)",
-									fontWeight: "var(--ds-font-weight-regular)",
-								}}
-							>
-								{truncatedName}
-							</p>
-							<p
-								className="text-xs text-[var(--ds-color-neutral-10)]"
-								style={{
-									fontFamily: "var(--ds-font-family-body)",
-									fontWeight: "var(--ds-font-weight-regular)",
-								}}
-							>
+							<p className={clsx(nameClasses, "inputupload-inline-1")}>{truncatedName}</p>
+							<p className="text-xs text-[var(--ds-color-neutral-10)] inputupload-inline-2">
 								{isUploading && getTimeRemaining(fileItem)}
 								{isCompleted && formatFileSize(fileItem.file.size)}
 								{isError && <span className="text-[var(--ds-color-red-40)]">{fileItem.error}</span>}
@@ -203,20 +190,15 @@ const DropzoneEmpty = memo<DropzoneEmptyProps>(
 					{iconNode}
 				</IconSlot>
 				<div className="flex flex-col gap-4 text-left">
-					<p
-						className="text-base"
-						style={{
-							fontFamily: "var(--ds-font-family-body)",
-							fontWeight: "var(--ds-font-weight-regular)",
-							lineHeight: "var(--ds-line-15)",
-						}}
-					>
+					<p className="text-base inputupload-inline-3">
 						<span
-							style={{ fontWeight: "var(--ds-font-weight-semibold)" }}
-							className={clsx("underline", {
-								"text-[var(--ds-color-sky-30)]": !disabled,
-								"text-[var(--ds-color-neutral-40)]": disabled,
-							})}
+							className={clsx(
+								clsx("underline", {
+									"text-[var(--ds-color-sky-30)]": !disabled,
+									"text-[var(--ds-color-neutral-40)]": disabled,
+								}),
+								"inputupload-inline-4",
+							)}
 						>
 							Selecione um ou mais arquivos
 						</span>
@@ -228,21 +210,17 @@ const DropzoneEmpty = memo<DropzoneEmptyProps>(
 							{" "}
 						</span>
 						<span
-							style={{ fontWeight: "var(--ds-font-weight-regular)" }}
-							className={
-								disabled ? "text-[var(--ds-color-neutral-40)]" : "text-[var(--ds-color-neutral-10)]"
-							}
+							className={clsx(
+								disabled
+									? "text-[var(--ds-color-neutral-40)]"
+									: "text-[var(--ds-color-neutral-10)]",
+								"inputupload-inline-5",
+							)}
 						>
 							ou arraste-os para cá.
 						</span>
 					</p>
-					<p
-						className="text-sm text-[var(--ds-color-neutral-40)]"
-						style={{
-							fontFamily: "var(--ds-font-family-body)",
-							fontWeight: "var(--ds-font-weight-regular)",
-						}}
-					>
+					<p className="text-sm text-[var(--ds-color-neutral-40)] inputupload-inline-6">
 						Arquivos {acceptedFormatsText} com no máximo {maxSize}MB.
 					</p>
 				</div>
@@ -303,17 +281,13 @@ const DropzoneWithFiles = memo<DropzoneWithFilesProps>(
 			))}
 			<button
 				type="button"
-				className="w-full py-2 text-sm text-[var(--ds-color-sky-30)] hover:text-[var(--ds-color-sky-40)] underline disabled:text-[var(--ds-color-neutral-40)] disabled:cursor-not-allowed"
+				className="w-full py-2 text-sm text-[var(--ds-color-sky-30)] hover:text-[var(--ds-color-sky-40)] underline disabled:text-[var(--ds-color-neutral-40)] disabled:cursor-not-allowed inputupload-inline-7"
 				onClick={onBrowseClick}
 				onDragEnter={onDragEnter}
 				onDragLeave={onDragLeave}
 				onDragOver={onDragOver}
 				onDrop={onDrop}
 				disabled={disabled}
-				style={{
-					fontFamily: "var(--ds-font-family-body)",
-					fontWeight: "var(--ds-font-weight-semibold)",
-				}}
 			>
 				Adicionar mais arquivos
 			</button>
@@ -483,13 +457,7 @@ export const InputUpload: React.FC<InputUploadProps> = memo(
 				{dropzoneElement}
 
 				{message && (
-					<p
-						className="text-sm text-[var(--ds-color-neutral-40)]"
-						style={{
-							fontFamily: "var(--ds-font-family-body)",
-							fontWeight: "var(--ds-font-weight-regular)",
-						}}
-					>
+					<p className="text-sm text-[var(--ds-color-neutral-40)] inputupload-inline-8">
 						{message}
 					</p>
 				)}

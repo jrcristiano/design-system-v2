@@ -3,6 +3,7 @@ import clsx from "clsx";
 import type { IMenuItemProps } from "./Menu.interface";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import { useMenuContext } from "./MenuContext";
+import "./MenuItem.inline.css";
 
 interface MenuItemContentProps {
 	LeftIcon?: ElementType;
@@ -24,10 +25,7 @@ const MenuItemContent: React.FC<MenuItemContentProps> = React.memo(
 			)}
 			{!menuIsCollapsed && (
 				<div className="flex flex-col items-start min-w-0 pointer-events-none">
-					<span
-						className="text-[var(--ds-font-size-16)] font-[var(--ds-font-weight-regular)] leading-[20px] truncate"
-						style={{ fontFamily: "Poppins" }}
-					>
+					<span className="text-[var(--ds-font-size-16)] font-[var(--ds-font-weight-regular)] leading-[20px] truncate menuitem-inline-1">
 						{label}
 					</span>
 				</div>

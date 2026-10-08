@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { Editor } from "@tiptap/react";
 import styles from "./RichText.module.css";
+import "./RichTextToolbar.inline.css";
 
 type ToolbarButtonProps = {
 	onClick: () => void;
@@ -94,15 +95,7 @@ export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({ editor, disabl
 			role="toolbar"
 			aria-label="Ferramentas de formatação"
 			onKeyDown={handleToolbarKeyDown}
-			style={{
-				display: "flex",
-				gap: "12px",
-				padding: "8px",
-				background: "var(--ds-color-neutral-95)",
-				borderRadius: "8px",
-				outline: "1px solid var(--ds-color-neutral-50)",
-				outlineOffset: "-1px",
-			}}
+			className="richtexttoolbar-inline-1"
 			data-editor-tick={editorTick}
 		>
 			<ToolbarButton

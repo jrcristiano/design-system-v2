@@ -17,9 +17,7 @@ describe("Card", () => {
 			const { container } = render(<Card variant="simple" title="Title" label="Label" />);
 			const card = container.firstChild as HTMLElement;
 
-			expect(card.style.borderLeft).toBeTruthy();
-			expect(card.style.borderLeft).toContain("10px");
-			expect(card.style.borderLeft).toContain("solid");
+			expect(card).toHaveClass("card-simple-root", "card-simple-root--with-left-border");
 		});
 
 		it("hides left border when showLeftBorder is false", () => {
@@ -28,7 +26,8 @@ describe("Card", () => {
 			);
 			const card = container.firstChild as HTMLElement;
 
-			expect(card.style.borderLeft).toBe("");
+			expect(card).toHaveClass("card-simple-root");
+			expect(card).not.toHaveClass("card-simple-root--with-left-border");
 		});
 
 		it("applies custom left border color", () => {
@@ -37,9 +36,8 @@ describe("Card", () => {
 			);
 			const card = container.firstChild as HTMLElement;
 
-			expect(card).toHaveStyle({
-				borderLeft: "10px solid #FF0000",
-			});
+			expect(card).toHaveClass("card-simple-root--with-left-border");
+			expect(card.style.getPropertyValue("--card-left-border-color")).toBe("#FF0000");
 		});
 
 		it("applies custom className", () => {
@@ -55,10 +53,7 @@ describe("Card", () => {
 			const { container } = render(<Card variant="simple" title="Title" label="Label" />);
 			const card = container.firstChild as HTMLElement;
 
-			expect(card).toHaveStyle({
-				boxShadow: "0px 4px 25px rgba(0, 0, 0, 0.20)",
-				borderRadius: "8px",
-			});
+			expect(card).toHaveClass("card-simple-root");
 		});
 
 		it("renders with chipLabel when provided", () => {
@@ -141,10 +136,7 @@ describe("Card", () => {
 			);
 			const card = container.firstChild as HTMLElement;
 
-			expect(card).toHaveStyle({
-				outline: "2px solid var(--ds-color-neutral-60, #737D8C)",
-				outlineOffset: "-2px",
-			});
+			expect(card).toHaveClass("card-complex-root");
 		});
 	});
 

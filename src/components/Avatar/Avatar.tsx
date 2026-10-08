@@ -3,37 +3,9 @@ import type { AvatarProps } from "./Avatar.interface";
 import { getInitials } from "../../utils/get.initials.util";
 import type { IconSize } from "../../types/Commons.type";
 import React, { useMemo } from "react";
+import "./Avatar.inline.css";
 
 // Constantes melhor tipadas
-const FONT_SIZES: Record<IconSize, string> = {
-	xs: "var(--ds-font-size-12)",
-	sm: "var(--ds-font-size-14)",
-	md: "var(--ds-font-size-16)",
-	lg: "var(--ds-font-size-20)",
-	xl: "var(--ds-font-size-24)",
-} as const;
-
-const AVATAR_SIZES: Record<IconSize, number> = {
-	xs: 28,
-	sm: 32,
-	md: 40,
-	lg: 48,
-	xl: 56,
-} as const;
-
-const STATUS_SIZES: Record<IconSize, string> = {
-	xs: "8px",
-	sm: "10px",
-	md: "12px",
-	lg: "14px",
-	xl: "16px",
-} as const;
-
-const STATUS_COLORS: Record<"available" | "away", string> = {
-	available: "#338618",
-	away: "#C1290B",
-} as const;
-
 // Componente UserIcon memoizado para performance
 const UserIcon: FC<{ iconSize: IconSize }> = ({ iconSize }) => {
 	const sizes = {
@@ -99,20 +71,13 @@ export const Avatar: FC<AvatarProps> = ({
 
 	return (
 		<div
-			className={containerClasses}
-			style={{
-				width: AVATAR_SIZES[iconSize],
-				height: AVATAR_SIZES[iconSize],
-				backgroundColor: hasUserName ? "var(--ds-color-neutral-10)" : "var(--ds-color-sky-90)",
-				color: hasUserName ? "var(--ds-color-neutral-white)" : "var(--ds-color-sky-90)",
-				fontWeight: "var(--ds-font-weight-semibold)",
-			}}
+			className={`${containerClasses} avatar-inline avatar-inline--${iconSize} ${hasUserName ? "avatar-inline--named" : "avatar-inline--generic"}`}
 			{...accessibilityProps}
 			{...rest}
 		>
 			{hasUserName ? (
 				<span
-					style={{ fontSize: FONT_SIZES[iconSize] }}
+					className="avatar-inline__initials"
 					aria-hidden="true" // As iniciais são visuais, o texto alternativo está no container
 				>
 					{initials}
@@ -124,14 +89,7 @@ export const Avatar: FC<AvatarProps> = ({
 			{/* Indicador de status - apenas visual */}
 			<span
 				aria-hidden="true" // Removido role="presentation" pois é redundante com aria-hidden
-				className="absolute rounded-full"
-				style={{
-					width: STATUS_SIZES[iconSize],
-					height: STATUS_SIZES[iconSize],
-					backgroundColor: STATUS_COLORS[status],
-					right: 0,
-					bottom: 0,
-				}}
+				className={`absolute rounded-full avatar-inline__status avatar-inline__status--${status}`}
 			/>
 		</div>
 	);

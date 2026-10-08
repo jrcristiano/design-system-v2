@@ -4,6 +4,7 @@ import clsx from "clsx";
 import type { ReactNode, MouseEvent } from "react";
 import { useCallback, useMemo } from "react";
 import { useDropdown } from "./DropdownContext";
+import "./DropdownItem.inline.css";
 
 export type DropdownItemVariant =
 	| "default"
@@ -149,11 +150,7 @@ export function DropdownItem({
 				</span>
 			)}
 
-			{showIcon && (
-				<span className="flex items-center" style={{ fontSize: "var(--ds-font-size-16)" }}>
-					{icon}
-				</span>
-			)}
+			{showIcon && <span className="flex items-center dropdownitem-inline-1">{icon}</span>}
 
 			{!isCheckboxVariant && children && <span style={fontStyle}>{children}</span>}
 

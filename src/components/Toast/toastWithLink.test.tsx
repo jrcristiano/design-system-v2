@@ -41,13 +41,8 @@ describe("toastWithLink utilities", () => {
 			href: "https://example.com",
 			target: "_blank",
 			rel: "noopener noreferrer",
-			style: {
-				color: "#fff",
-				fontStyle: "italic",
-				textDecoration: "underline",
-				whiteSpace: "nowrap",
-			},
 		});
+		expect(link.props.className).toContain("toast-inline--no-wrap");
 	});
 
 	it("calls toast.success/error/warning/info variants", () => {

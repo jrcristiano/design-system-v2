@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { PlusIcon, TrashIcon, XIcon } from "@phosphor-icons/react";
 import { SampleCard } from "./components/SampleCard";
+import "./SampleCard.stories.inline.css";
 
 const outlinedTags = [
 	{ label: "Label 1", variant: "primary", state: "outline", pill: false },
@@ -24,11 +25,7 @@ const meta: Meta<typeof SampleCard> = {
 	decorators: [
 		(Story, context) => (
 			<div
-				style={{
-					width: "100%",
-					maxWidth: context.args.layout === "horizontal" ? "650px" : "380px",
-					margin: "0 auto",
-				}}
+				className={`sample-card-story ${context.args.layout === "horizontal" ? "sample-card-story--horizontal" : "sample-card-story--vertical"}`}
 			>
 				<Story />
 			</div>

@@ -2,6 +2,7 @@ import React from "react";
 import type { ComponentProps } from "react";
 import Switch from "../components/Switch/Switch";
 import { Button } from "../components/Button/Button";
+import "./Switch.stories.inline.css";
 
 export default {
 	title: "Components/Switch",
@@ -81,9 +82,9 @@ export const Controlled = (args: ComponentProps<typeof Switch>) => {
 	const [isChecked, setIsChecked] = React.useState(false);
 
 	return (
-		<div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
+		<div className="switch-stories-inline-1">
 			<Switch {...args} checked={isChecked} onChange={setIsChecked} />
-			<span style={{ color: "var(--ds-color-neutral-70)" }}>
+			<span className="switch-stories-inline-2">
 				Estado atual: {isChecked ? "Ligado" : "Desligado"}
 			</span>
 			<Button onClick={() => setIsChecked(!isChecked)}>Alternar Switch</Button>
@@ -99,23 +100,23 @@ Controlled.parameters = {
 };
 
 export const AllStates = () => (
-	<div style={{ display: "flex", flexDirection: "column", gap: "24px", padding: "20px" }}>
-		<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+	<div className="switch-stories-inline-3">
+		<div className="switch-stories-inline-4">
 			<Switch defaultChecked={false} />
 			<span>Default (Off)</span>
 		</div>
 
-		<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+		<div className="switch-stories-inline-5">
 			<Switch defaultChecked={true} />
 			<span>Default (On)</span>
 		</div>
 
-		<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+		<div className="switch-stories-inline-6">
 			<Switch disabled defaultChecked={false} />
 			<span>Disabled (Off)</span>
 		</div>
 
-		<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+		<div className="switch-stories-inline-7">
 			<Switch disabled defaultChecked={true} />
 			<span>Disabled (On)</span>
 		</div>
@@ -131,8 +132,8 @@ AllStates.parameters = {
 };
 
 export const Sizes = () => (
-	<div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "20px" }}>
-		<div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+	<div className="switch-stories-inline-8">
+		<div className="switch-stories-inline-9">
 			<Switch defaultChecked={false} />
 			<span>Padrão (50px)</span>
 		</div>
@@ -140,20 +141,20 @@ export const Sizes = () => (
 );
 
 export const Accessibility = () => (
-	<div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "300px" }}>
+	<div className="switch-stories-inline-10">
 		<h3>Switch com labels acessíveis</h3>
 
-		<label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+		<label className="switch-stories-inline-11">
 			<Switch defaultChecked={true} />
 			<span>Notificações por email</span>
 		</label>
 
-		<label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+		<label className="switch-stories-inline-12">
 			<Switch defaultChecked={false} />
 			<span>Modo escuro</span>
 		</label>
 
-		<label style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
+		<label className="switch-stories-inline-13">
 			<Switch disabled defaultChecked={true} />
 			<span>Login automático (desabilitado)</span>
 		</label>

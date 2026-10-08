@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { XIcon } from "@phosphor-icons/react";
 import { useSidebarFilter } from "./SidebarFilterContext";
 import type { SidebarFilterHeaderProps } from "./SidebarFilter.interface";
+import "./SidebarFilterHeader.inline.css";
 
 export function SidebarFilterHeader({
 	title = "Filtros",
@@ -31,23 +32,8 @@ export function SidebarFilterHeader({
 	};
 
 	return (
-		<div
-			className="px-4 flex items-center justify-between border-b border-[var(--ds-color-neutral-50)]"
-			style={{
-				height: "64.8px",
-				borderBottomWidth: "0.80px",
-				flexShrink: 0,
-			}}
-		>
-			<h2
-				id={headerId}
-				style={{
-					fontSize: "var(--ds-font-size-20)",
-					fontWeight: "var(--ds-font-weight-medium)",
-					lineHeight: "30px",
-					color: "var(--ds-color-neutral-10)",
-				}}
-			>
+		<div className="px-4 flex items-center justify-between border-b border-[var(--ds-color-neutral-50)] sidebarfilterheader-inline-1">
+			<h2 id={headerId} className="sidebarfilterheader-inline-2">
 				{title}
 			</h2>
 			<button

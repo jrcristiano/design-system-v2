@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CircleDashedIcon } from "@phosphor-icons/react";
-import type { SpinnerProps, SpinnerSize, SpinnerVariant } from "./Spinner.interface";
+import type { SpinnerProps, SpinnerSize } from "./Spinner.interface";
+import "./Spinner.inline.css";
 
 const SIZE_PRESETS: Record<SpinnerSize, number> = {
 	xs: 18,
@@ -8,14 +9,6 @@ const SIZE_PRESETS: Record<SpinnerSize, number> = {
 	md: 52,
 	lg: 84,
 	xl: 120,
-};
-
-const COLOR_VARIANTS: Record<SpinnerVariant, string> = {
-	primary: "var(--ds-color-blue-40)",
-	neutral: "var(--ds-color-neutral-40)",
-	success: "var(--ds-color-green-30)",
-	warning: "var(--ds-color-orange-50)",
-	danger: "var(--ds-color-red-40)",
 };
 
 export const Spinner: React.FC<SpinnerProps> = ({
@@ -56,14 +49,14 @@ export const Spinner: React.FC<SpinnerProps> = ({
 		<output
 			aria-busy="true"
 			aria-label={ariaLabel}
-			className="inline-flex flex-col items-center gap-2"
-			style={{ opacity: 1, color: COLOR_VARIANTS[variant] }}
+			className="inline-flex flex-col items-center gap-2 spinner-inline"
+			data-variant={variant}
 		>
 			<CircleDashedIcon
 				size={resolvedSize}
 				weight="thin"
-				className="animate-spin"
-				style={{ animationDuration: `${speed}s`, opacity: 1 }}
+				className="animate-spin spinner-inline__icon"
+				style={{ "--spinner-speed": `${speed}s` } as React.CSSProperties}
 			/>
 			<span className="text-[var(--ds-font-size-12)] font-[var(--ds-font-family-ui)] text-[var(--ds-color-neutral-10)]">
 				{displayProgress}%

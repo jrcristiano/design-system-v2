@@ -3,6 +3,7 @@
 import { useSidebarFilter } from "./SidebarFilterContext";
 import { Button } from "../Button/Button";
 import type { SidebarFilterFooterProps } from "./SidebarFilter.interface";
+import "./SidebarFilterFooter.inline.css";
 
 export function SidebarFilterFooter({
 	onClear,
@@ -23,10 +24,7 @@ export function SidebarFilterFooter({
 	};
 
 	return (
-		<div
-			className="px-4 flex items-center justify-end gap-4"
-			style={{ height: "64.8px", flexShrink: 0 }}
-		>
+		<div className="px-4 flex items-center justify-end gap-4 sidebarfilterfooter-inline-1">
 			<Button variant="text" size="md" onClick={handleClear}>
 				{clearLabel}
 			</Button>

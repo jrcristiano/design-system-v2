@@ -1,0 +1,10 @@
+.sample-card-story {
+	width: 100%;
+	margin: 0 auto;
+}
+.sample-card-story--horizontal {
+	max-width: 650px;
+}
+.sample-card-story--vertical {
+	max-width: 380px;
+}

@@ -1,0 +1,9 @@
+.treeviewitem-inline-label {
+	font-size: var(--ds-font-size-14);
+	font-weight: var(--ds-font-weight-medium);
+	line-height: 20px;
+	color: #17191c;
+}
+.treeviewitem-inline-label[data-disabled="true"] {
+	color: var(--ds-color-neutral-40);
+}

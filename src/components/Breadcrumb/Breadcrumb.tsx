@@ -1,5 +1,7 @@
 import React, { type FC, type ReactNode, useMemo } from "react";
 import type { BreadcrumbItem, BreadcrumbProps } from "./Breadcrumb.interface";
+import "./Breadcrumb.inline.css";
+import clsx from "clsx";
 
 const responsiveTokens = {
 	typography: {
@@ -121,13 +123,15 @@ const BreadcrumbItemComponent: FC<{
 		element = (
 			<span
 				aria-current="page"
-				className={`
+				className={clsx(
+					`
 					flex items-center gap-1
 					${responsiveTokens.typography.mobile}
 					md:${responsiveTokens.typography.desktop}
 					text-gray-900 truncate
-				`}
-				style={{ fontWeight: "var(--ds-font-weight-regular, 400)" }}
+				`,
+					"breadcrumb-inline-1",
+				)}
 			>
 				{content}
 			</span>

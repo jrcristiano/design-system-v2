@@ -10,6 +10,7 @@ import type {
 	ITableCellProps,
 } from "./Table.interface";
 import type { ColumnSize } from "./Table.type";
+import "./Table.inline.css";
 
 const SIZE_STYLES: Record<ColumnSize, string> = {
 	xs: "w-[160px]",
@@ -203,10 +204,12 @@ export const TableHeadCell: React.FC<ITableHeadCellProps> = React.memo(
 						type="button"
 						onClick={handleSort}
 						className={clsx(
-							contentClasses,
-							"cursor-pointer select-none hover:bg-[var(--ds-color-neutral-95)] transition-colors border-0 m-0 p-0 bg-transparent text-left",
+							clsx(
+								contentClasses,
+								"cursor-pointer select-none hover:bg-[var(--ds-color-neutral-95)] transition-colors border-0 m-0 p-0 bg-transparent text-left",
+							),
+							"table-inline-1",
 						)}
-						style={{ padding: "0 24px" }}
 					>
 						{renderContent()}
 					</button>

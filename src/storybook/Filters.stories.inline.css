@@ -1,0 +1,12 @@
+.filters-stories-status[data-status="success"] {
+	background-color: #338618;
+}
+.filters-stories-status[data-status="error"] {
+	background-color: #c1290b;
+}
+.filters-stories-status[data-status="warning"] {
+	background-color: #b36205;
+}
+.filters-stories-status[data-status="pending"] {
+	background-color: #017da2;
+}

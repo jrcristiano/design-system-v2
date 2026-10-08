@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo, memo } from "
 import "./../../tokens/typography.css";
 import "./../../tokens/colors.css";
 import { Button } from "../Button/Button";
+import "./Typography.inline.css";
 
 type TypographyRow = {
 	name: string;
@@ -258,10 +259,8 @@ const TypographyTable = memo<{ title: string; rows: TypographyRow[] }>(({ title,
 				<tbody>
 					{rows.map((r) => (
 						<tr
-							style={{
-								fontSize: r.size,
-								fontWeight: r.weight,
-							}}
+							data-typography-size={r.size}
+							data-typography-weight={r.weight}
 							key={r.name}
 							className="bg-[var(--ds-color-neutral-white)] even:bg-[var(--ds-color-neutral-98)] hover:bg-[var(--ds-color-neutral-95)] transition"
 						>
@@ -282,36 +281,29 @@ const TypographyTable = memo<{ title: string; rows: TypographyRow[] }>(({ title,
 TypographyTable.displayName = "TypographyTable";
 
 const TypefaceAndWeights = memo<{ active: ActiveTypography }>(({ active }) => {
-	const headingFont = useMemo(
-		() => (active === "em" ? "var(--ds-font-family-montserrat)" : "var(--ds-font-family-fredoka)"),
-		[active],
-	);
-
-	const bodyFont = useMemo(
-		() => (active === "em" ? "var(--ds-font-family-montserrat)" : "var(--ds-font-family-poppins)"),
-		[active],
-	);
-
+	const fontScheme = active === "em" ? "medium" : "fundamental";
 	const fontName = useMemo(() => (active === "em" ? "Montserrat" : "Fredoka"), [active]);
 
 	return (
 		<div className="flex flex-col lg:flex-row gap-10 items-start mb-12">
 			<div className="flex-1">
 				<div className="flex items-center gap-3 mb-6">
-					<h3 className="text-4xl font-bold" style={{ fontFamily: headingFont }}>
+					<h3 className="text-4xl font-bold typography-heading-font" data-font-scheme={fontScheme}>
 						{fontName}
 					</h3>
 				</div>
 				<div
 					className="text-[112px] text-[var(--ds-color-neutral-10)] leading-none"
-					style={{ fontFamily: headingFont }}
+					data-font-scheme={fontScheme}
+					data-font-role="heading"
 				>
 					Ag
 				</div>
 
 				<p
 					className="text-4xl mt-6 text-[var(--ds-color-neutral-30)]"
-					style={{ fontFamily: bodyFont, lineHeight: "60px" }}
+					data-font-scheme={fontScheme}
+					data-font-role="body"
 				>
 					ABCDEFGHIJKLMNOPQRSTUVWXYZ
 					<br />
@@ -329,17 +321,24 @@ const TypefaceAndWeights = memo<{ active: ActiveTypography }>(({ active }) => {
 					>
 						<div
 							className="text-[60px] text-[var(--ds-color-neutral-10)]"
-							style={{ fontFamily: headingFont, fontWeight: w.weight }}
+							data-font-scheme={fontScheme}
+							data-font-role="heading"
+							data-font-weight={w.weight}
 						>
 							Aa
 						</div>
 						<div>
-							<div className={`text-xl ${w.name}`} style={{ fontFamily: headingFont }}>
+							<div
+								className={`text-xl ${w.name}`}
+								data-font-scheme={fontScheme}
+								data-font-role="heading"
+							>
 								{w.name}
 							</div>
 							<div
 								className="text-sm text-[var(--ds-color-neutral-50)]"
-								style={{ fontFamily: bodyFont }}
+								data-font-scheme={fontScheme}
+								data-font-role="body"
 							>
 								Font weight: {w.weight}
 							</div>
@@ -399,18 +398,17 @@ export const Typography: React.FC = () => {
 		if (saved === "ef" || saved === "em") applyTypography(saved);
 	}, [applyTypography]);
 
-	const containerStyle = useMemo(
-		() => ({
-			fontFamily: `var(${fontToken})`,
-		}),
-		[fontToken],
-	);
+	const fontTokenClass =
+		fontToken === "--ds-font-family-fredoka"
+			? "typography-font--fredoka"
+			: fontToken === "--ds-font-family-montserrat"
+				? "typography-font--montserrat"
+				: "typography-font--body";
 
 	return (
 		<div
 			ref={containerRef}
-			className="p-8 bg-[var(--ds-color-neutral-white)] text-[var(--ds-color-neutral-10)]"
-			style={containerStyle}
+			className={`p-8 bg-[var(--ds-color-neutral-white)] text-[var(--ds-color-neutral-10)] ${fontTokenClass}`}
 		>
 			<PlaygroundHeader
 				pretitle="Tipografia"

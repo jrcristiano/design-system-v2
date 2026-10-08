@@ -1,0 +1,9 @@
+.rich-text-label__text {
+	color: var(--ds-color-neutral-10);
+}
+.rich-text-label__text--disabled {
+	color: var(--ds-color-neutral-40);
+}
+.rich-text-label__required {
+	color: var(--ds-color-red-40);
+}

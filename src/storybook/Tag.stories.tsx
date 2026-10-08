@@ -1,6 +1,7 @@
 import { CheckIcon, CircleIcon, EyeIcon, PlusIcon, TrashIcon, XIcon } from "@phosphor-icons/react";
 import { Tag } from "../components/Tag/Tag";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import "./Tag.stories.inline.css";
 
 const meta: Meta<typeof Tag> = {
 	title: "Components/Tags",
@@ -141,10 +142,10 @@ type Story = StoryObj<typeof Tag>;
 
 export const Examples: Story = {
 	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "600px" }}>
+		<div className="tag-stories-inline-1">
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Variantes Básicas</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+				<h3 className="tag-stories-inline-2">Variantes Básicas</h3>
+				<div className="tag-stories-inline-3">
 					<Tag variant="primary">Primary</Tag>
 					<Tag variant="success">Success</Tag>
 					<Tag variant="info">Info</Tag>
@@ -155,8 +156,8 @@ export const Examples: Story = {
 			</div>
 
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Com Ícones</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+				<h3 className="tag-stories-inline-4">Com Ícones</h3>
+				<div className="tag-stories-inline-5">
 					<Tag variant="primary" iconLeft={PlusIcon}>
 						Add
 					</Tag>
@@ -176,8 +177,8 @@ export const Examples: Story = {
 			</div>
 
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Fecháveis</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+				<h3 className="tag-stories-inline-6">Fecháveis</h3>
+				<div className="tag-stories-inline-7">
 					<Tag variant="primary" closable>
 						Primary
 					</Tag>
@@ -197,8 +198,8 @@ export const Examples: Story = {
 			</div>
 
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Formatos</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+				<h3 className="tag-stories-inline-8">Formatos</h3>
+				<div className="tag-stories-inline-9">
 					<Tag variant="primary" pill>
 						Pill
 					</Tag>
@@ -211,8 +212,8 @@ export const Examples: Story = {
 			</div>
 
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Tamanhos</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+				<h3 className="tag-stories-inline-10">Tamanhos</h3>
+				<div className="tag-stories-inline-11">
 					<Tag variant="primary" size="sm">
 						Small
 					</Tag>
@@ -235,8 +236,8 @@ export const Examples: Story = {
 			</div>
 
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Estados</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+				<h3 className="tag-stories-inline-12">Estados</h3>
+				<div className="tag-stories-inline-13">
 					<Tag variant="primary" state="default">
 						Default
 					</Tag>
@@ -259,8 +260,8 @@ export const Examples: Story = {
 			</div>
 
 			<div>
-				<h3 style={{ marginBottom: "12px", color: "#333" }}>Exemplos Combinados</h3>
-				<div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+				<h3 className="tag-stories-inline-14">Exemplos Combinados</h3>
+				<div className="tag-stories-inline-15">
 					<Tag variant="success" iconLeft={CheckIcon} closable pill>
 						Success Pill
 					</Tag>

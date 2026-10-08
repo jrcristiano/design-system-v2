@@ -1,0 +1,18 @@
+.spinner-inline[data-variant="primary"] {
+	color: var(--ds-color-blue-40);
+}
+.spinner-inline[data-variant="neutral"] {
+	color: var(--ds-color-neutral-40);
+}
+.spinner-inline[data-variant="success"] {
+	color: var(--ds-color-green-30);
+}
+.spinner-inline[data-variant="warning"] {
+	color: var(--ds-color-orange-50);
+}
+.spinner-inline[data-variant="danger"] {
+	color: var(--ds-color-red-40);
+}
+.spinner-inline__icon {
+	animation-duration: var(--spinner-speed, 1.5s);
+}

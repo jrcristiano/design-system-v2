@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as Yup from "yup";
 import { fn } from "storybook/test";
 import { RichText } from "../components/RichText/RichText";
+import "./RichText.stories.inline.css";
 
 const meta: Meta<typeof RichText> = {
 	title: "Components/RichText",
@@ -59,7 +60,7 @@ const RichTextWrapper = (args: any) => {
 	const [value, setValue] = useState(args.value || "");
 
 	return (
-		<div style={{ width: "700px" }}>
+		<div className="richtext-stories-inline-1">
 			<RichText
 				{...args}
 				value={value}
@@ -148,7 +149,7 @@ export const MinimumCharacterValidation: Story = {
  */
 export const MaximumCharacterValidation: Story = {
 	render: (args) => (
-		<div style={{ maxWidth: "750px" }}>
+		<div className="richtext-stories-inline-2">
 			<Formik
 				initialValues={{ description: args.value || "" }}
 				initialTouched={{ description: true }}

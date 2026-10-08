@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Tooltip } from "../components/Tooltip/Tooltip";
 import { Button } from "../components/Button/Button";
+import "./Tooltip.stories.inline.css";
 
 const meta: Meta<typeof Tooltip> = {
 	title: "Components/Tooltips",
@@ -75,17 +76,7 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Examples: Story = {
 	render: (args) => (
-		<div
-			style={{
-				display: "grid",
-				gridTemplateColumns: "repeat(3, auto)",
-				gap: "2rem",
-				alignItems: "center",
-				justifyContent: "center",
-				textAlign: "center",
-				padding: "2rem",
-			}}
-		>
+		<div className="tooltip-stories-inline-1">
 			<Tooltip {...args} content="Default tooltip">
 				<Button>default</Button>
 			</Tooltip>

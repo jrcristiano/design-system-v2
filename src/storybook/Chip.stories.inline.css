@@ -1,0 +1,27 @@
+.chip-stories-inline-1 {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.chip-stories-inline-2 {
+	margin-bottom: 12px;
+	color: #333;
+}
+
+.chip-stories-inline-3 {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.chip-stories-inline-4 {
+	margin-bottom: 12px;
+	color: #333;
+}
+
+.chip-stories-inline-5 {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}

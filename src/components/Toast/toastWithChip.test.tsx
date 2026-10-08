@@ -79,12 +79,8 @@ describe("toastWithChip utilities", () => {
 			href: "https://example.com",
 			target: "_blank",
 			rel: "noopener noreferrer",
-			style: {
-				color: "#fff",
-				fontStyle: "italic",
-				textDecoration: "underline",
-			},
 		});
-		expect(link.props.style).not.toHaveProperty("whiteSpace");
+		expect(link.props.className).toContain("toast-inline");
+		expect(link.props.className).not.toContain("toast-inline--no-wrap");
 	});
 });

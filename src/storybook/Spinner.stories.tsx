@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Spinner } from "../components/Spinner/Spinner";
+import "./Spinner.stories.inline.css";
 
 const meta: Meta<typeof Spinner> = {
 	title: "Components/Spinner",
@@ -39,7 +40,7 @@ const meta: Meta<typeof Spinner> = {
 	},
 	decorators: [
 		(Story) => (
-			<div style={{ width: "100%", maxWidth: "100%", padding: "24px" }}>
+			<div className="spinner-stories-inline-1">
 				<Story />
 			</div>
 		),

@@ -1,0 +1,9 @@
+.tooltip-stories-inline-1 {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 2rem;
+}

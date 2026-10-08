@@ -1,0 +1,79 @@
+tr[data-typography-size="64px"] {
+	font-size: 64px;
+}
+tr[data-typography-size="48px"] {
+	font-size: 48px;
+}
+tr[data-typography-size="40px"] {
+	font-size: 40px;
+}
+tr[data-typography-size="24px"] {
+	font-size: 24px;
+}
+tr[data-typography-size="20px"] {
+	font-size: 20px;
+}
+tr[data-typography-size="18px"] {
+	font-size: 18px;
+}
+tr[data-typography-size="16px"] {
+	font-size: 16px;
+}
+tr[data-typography-size="14px"] {
+	font-size: 14px;
+}
+tr[data-typography-size="12px"] {
+	font-size: 12px;
+}
+tr[data-typography-size="10px"] {
+	font-size: 10px;
+}
+tr[data-typography-weight="Regular"] {
+	font-weight: 400;
+}
+tr[data-typography-weight="Medium"] {
+	font-weight: 500;
+}
+tr[data-typography-weight="Semibold"] {
+	font-weight: 600;
+}
+tr[data-typography-weight="Bold"] {
+	font-weight: 700;
+}
+.typography-heading-font[data-font-scheme="fundamental"],
+[data-font-role="heading"][data-font-scheme="fundamental"] {
+	font-family: var(--ds-font-family-fredoka);
+}
+.typography-heading-font[data-font-scheme="medium"],
+[data-font-role="heading"][data-font-scheme="medium"] {
+	font-family: var(--ds-font-family-montserrat);
+}
+[data-font-role="body"][data-font-scheme="fundamental"] {
+	font-family: var(--ds-font-family-poppins);
+	line-height: 60px;
+}
+[data-font-role="body"][data-font-scheme="medium"] {
+	font-family: var(--ds-font-family-montserrat);
+	line-height: 60px;
+}
+.typography-font--body {
+	font-family: var(--ds-font-family-body);
+}
+.typography-font--fredoka {
+	font-family: var(--ds-font-family-fredoka);
+}
+.typography-font--montserrat {
+	font-family: var(--ds-font-family-montserrat);
+}
+[data-font-role="heading"][data-font-weight="400"] {
+	font-weight: 400;
+}
+[data-font-role="heading"][data-font-weight="500"] {
+	font-weight: 500;
+}
+[data-font-role="heading"][data-font-weight="600"] {
+	font-weight: 600;
+}
+[data-font-role="heading"][data-font-weight="700"] {
+	font-weight: 700;
+}

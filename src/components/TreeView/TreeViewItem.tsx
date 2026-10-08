@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useTreeView } from "./TreeViewContext";
 import { Checkbox } from "../Checkbox/Checkbox";
 import type { TreeViewItemProps } from "./TreeView.type";
+import "./TreeViewItem.inline.css";
 
 export function TreeViewItem({ node, level = 0 }: Readonly<TreeViewItemProps>) {
 	const context = useTreeView();
@@ -201,13 +202,8 @@ export function TreeViewItem({ node, level = 0 }: Readonly<TreeViewItemProps>) {
 
 					<div className="flex-1 px-2.5 py-2 rounded-md overflow-hidden">
 						<span
-							className="transition-colors duration-150"
-							style={{
-								fontSize: "var(--ds-font-size-14)",
-								fontWeight: "var(--ds-font-weight-medium)",
-								lineHeight: "20px",
-								color: node.disabled ? "var(--ds-color-neutral-40)" : "#17191C",
-							}}
+							className="transition-colors duration-150 treeviewitem-inline-label"
+							data-disabled={node.disabled || false}
 						>
 							{node.label}
 						</span>

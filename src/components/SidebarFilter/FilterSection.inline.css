@@ -1,0 +1,13 @@
+.filtersection-inline-1 {
+	font-size: var(--ds-font-size-14);
+	font-weight: var(--ds-font-weight-medium);
+	line-height: 21px;
+	color: var(--ds-color-neutral-10);
+}
+
+.filtersection-inline-2 {
+	font-size: var(--ds-font-size-14);
+	font-weight: var(--ds-font-weight-medium);
+	line-height: 20px;
+	color: var(--ds-color-red-40);
+}

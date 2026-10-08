@@ -2,6 +2,7 @@ import { type FC, memo, useMemo, useCallback, type ReactNode, type KeyboardEvent
 import clsx from "clsx";
 import { CheckIcon } from "@phosphor-icons/react";
 import type { StepStatus } from "./Step.interface";
+import "./Step.inline.css";
 
 interface StepProps {
 	stepKey: string | number;
@@ -26,20 +27,6 @@ const CIRCLE_STATUS_CLASSES: Record<StepStatus | "pressed", string> = {
 
 const LABEL_CLASSES = "text-[var(--ds-font-size-14)] font-medium";
 
-const getLabelColor = (status: StepStatus, disabled: boolean): string => {
-	if (disabled) return "var(--ds-color-neutral-80)";
-
-	switch (status) {
-		case "default":
-		case "completed":
-			return "var(--ds-color-neutral-40)";
-		case "focused":
-		case "active":
-		default:
-			return "var(--ds-color-neutral-10)";
-	}
-};
-
 const getNumberColor = (status: StepStatus, disabled: boolean): string => {
 	if (disabled) return "var(--ds-color-neutral-40)";
 	if (status === "completed") return "var(--ds-surface)";
@@ -55,8 +42,6 @@ export const Step: FC<StepProps> = memo(
 		);
 
 		const numberColor = useMemo(() => getNumberColor(status, disabled), [status, disabled]);
-
-		const labelColor = useMemo(() => getLabelColor(status, disabled), [status, disabled]);
 
 		const wrapperClassName = useMemo(
 			() =>
@@ -88,8 +73,11 @@ export const Step: FC<StepProps> = memo(
 				{href ? (
 					<a
 						href={disabled ? undefined : href}
-						className={`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`}
-						style={{ padding: "8px 16px" }}
+						className={clsx(
+							`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`,
+							"step-inline-1",
+						)}
+
 						aria-disabled={disabled || undefined}
 						aria-current={status === "active" ? "step" : undefined}
 						tabIndex={disabled ? -1 : undefined}
@@ -104,9 +92,9 @@ export const Step: FC<StepProps> = memo(
 						<StepContent
 							stepKey={stepKey}
 							status={status}
+							disabled={disabled}
 							circleClasses={circleClasses}
 							numberColor={numberColor}
-							labelColor={labelColor}
 						>
 							{children}
 						</StepContent>
@@ -114,8 +102,11 @@ export const Step: FC<StepProps> = memo(
 				) : (
 					<button
 						type="button"
-						className={`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`}
-						style={{ padding: "8px 16px" }}
+						className={clsx(
+							`${wrapperClassName} bg-transparent border-0 p-0 m-0 text-left`,
+							"step-inline-2",
+						)}
+
 						disabled={disabled}
 						aria-current={status === "active" ? "step" : undefined}
 						onClick={handleClick}
@@ -124,9 +115,9 @@ export const Step: FC<StepProps> = memo(
 						<StepContent
 							stepKey={stepKey}
 							status={status}
+							disabled={disabled}
 							circleClasses={circleClasses}
 							numberColor={numberColor}
-							labelColor={labelColor}
 						>
 							{children}
 						</StepContent>
@@ -149,20 +140,26 @@ Step.displayName = "Step";
 const StepContent: FC<{
 	stepKey: string | number;
 	status: StepStatus;
+	disabled: boolean;
 	circleClasses: string;
 	numberColor: string;
-	labelColor: string;
 	children: ReactNode;
-}> = ({ stepKey, status, circleClasses, numberColor, labelColor, children }) => (
+}> = ({ stepKey, status, disabled, circleClasses, numberColor, children }) => (
 	<>
 		<div className={circleClasses}>
 			{status === "completed" ? (
 				<CheckIcon size={22} weight="bold" color={numberColor} />
 			) : (
-				<span style={{ color: numberColor }}>{stepKey}</span>
+				<span className="step-number-color" data-status={status} data-disabled={disabled}>
+					{stepKey}
+				</span>
 			)}
 		</div>
-		<span className={LABEL_CLASSES} style={{ color: labelColor }}>
+		<span
+			className={`${LABEL_CLASSES} step-label-color`}
+			data-status={status}
+			data-disabled={disabled}
+		>
 			{children}
 		</span>
 	</>

@@ -19,6 +19,7 @@ import {
 	CircleIcon,
 } from "@phosphor-icons/react";
 import { useState } from "react";
+import "./Filters.stories.inline.css";
 
 const meta = {
 	title: "Examples/Filters",
@@ -465,28 +466,24 @@ const ShoppingListExampleComponent = () => {
 			value: "success",
 			icon: CheckCircleIcon,
 			variant: "success" as const,
-			color: "#338618",
 		},
 		{
 			label: "Reprovado",
 			value: "error",
 			icon: XCircleIcon,
 			variant: "danger" as const,
-			color: "#C1290B",
 		},
 		{
 			label: "Recuperação",
 			value: "warning",
 			icon: WarningCircleIcon,
 			variant: "warning" as const,
-			color: "#B36205",
 		},
 		{
 			label: "Em Andamento",
 			value: "pending",
 			icon: ClockIcon,
 			variant: "info" as const,
-			color: "#017DA2",
 		},
 	];
 
@@ -695,10 +692,8 @@ const ShoppingListExampleComponent = () => {
 										{item.name}
 									</h3>
 									<span
-										className="w-3 h-3 rounded-full"
-										style={{
-											backgroundColor: statusOptions.find((s) => s.value === item.status)?.color,
-										}}
+										className="w-3 h-3 rounded-full filters-stories-status"
+										data-status={item.status}
 										title={statusOptions.find((s) => s.value === item.status)?.label}
 									/>
 								</div>

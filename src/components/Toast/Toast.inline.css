@@ -1,0 +1,8 @@
+.toast-inline {
+	color: #fff;
+	font-style: italic;
+	text-decoration: underline;
+}
+.toast-inline--no-wrap {
+	white-space: nowrap;
+}

@@ -9,6 +9,8 @@ import { RichTextLabel } from "./RichTextLabel";
 import { RichTextToolbar } from "./RichTextToolbar";
 import { RichTextEditor } from "./RichTextEditor";
 import { RichTextFooter } from "./RichTextFooter";
+import "./RichText.inline.css";
+import clsx from "clsx";
 
 export const RichText: React.FC<RichTextProps> = ({
 	label,
@@ -129,31 +131,23 @@ export const RichText: React.FC<RichTextProps> = ({
 	const showMinLengthError = charCount > 0 && charCount < minLength;
 	const hasError = Boolean(validationError || error || showMinLengthError);
 
-	const getOutlineColor = () => {
-		if (hasError || showMinLengthError) return "var(--ds-color-red-40)";
-		if (isFocused && !disabled) return "var(--ds-color-blue-10)";
-		return "transparent";
-	};
-
 	const getBackgroundColor = () => {
 		if (disabled) return "var(--ds-color-neutral-95)";
 		return "white";
 	};
 
 	return (
-		<div className={className} style={{ width: "100%" }}>
+		<div className={clsx(className, "richtext-inline-1")}>
 			<fieldset
-				style={{
-					borderRadius: "8px",
-					outline: `2px solid ${getOutlineColor()}`,
-					outlineOffset: "2px",
-					padding: "8px",
-					display: "flex",
-					flexDirection: "column",
-					gap: "8px",
-					border: "none",
-					margin: 0,
-				}}
+				className={clsx(
+					"richtext-fieldset",
+					(hasError || showMinLengthError) && "richtext-fieldset--error",
+					!hasError &&
+						!showMinLengthError &&
+						isFocused &&
+						!disabled &&
+						"richtext-fieldset--focused",
+				)}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => {
 					setIsFocused(false);

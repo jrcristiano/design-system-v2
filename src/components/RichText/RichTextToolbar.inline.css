@@ -1,0 +1,9 @@
+.richtexttoolbar-inline-1 {
+	display: flex;
+	gap: 12px;
+	padding: 8px;
+	background: var(--ds-color-neutral-95);
+	border-radius: 8px;
+	outline: 1px solid var(--ds-color-neutral-50);
+	outline-offset: -1px;
+}

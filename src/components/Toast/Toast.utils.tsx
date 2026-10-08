@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
+import "./Toast.inline.css";
 
 export interface ToastLinkConfig {
 	text: string;
@@ -43,13 +44,7 @@ export const renderToastLink = (
 		href={link.href}
 		target="_blank"
 		rel="noopener noreferrer"
-		style={{
-			color: "#fff",
-			fontStyle: "italic",
-			textDecoration: "underline",
-			...(preventWrapping && { whiteSpace: "nowrap" as const }),
-		}}
-		className="hover:opacity-80 transition-opacity"
+		className={`hover:opacity-80 transition-opacity toast-inline ${preventWrapping ? "toast-inline--no-wrap" : ""}`}
 	>
 		{link.text}
 	</a>

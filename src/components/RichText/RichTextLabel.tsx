@@ -1,4 +1,5 @@
 import React from "react";
+import "./RichTextLabel.css";
 
 type RichTextLabelProps = {
 	label?: string;
@@ -18,8 +19,7 @@ export const RichTextLabel: React.FC<RichTextLabelProps> = ({
 	if (!label) return null;
 
 	const labelClasses = disabled ? "cursor-default" : "cursor-pointer";
-	const labelColor = disabled ? "var(--ds-color-neutral-40)" : "var(--ds-color-neutral-10)";
-	const requiredColor = "var(--ds-color-red-40)";
+	const labelColorClass = disabled ? "rich-text-label__text--disabled" : "rich-text-label__text";
 
 	return (
 		<label
@@ -27,9 +27,9 @@ export const RichTextLabel: React.FC<RichTextLabelProps> = ({
 			htmlFor={htmlFor}
 			className={`flex items-center gap-1 font-body font-[var(--ds-label-1-weight)] ${labelClasses}`}
 		>
-			<span style={{ color: labelColor }}>{label}</span>
+			<span className={labelColorClass}>{label}</span>
 			{required && (
-				<span aria-hidden="true" style={{ color: requiredColor }}>
+				<span aria-hidden="true" className="rich-text-label__required">
 					*
 				</span>
 			)}

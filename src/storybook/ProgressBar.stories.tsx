@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ProgressBar } from "../components/ProgressBar/ProgressBar";
+import "./ProgressBar.stories.inline.css";
 
 const meta: Meta<typeof ProgressBar> = {
 	title: "Components/ProgressBar",
@@ -39,14 +40,7 @@ const meta: Meta<typeof ProgressBar> = {
 	},
 	decorators: [
 		(Story) => (
-			<div
-				style={{
-					width: "100%",
-					maxWidth: "100%",
-					padding: "24px",
-					backgroundColor: "#ddd",
-				}}
-			>
+			<div className="progressbar-stories-inline-1">
 				<Story />
 			</div>
 		),
