@@ -6,6 +6,8 @@ import type { IModalAction, IModalProps } from "./Modal.interface";
 import type { ModalVariant } from "./Modal.type";
 import type { Size } from "../../types/Commons.type";
 import { Button } from "../Button/Button";
+import { acquireBodyScrollLock } from "../shared/bodyScrollLock";
+import "./Modal.css";
 
 const focusableSelector =
 	'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
@@ -43,6 +45,7 @@ export const Modal: React.FC<IModalProps> = React.memo(
 		ariaLabel,
 		size = "md",
 		variant = "default",
+		verticalPosition = "center",
 		state = "default",
 		actions,
 		icon,
@@ -60,6 +63,7 @@ export const Modal: React.FC<IModalProps> = React.memo(
 	}) => {
 		const dialogRef = useRef<HTMLDialogElement>(null);
 		const lastActiveRef = useRef<HTMLElement | null>(null);
+		const isNativeModalRef = useRef(false);
 		const isBlocking = state === "loading";
 		const titleId = React.useId();
 		const descriptionId = React.useId();
@@ -111,7 +115,9 @@ export const Modal: React.FC<IModalProps> = React.memo(
 
 		const handleDocumentKeyDown = useCallback(
 			(event: KeyboardEvent) => {
+				if (event.key === "Escape" && isNativeModalRef.current) return;
 				if (event.key === "Escape" && closeOnEsc && !isBlocking) {
+					event.preventDefault();
 					event.stopPropagation();
 					handleClose();
 					return;
@@ -123,22 +129,62 @@ export const Modal: React.FC<IModalProps> = React.memo(
 
 		useEffect(() => {
 			if (!isOpen) return undefined;
+			const dialog = dialogRef.current;
+			if (!dialog) return undefined;
+
 			lastActiveRef.current = document.activeElement as HTMLElement | null;
 			const returnFocusNode = returnFocusRef?.current ?? lastActiveRef.current;
+			let openedNatively = false;
+			try {
+				if (!dialog.open && typeof dialog.showModal === "function") {
+					dialog.showModal();
+					openedNatively = true;
+				}
+			} catch {
+				// Keep the existing focus trap available in DOMs without dialog support.
+			}
+			if (!dialog.open) dialog.setAttribute("open", "");
+			isNativeModalRef.current = openedNatively;
+
 			const focusTarget =
-				initialFocusRef?.current ??
-				dialogRef.current?.querySelector<HTMLElement>(focusableSelector);
-			const fallback = dialogRef.current;
+				initialFocusRef?.current ?? dialog.querySelector<HTMLElement>(focusableSelector);
+			const fallback = dialog;
 			(focusTarget ?? fallback)?.focus();
-			const originalOverflow = document.body.style.overflow;
-			document.body.style.overflow = "hidden";
+			const releaseBodyScrollLock = acquireBodyScrollLock();
 			document.addEventListener("keydown", handleDocumentKeyDown);
 			return () => {
-				document.body.style.overflow = originalOverflow;
-				returnFocusNode?.focus();
 				document.removeEventListener("keydown", handleDocumentKeyDown);
+				if (dialog.open) {
+					if (openedNatively) dialog.close();
+					else dialog.removeAttribute("open");
+				}
+				isNativeModalRef.current = false;
+				releaseBodyScrollLock();
+				returnFocusNode?.focus();
 			};
 		}, [isOpen, initialFocusRef, returnFocusRef, handleDocumentKeyDown]);
+
+		const handleCancel = useCallback(
+			(event: React.SyntheticEvent<HTMLDialogElement>) => {
+				event.preventDefault();
+				if (closeOnEsc && !isBlocking) handleClose();
+			},
+			[closeOnEsc, handleClose, isBlocking],
+		);
+
+		const handleNativeBackdropClick = useCallback(
+			(event: React.MouseEvent<HTMLDialogElement>) => {
+				if (event.target !== event.currentTarget || !isNativeModalRef.current) return;
+				const bounds = event.currentTarget.getBoundingClientRect();
+				const outside =
+					event.clientX < bounds.left ||
+					event.clientX > bounds.right ||
+					event.clientY < bounds.top ||
+					event.clientY > bounds.bottom;
+				if (outside) handleClose();
+			},
+			[handleClose],
+		);
 
 		const modalClasses = useMemo(() => {
 			const base =
@@ -275,7 +321,6 @@ export const Modal: React.FC<IModalProps> = React.memo(
 					/>
 					<dialog
 						ref={dialogRef}
-						open
 						aria-modal="true"
 						aria-labelledby={labelledBy}
 						aria-describedby={describedBy}
@@ -284,8 +329,11 @@ export const Modal: React.FC<IModalProps> = React.memo(
 						data-state={state}
 						data-variant={variant}
 						tabIndex={-1}
-						className={modalClasses}
+						className={clsx("modal-dialog", `modal-dialog--${verticalPosition}`, modalClasses)}
 						{...props}
+						open={false}
+						onCancel={handleCancel}
+						onClick={handleNativeBackdropClick}
 					>
 						<div className={headerClasses}>
 							<div className="flex flex-col gap-2">

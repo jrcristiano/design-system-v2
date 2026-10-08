@@ -66,6 +66,11 @@ const meta: Meta<typeof Modal> = {
 			options: ["default", "confirmation", "warning", "destructive", "fullscreen", "form"],
 			description: "Variação visual e semantica.",
 		},
+		verticalPosition: {
+			control: "select",
+			options: ["top", "center", "bottom"],
+			description: "Define o posicionamento vertical do modal.",
+		},
 		state: {
 			control: { type: "select" },
 			options: ["default", "loading", "error", "success"],
@@ -114,6 +119,14 @@ const meta: Meta<typeof Modal> = {
 
 export default meta;
 type Story = StoryObj<typeof Modal>;
+
+const PositioningExample = (args: ComponentProps<typeof Modal>) => (
+	<ModalStoryShell {...args}>
+		<p className="text-[var(--ds-color-neutral-10)]">
+			Ajuste verticalmente este modal pelo controle verticalPosition.
+		</p>
+	</ModalStoryShell>
+);
 
 const variantIcons: Record<ModalVariant, JSX.Element | null> = {
 	default: iconOptions.InfoIcon,
@@ -445,4 +458,53 @@ export const SuccessState: Story = {
 			</div>
 		</ModalStoryShell>
 	),
+};
+
+export const Default: Story = {
+	args: { title: "Modal padrão", description: "Posição central, como no comportamento atual." },
+	render: (args) => <PositioningExample {...args} />,
+};
+
+export const Top: Story = {
+	args: { title: "Modal no topo", verticalPosition: "top" },
+	render: (args) => <PositioningExample {...args} />,
+};
+
+export const Center: Story = {
+	args: { title: "Modal centralizado", verticalPosition: "center" },
+	render: (args) => <PositioningExample {...args} />,
+};
+
+export const Bottom: Story = {
+	args: { title: "Modal na parte inferior", verticalPosition: "bottom" },
+	render: (args) => <PositioningExample {...args} />,
+};
+
+export const LongContent: Story = {
+	args: {
+		title: "Conteúdo extenso",
+		description: "O modal respeita a altura disponível e permite rolagem.",
+		verticalPosition: "top",
+		isContentScrollable: true,
+	},
+	render: (args) => (
+		<ModalStoryShell {...args}>
+			<div className="flex flex-col gap-4 text-[var(--ds-color-neutral-10)]">
+				{Array.from({ length: 16 }, (_, index) => (
+					<p key={index}>
+						Seção {index + 1}: conteúdo demonstrativo para testar a rolagem do modal.
+					</p>
+				))}
+			</div>
+		</ModalStoryShell>
+	),
+};
+
+export const InteractivePositioning: Story = {
+	args: {
+		title: "Posicionamento interativo",
+		description: "Use o controle verticalPosition no painel Controls.",
+		verticalPosition: "center",
+	},
+	render: (args) => <PositioningExample {...args} />,
 };

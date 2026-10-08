@@ -1,7 +1,7 @@
 import type React from "react";
 import type { IconWeight } from "@phosphor-icons/react";
 import type { Size, Variant } from "../../types/Commons.type";
-import type { ModalState, ModalVariant } from "./Modal.type";
+import type { ModalState, ModalVariant, ModalVerticalPosition } from "./Modal.type";
 
 export interface IModalAction {
 	label: string;
@@ -29,6 +29,7 @@ export interface IModalProps extends React.DialogHTMLAttributes<HTMLDialogElemen
 	ariaLabel?: string;
 	size?: Size;
 	variant?: ModalVariant;
+	verticalPosition?: ModalVerticalPosition;
 	state?: ModalState;
 	actions?: IModalActions;
 	icon?: React.ReactNode;

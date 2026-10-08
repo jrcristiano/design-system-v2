@@ -1,0 +1,29 @@
+.modal-dialog::backdrop {
+	background: rgba(0, 0, 0, 0.50);
+}
+
+.modal-dialog {
+	box-sizing: border-box;
+	width: calc(100% - 2 * var(--ds-pad-modal));
+	max-height: calc(100vh - 2 * var(--ds-pad-modal));
+	max-height: calc(100dvh - 2 * var(--ds-pad-modal));
+	margin: auto;
+	overflow: auto;
+}
+
+.modal-dialog--top {
+	margin-block-start: calc(var(--ds-pad-modal) + env(safe-area-inset-top, 0px));
+	margin-block-end: auto;
+}
+
+.modal-dialog--bottom {
+	margin-block-start: auto;
+	margin-block-end: calc(var(--ds-pad-modal) + env(safe-area-inset-bottom, 0px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.modal-dialog,
+	.modal-dialog::backdrop {
+		scroll-behavior: auto;
+	}
+}
