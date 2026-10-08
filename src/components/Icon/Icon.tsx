@@ -1,6 +1,9 @@
 import React from "react";
 import * as PhosphorIcons from "@phosphor-icons/react";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import type { IconProps } from "./Icon.interface";
+
+const iconComponents = PhosphorIcons as unknown as Record<string, PhosphorIcon>;
 
 export const Icon: React.FC<IconProps> = ({
 	name,
@@ -10,7 +13,7 @@ export const Icon: React.FC<IconProps> = ({
 	className = "",
 }) => {
 	// Converte o nome do ícone para o formato do Phosphor Icons
-	const IconComponent = (PhosphorIcons as any)[name];
+	const IconComponent = iconComponents[name];
 
 	if (!IconComponent) {
 		console.warn(`Ícone "${name}" não encontrado`);

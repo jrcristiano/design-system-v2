@@ -1,5 +1,5 @@
 import { CaretDownIcon, CaretRightIcon } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "../Dropdown/Dropdown";
 import { DropdownMenu } from "../Dropdown/DropdownMenu";
 import { DropdownTrigger } from "../Dropdown/DropdownTrigger";
@@ -81,8 +81,11 @@ export const DateDropdownPicker = ({
 	size = "lg",
 	placeholder = "Selecione uma data",
 }: DateDropdownPickerProps) => {
-	// Estado único, derivado do value, elimina uso redundante de useMemo e useEffect
 	const [draftDate, setDraftDate] = useState<Date | null>(parseDateValue(value));
+
+	useEffect(() => {
+		setDraftDate(parseDateValue(value));
+	}, [value]);
 
 	// Cancelar mantém a data atual
 	const handleCancel = () => setDraftDate(parseDateValue(value));

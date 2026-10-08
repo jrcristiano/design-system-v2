@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import type { FileUploadItem, UploadState } from "../components/Input/InputUpload.type";
+import type { FileUploadItem } from "../components/Input/InputUpload.type";
 
 let fallbackIdSequence = 0;
 
@@ -62,8 +62,8 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 
 	const markFileCompleted = useCallback((fileId: string) => {
 		setFiles((prev) =>
-			prev.map((f) =>
-				f.id === fileId ? { ...f, state: "completed" as UploadState, progress: 100 } : f,
+			prev.map<FileUploadItem>((f) =>
+				f.id === fileId ? { ...f, state: "completed", progress: 100 } : f,
 			),
 		);
 	}, []);
@@ -112,12 +112,12 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
 		(newFiles: File[]) => {
 			const filesToAdd = multiple ? newFiles : newFiles.slice(0, 1);
 
-			const fileItems: FileUploadItem[] = filesToAdd.map((file) => {
+			const fileItems = filesToAdd.map<FileUploadItem>((file) => {
 				const validation = validateFile(file);
 				return {
 					id: createFileId(),
 					file,
-					state: validation.valid ? ("uploading" as UploadState) : ("error" as UploadState),
+					state: validation.valid ? "uploading" : "error",
 					progress: 0,
 					error: validation.error,
 					uploadedSize: 0,

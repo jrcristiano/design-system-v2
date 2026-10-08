@@ -114,9 +114,7 @@ describe("InputUpload", () => {
 
 		render(<InputUpload files={files} onRemoveFile={handleRemoveFile} />);
 
-		// Get the remove button (first button, not the "Adicionar mais arquivos" button)
-		const buttons = screen.getAllByRole("button");
-		const removeButton = buttons[0];
+		const removeButton = screen.getByRole("button", { name: "Remover arquivo document.pdf" });
 		await user.click(removeButton);
 		expect(handleRemoveFile).toHaveBeenCalledWith("file-1");
 	});
@@ -135,9 +133,7 @@ describe("InputUpload", () => {
 
 		render(<InputUpload files={files} onRemoveFile={handleRemoveFile} disabled />);
 
-		// Get the remove button (first button, not the "Adicionar mais arquivos" button)
-		const buttons = screen.getAllByRole("button");
-		const removeButton = buttons[0];
+		const removeButton = screen.getByRole("button", { name: "Remover arquivo document.pdf" });
 		await user.click(removeButton);
 		expect(handleRemoveFile).not.toHaveBeenCalled();
 	});

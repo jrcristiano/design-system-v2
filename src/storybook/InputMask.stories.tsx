@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { InputMasked } from "../components/Input/InputMasked";
 import {
 	CheckIcon,
@@ -10,7 +11,6 @@ import {
 	UserCircleIcon,
 } from "@phosphor-icons/react";
 import type { InputProps } from "../components/Input/Input.interface";
-import { Input } from "../components/Input/Input";
 
 const meta: Meta<typeof InputMasked> = {
 	title: "Form/Inputs",
@@ -142,13 +142,14 @@ export const GenericMask: Story = {
 		iconLeft: <UserCircleIcon />,
 		iconRight: undefined,
 		disabled: false,
+		onChangeRaw: fn(),
 	} satisfies InputProps,
-	render: (args) => (
-		<Input
-			{...args}
-			onChangeRaw={(rawValue: string) => console.log("Valor sem máscara:", rawValue)}
-		/>
-	),
+	render: (args) => <InputMasked {...args} />,
+	play: async ({ args, canvasElement }) => {
+		const input = within(canvasElement).getByRole("textbox", { name: /Telefone/ });
+		await userEvent.type(input, "11987654321");
+		await expect(args.onChangeRaw).toHaveBeenCalledWith("11987654321");
+	},
 	parameters: {
 		docs: {
 			description: {

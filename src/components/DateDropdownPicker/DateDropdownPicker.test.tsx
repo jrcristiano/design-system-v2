@@ -186,5 +186,16 @@ describe("DateDropdownPicker", () => {
 			rerender(<DateDropdownPicker value="31/12/2025" onChange={onChange} />);
 			expect(screen.getByText("31/12/2025")).toBeInTheDocument();
 		});
+
+		it("confirms the latest controlled value after it changes externally", () => {
+			const onChange = vi.fn();
+			const { rerender } = render(<DateDropdownPicker value="25/12/2025" onChange={onChange} />);
+
+			rerender(<DateDropdownPicker value="31/12/2025" onChange={onChange} />);
+			fireEvent.click(screen.getByRole("button", { name: "31/12/2025" }));
+			fireEvent.click(screen.getByRole("button", { name: "Confirmar seleção de data" }));
+
+			expect(onChange).toHaveBeenCalledWith("31/12/2025");
+		});
 	});
 });

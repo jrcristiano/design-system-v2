@@ -12,19 +12,26 @@ import clsx from "clsx";
 import "./../../tokens/typography.css";
 import "./../../tokens/colors.css";
 import type { InputUploadProps } from "./InputUpload.interface";
+import type { FileUploadItem } from "./InputUpload.type";
 import { useFileUpload } from "../../hooks/useFileUpload";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { IconSlot } from "../shared/IconSlot";
 
+type IconCloneProps = {
+	size?: number;
+	weight?: string;
+	className?: string;
+};
+
 interface FileItemProps {
-	fileItem: any;
+	fileItem: FileUploadItem;
 	disabled: boolean;
 	tooltipContent?: ReactNode;
 	iconRight: ReactNode;
 	onIconRightClick?: () => void;
 	onRemove: (id: string) => void;
 	formatFileSize: (size: number) => string;
-	getTimeRemaining: (file: any) => string;
+	getTimeRemaining: (file: FileUploadItem) => string;
 }
 
 const FileItem = memo<FileItemProps>(
@@ -71,8 +78,8 @@ const FileItem = memo<FileItemProps>(
 
 		const clonedIconRight = useMemo(
 			() =>
-				isValidElement(iconRight)
-					? cloneElement(iconRight as React.ReactElement<any>, {
+				isValidElement<IconCloneProps>(iconRight)
+					? cloneElement(iconRight, {
 							size: 24,
 							weight: "regular",
 							className: "text-[var(--ds-color-sky-30)]",
@@ -132,6 +139,7 @@ const FileItem = memo<FileItemProps>(
 						type="button"
 						onClick={handleRemoveClick}
 						disabled={disabled}
+						aria-label={`Remover arquivo ${fileItem.file.name}`}
 						className={buttonClasses}
 					>
 						{isUploading ? (
@@ -248,13 +256,13 @@ DropzoneEmpty.displayName = "DropzoneEmpty";
 type DropzoneWithFilesProps = {
 	dropzoneClasses: string;
 	disabled: boolean;
-	displayFiles: any[];
+	displayFiles: FileUploadItem[];
 	tooltipContent?: ReactNode;
 	iconRight: ReactNode;
 	onIconRightClick?: () => void;
 	onRemove: (id: string) => void;
 	formatFileSize: (size: number) => string;
-	getTimeRemaining: (file: any) => string;
+	getTimeRemaining: (file: FileUploadItem) => string;
 	onBrowseClick: () => void;
 	onDragEnter: (e: React.DragEvent) => void;
 	onDragLeave: (e: React.DragEvent) => void;
@@ -413,8 +421,8 @@ export const InputUpload: React.FC<InputUploadProps> = memo(
 
 		const clonedIconLeft = useMemo(
 			() =>
-				isValidElement(iconLeft)
-					? cloneElement(iconLeft as React.ReactElement<any>, {
+				isValidElement<IconCloneProps>(iconLeft)
+					? cloneElement(iconLeft, {
 							size: 40,
 							weight: "regular",
 							className: disabled

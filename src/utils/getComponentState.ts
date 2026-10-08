@@ -18,7 +18,7 @@ export interface GetComponentStateOptions {
 	/** Whether the component is being pressed */
 	isPressed?: boolean;
 	/** Controlled state that takes priority (if not "default") */
-	controlledState?: string;
+	controlledState?: ComponentState;
 	/** Default state to return when no other state applies */
 	defaultState?: ComponentState;
 }
@@ -70,7 +70,7 @@ export function getComponentState(options: GetComponentStateOptions = {}): Compo
 
 	// Controlled state takes priority if it's not "default"
 	if (controlledState && controlledState !== "default") {
-		return controlledState as ComponentState;
+		return controlledState;
 	}
 
 	// Priority-based state resolution

@@ -6,6 +6,13 @@ import type {
 	ProgressBarVariant,
 } from "./ProgressBar.interface";
 
+type IconCloneProps = {
+	className?: string;
+	size?: number;
+	style?: React.CSSProperties;
+	weight?: string;
+};
+
 const VARIANT_COLORS: Record<ProgressBarVariant, string> = {
 	primary: "var(--ds-color-blue-40)",
 	success: "var(--ds-color-green-30)",
@@ -31,14 +38,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 	const resolvedColor = VARIANT_COLORS[variant];
 	const resolvedIcon = (() => {
 		if (icon) {
-			if (isValidElement(icon)) {
-				const iconElement = icon as React.ReactElement<any>;
-				const iconStyle = iconElement.props.style;
-				return cloneElement(iconElement, {
+			if (isValidElement<IconCloneProps>(icon)) {
+				const iconStyle = icon.props.style;
+				return cloneElement(icon, {
 					size: 16,
 					weight: "regular",
 					style: iconStyle ? { color: resolvedColor, ...iconStyle } : { color: resolvedColor },
-					className: iconElement.props.className,
+					className: icon.props.className,
 				});
 			}
 			return icon;

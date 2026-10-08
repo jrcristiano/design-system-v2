@@ -1,4 +1,5 @@
 import React from "react";
+import type { ComponentProps } from "react";
 import Switch from "../components/Switch/Switch";
 import { Button } from "../components/Button/Button";
 
@@ -29,7 +30,7 @@ export default {
 	},
 };
 
-const Template = (args: any) => <Switch {...args} />;
+const Template = (args: ComponentProps<typeof Switch>) => <Switch {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -76,12 +77,12 @@ DisabledChecked.parameters = {
 	},
 };
 
-export const Controlled = (args: any) => {
+export const Controlled = (args: ComponentProps<typeof Switch>) => {
 	const [isChecked, setIsChecked] = React.useState(false);
 
 	return (
 		<div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
-			<Switch checked={isChecked} onChange={setIsChecked} {...args} />
+			<Switch {...args} checked={isChecked} onChange={setIsChecked} />
 			<span style={{ color: "var(--ds-color-neutral-70)" }}>
 				Estado atual: {isChecked ? "Ligado" : "Desligado"}
 			</span>

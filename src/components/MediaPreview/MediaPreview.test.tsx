@@ -85,6 +85,32 @@ describe("MediaPreview", () => {
 		).toBeInTheDocument();
 	});
 
+	it("does not create preview URLs for files rejected by the size limit", async () => {
+		const user = userEvent.setup();
+		render(<MediaPreview label="Preview" maxTotalSizeMb={0} />);
+
+		const input = screen.getByLabelText("Preview") as HTMLInputElement;
+		await user.upload(input, new File(["image"], "grande.jpg", { type: "image/jpeg" }));
+
+		expect(screen.getByText(/Tamanho máximo excedido/i)).toBeInTheDocument();
+		expect(URL.createObjectURL).not.toHaveBeenCalled();
+	});
+
+	it("creates a preview only for the selected file in single mode", async () => {
+		const user = userEvent.setup();
+		render(<MediaPreview label="Preview" />);
+
+		const input = screen.getByLabelText("Preview") as HTMLInputElement;
+		const first = new File(["first"], "primeiro.jpg", { type: "image/jpeg" });
+		const second = new File(["second"], "segundo.jpg", { type: "image/jpeg" });
+		fireEvent.change(input, { target: { files: [first, second] } });
+
+		expect(await screen.findByText("segundo.jpg")).toBeInTheDocument();
+		expect(URL.createObjectURL).toHaveBeenCalledTimes(1);
+		await user.click(screen.getByLabelText("Remover arquivo"));
+		expect(URL.revokeObjectURL).toHaveBeenCalledWith("blob:mock");
+	});
+
 	it("removes item when clicking trash button", async () => {
 		const user = userEvent.setup();
 		render(<MediaPreview label="Preview" multiple />);

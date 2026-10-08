@@ -203,9 +203,8 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 		}
 
 		try {
-			const nextItems = validFiles.map(createMediaItem);
-			const orderedItems = [...nextItems].reverse();
-			const incomingBytes = orderedItems.reduce((acc, item) => acc + item.file.size, 0);
+			const orderedFiles = [...validFiles].reverse();
+			const incomingBytes = orderedFiles.reduce((acc, file) => acc + file.size, 0);
 			const projectedBytes = multiple ? totalBytes + incomingBytes : incomingBytes;
 
 			if (projectedBytes > maxBytes) {
@@ -217,10 +216,12 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 				return;
 			}
 
+			const filesToAdd = multiple ? orderedFiles : orderedFiles.slice(0, 1);
+			const orderedItems = filesToAdd.map(createMediaItem);
 			if (multiple) {
 				updateMedia([...orderedItems, ...media]);
 			} else {
-				updateMedia(orderedItems.slice(0, 1));
+				updateMedia(orderedItems);
 			}
 		} finally {
 			setLoading(false);
