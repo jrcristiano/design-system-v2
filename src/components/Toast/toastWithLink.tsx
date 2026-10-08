@@ -1,12 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
-import {
-	InfoIcon,
-	CheckCircleIcon,
-	WarningCircleIcon,
-	WarningOctagonIcon,
-} from "@phosphor-icons/react";
+import { TOAST_ICONS, renderToastContent } from "./Toast.utils";
 
 interface ToastLinkConfig {
 	text: string;
@@ -16,13 +11,6 @@ interface ToastLinkConfig {
 // ---------------------------------------------------------------------------
 // Ícones padrão por variante (brancos e weight light)
 // ---------------------------------------------------------------------------
-
-const ICONS = {
-	info: <InfoIcon size={20} color="white" weight="light" />,
-	success: <CheckCircleIcon size={20} color="white" weight="light" />,
-	warning: <WarningCircleIcon size={20} color="white" weight="light" />,
-	error: <WarningOctagonIcon size={20} color="white" weight="light" />,
-};
 
 // ---------------------------------------------------------------------------
 // Helper
@@ -62,12 +50,7 @@ export const toastWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{linkConfig && renderLink(linkConfig)}
-		</div>
-	);
+	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
 
 	return toast(content, options);
 };
@@ -80,14 +63,9 @@ export const toastSuccessWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{linkConfig && renderLink(linkConfig)}
-		</div>
-	);
+	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
 
-	return toast.success(content, { icon: ICONS.success, ...options });
+	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
 };
 
 /**
@@ -98,14 +76,9 @@ export const toastErrorWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{linkConfig && renderLink(linkConfig)}
-		</div>
-	);
+	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
 
-	return toast.error(content, { icon: ICONS.error, ...options });
+	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
 };
 
 /**
@@ -116,14 +89,9 @@ export const toastWarningWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{linkConfig && renderLink(linkConfig)}
-		</div>
-	);
+	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
 
-	return toast.warning(content, { icon: ICONS.warning, ...options });
+	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
 };
 
 /**
@@ -134,12 +102,7 @@ export const toastInfoWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{linkConfig && renderLink(linkConfig)}
-		</div>
-	);
+	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
 
-	return toast.info(content, { icon: ICONS.info, ...options });
+	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
 };

@@ -1,14 +1,9 @@
 import React from "react";
 import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
-import {
-	InfoIcon,
-	CheckCircleIcon,
-	WarningCircleIcon,
-	WarningOctagonIcon,
-} from "@phosphor-icons/react";
 import type { IChipProps } from "../Chip/Chip.interface";
 import { Chip } from "../Chip/Chip";
+import { TOAST_ICONS, renderToastContent } from "./Toast.utils";
 
 interface ToastWithChipOptions extends ToastOptions {
 	chip?: IChipProps;
@@ -22,13 +17,6 @@ interface LinkProps {
 // ---------------------------------------------------------------------------
 // Ícones padrão por variante (brancos e weight light)
 // ---------------------------------------------------------------------------
-
-const ICONS = {
-	info: <InfoIcon size={20} color="white" weight="light" />,
-	success: <CheckCircleIcon size={20} color="white" weight="light" />,
-	warning: <WarningCircleIcon size={20} color="white" weight="light" />,
-	error: <WarningOctagonIcon size={20} color="white" weight="light" />,
-};
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -67,12 +55,7 @@ export const toastWithChip = (
 	const { chip, ...toastOptions } = options || {};
 	const finalChipProps = chipProps || chip;
 
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{finalChipProps && <Chip {...finalChipProps} />}
-		</div>
-	);
+	const content = renderToastContent(message, finalChipProps && <Chip {...finalChipProps} />);
 
 	return toast(content, toastOptions);
 };
@@ -82,14 +65,9 @@ export const toastInfoWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{chipProps && <Chip {...chipProps} />}
-		</div>
-	);
+	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
 
-	return toast.info(content, { icon: ICONS.info, ...options });
+	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
 };
 
 export const toastSuccessWithChip = (
@@ -97,14 +75,9 @@ export const toastSuccessWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{chipProps && <Chip {...chipProps} />}
-		</div>
-	);
+	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
 
-	return toast.success(content, { icon: ICONS.success, ...options });
+	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
 };
 
 export const toastWarningWithChip = (
@@ -112,14 +85,9 @@ export const toastWarningWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{chipProps && <Chip {...chipProps} />}
-		</div>
-	);
+	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
 
-	return toast.warning(content, { icon: ICONS.warning, ...options });
+	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
 };
 
 export const toastErrorWithChip = (
@@ -127,14 +95,9 @@ export const toastErrorWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{chipProps && <Chip {...chipProps} />}
-		</div>
-	);
+	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
 
-	return toast.error(content, { icon: ICONS.error, ...options });
+	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
 };
 
 // ---------------------------------------------------------------------------
@@ -151,14 +114,9 @@ export const toastInfoWithLink = (
 	link: LinkProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{renderLink(link)}
-		</div>
-	);
+	const content = renderToastContent(message, renderLink(link));
 
-	return toast.info(content, { icon: ICONS.info, ...options });
+	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
 };
 
 export const toastSuccessWithLink = (
@@ -166,14 +124,9 @@ export const toastSuccessWithLink = (
 	link: LinkProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{renderLink(link)}
-		</div>
-	);
+	const content = renderToastContent(message, renderLink(link));
 
-	return toast.success(content, { icon: ICONS.success, ...options });
+	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
 };
 
 export const toastWarningWithLink = (
@@ -181,14 +134,9 @@ export const toastWarningWithLink = (
 	link: LinkProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{renderLink(link)}
-		</div>
-	);
+	const content = renderToastContent(message, renderLink(link));
 
-	return toast.warning(content, { icon: ICONS.warning, ...options });
+	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
 };
 
 export const toastErrorWithLink = (
@@ -196,14 +144,9 @@ export const toastErrorWithLink = (
 	link: LinkProps,
 	options?: ToastOptions,
 ) => {
-	const content = (
-		<div className="flex items-center gap-3">
-			<div className="flex-1">{message}</div>
-			{renderLink(link)}
-		</div>
-	);
+	const content = renderToastContent(message, renderLink(link));
 
-	return toast.error(content, { icon: ICONS.error, ...options });
+	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
 };
 
 // ---------------------------------------------------------------------------
