@@ -3,40 +3,12 @@ import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
 import type { IChipProps } from "../Chip/Chip.interface";
 import { Chip } from "../Chip/Chip";
-import { TOAST_ICONS, renderToastContent } from "./Toast.utils";
+import { TOAST_ICONS, renderToastContent, renderToastLink } from "./Toast.utils";
+import type { ToastLinkConfig } from "./Toast.utils";
 
 interface ToastWithChipOptions extends ToastOptions {
 	chip?: IChipProps;
 }
-
-interface LinkProps {
-	text: string;
-	href: string;
-}
-
-// ---------------------------------------------------------------------------
-// Ícones padrão por variante (brancos e weight light)
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-const renderLink = (link: LinkProps) => (
-	<a
-		href={link.href}
-		target="_blank"
-		rel="noopener noreferrer"
-		style={{
-			color: "#fff",
-			fontStyle: "italic",
-			textDecoration: "underline",
-		}}
-		className="hover:opacity-80 transition-opacity"
-	>
-		{link.text}
-	</a>
-);
 
 // ---------------------------------------------------------------------------
 // WithChip
@@ -111,40 +83,40 @@ export const toastErrorWithChip = (
  */
 export const toastInfoWithLink = (
 	message: string | React.ReactNode,
-	link: LinkProps,
+	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderLink(link));
+	const content = renderToastContent(message, renderToastLink(link));
 
 	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
 };
 
 export const toastSuccessWithLink = (
 	message: string | React.ReactNode,
-	link: LinkProps,
+	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderLink(link));
+	const content = renderToastContent(message, renderToastLink(link));
 
 	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
 };
 
 export const toastWarningWithLink = (
 	message: string | React.ReactNode,
-	link: LinkProps,
+	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderLink(link));
+	const content = renderToastContent(message, renderToastLink(link));
 
 	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
 };
 
 export const toastErrorWithLink = (
 	message: string | React.ReactNode,
-	link: LinkProps,
+	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderLink(link));
+	const content = renderToastContent(message, renderToastLink(link));
 
 	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
 };
@@ -161,7 +133,7 @@ export const toastLinkWithChip = (
 ) => {
 	const content = (
 		<div className="flex items-center gap-3">
-			{renderLink({ text: linkText, href: linkHref })}
+			{renderToastLink({ text: linkText, href: linkHref })}
 			{chipProps && <Chip {...chipProps} />}
 		</div>
 	);

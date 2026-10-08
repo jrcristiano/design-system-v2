@@ -1,37 +1,8 @@
 import React from "react";
 import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
-import { TOAST_ICONS, renderToastContent } from "./Toast.utils";
-
-interface ToastLinkConfig {
-	text: string;
-	href: string;
-}
-
-// ---------------------------------------------------------------------------
-// Ícones padrão por variante (brancos e weight light)
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
-// Helper
-// ---------------------------------------------------------------------------
-
-const renderLink = (linkConfig: ToastLinkConfig) => (
-	<a
-		href={linkConfig.href}
-		target="_blank"
-		rel="noopener noreferrer"
-		style={{
-			color: "#fff",
-			fontStyle: "italic",
-			textDecoration: "underline",
-			whiteSpace: "nowrap",
-		}}
-		className="hover:opacity-80 transition-opacity"
-	>
-		{linkConfig.text}
-	</a>
-);
+import { TOAST_ICONS, renderToastContent, renderToastLink } from "./Toast.utils";
+import type { ToastLinkConfig } from "./Toast.utils";
 
 // ---------------------------------------------------------------------------
 // WithLink
@@ -50,7 +21,10 @@ export const toastWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
+	const content = renderToastContent(
+		message,
+		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
+	);
 
 	return toast(content, options);
 };
@@ -63,7 +37,10 @@ export const toastSuccessWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
+	const content = renderToastContent(
+		message,
+		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
+	);
 
 	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
 };
@@ -76,7 +53,10 @@ export const toastErrorWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
+	const content = renderToastContent(
+		message,
+		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
+	);
 
 	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
 };
@@ -89,7 +69,10 @@ export const toastWarningWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
+	const content = renderToastContent(
+		message,
+		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
+	);
 
 	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
 };
@@ -102,7 +85,10 @@ export const toastInfoWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, linkConfig && renderLink(linkConfig));
+	const content = renderToastContent(
+		message,
+		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
+	);
 
 	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
 };

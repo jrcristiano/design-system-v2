@@ -69,4 +69,22 @@ describe("toastWithChip utilities", () => {
 		const firstArg = (toast as any).mock.calls[0][0];
 		expect(firstArg.props.children[0].props.children).toBe("Click");
 	});
+
+	it("preserves the link attributes and wrapping behavior", () => {
+		(toast as any).mockImplementation(() => "ok");
+		toastLinkWithChip("Click", "https://example.com");
+
+		const link = (toast as any).mock.calls[0][0].props.children[0];
+		expect(link.props).toMatchObject({
+			href: "https://example.com",
+			target: "_blank",
+			rel: "noopener noreferrer",
+			style: {
+				color: "#fff",
+				fontStyle: "italic",
+				textDecoration: "underline",
+			},
+		});
+		expect(link.props.style).not.toHaveProperty("whiteSpace");
+	});
 });

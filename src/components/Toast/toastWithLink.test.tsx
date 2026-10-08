@@ -31,6 +31,24 @@ describe("toastWithLink utilities", () => {
 		expect(firstArg.props.children[0].props.children).toBe("More");
 	});
 
+	it("preserves the non-wrapping link attributes", () => {
+		(toast as any).mockImplementation(() => "ok");
+		toastWithLink("More", { text: "click", href: "https://example.com" });
+
+		const link = (toast as any).mock.calls[0][0].props.children[1];
+		expect(link.props).toMatchObject({
+			href: "https://example.com",
+			target: "_blank",
+			rel: "noopener noreferrer",
+			style: {
+				color: "#fff",
+				fontStyle: "italic",
+				textDecoration: "underline",
+				whiteSpace: "nowrap",
+			},
+		});
+	});
+
 	it("calls toast.success/error/warning/info variants", () => {
 		const spySuccess = vi.spyOn(toast as any, "success").mockImplementation(() => "ok");
 		const spyError = vi.spyOn(toast as any, "error").mockImplementation(() => "ok");
