@@ -5,6 +5,8 @@ import {
 	WarningCircleIcon,
 	WarningOctagonIcon,
 } from "@phosphor-icons/react";
+import { toast } from "react-toastify";
+import type { ToastOptions } from "react-toastify";
 
 export interface ToastLinkConfig {
 	text: string;
@@ -17,6 +19,14 @@ export const TOAST_ICONS = {
 	warning: <WarningCircleIcon size={20} color="white" weight="light" />,
 	error: <WarningOctagonIcon size={20} color="white" weight="light" />,
 };
+
+export type ToastVariant = keyof typeof TOAST_ICONS;
+
+export const showToastVariant = (
+	variant: ToastVariant,
+	content: ReactNode,
+	options?: ToastOptions,
+) => toast[variant](content, { icon: TOAST_ICONS[variant], ...options });
 
 export const renderToastContent = (message: ReactNode, accessory?: ReactNode) => (
 	<div className="flex items-center gap-3">

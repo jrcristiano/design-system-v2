@@ -1,12 +1,18 @@
 import React from "react";
 import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
-import { TOAST_ICONS, renderToastContent, renderToastLink } from "./Toast.utils";
+import { renderToastContent, renderToastLink, showToastVariant } from "./Toast.utils";
 import type { ToastLinkConfig } from "./Toast.utils";
 
 // ---------------------------------------------------------------------------
 // WithLink
 // ---------------------------------------------------------------------------
+
+const createLinkedToastContent = (
+	message: string | React.ReactNode,
+	linkConfig?: ToastLinkConfig,
+) =>
+	renderToastContent(message, linkConfig && renderToastLink(linkConfig, { preventWrapping: true }));
 
 /**
  * Renderiza um Toast com um link branco, itálico e com underline
@@ -21,12 +27,7 @@ export const toastWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(
-		message,
-		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
-	);
-
-	return toast(content, options);
+	return toast(createLinkedToastContent(message, linkConfig), options);
 };
 
 /**
@@ -37,12 +38,7 @@ export const toastSuccessWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(
-		message,
-		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
-	);
-
-	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
+	return showToastVariant("success", createLinkedToastContent(message, linkConfig), options);
 };
 
 /**
@@ -53,12 +49,7 @@ export const toastErrorWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(
-		message,
-		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
-	);
-
-	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
+	return showToastVariant("error", createLinkedToastContent(message, linkConfig), options);
 };
 
 /**
@@ -69,12 +60,7 @@ export const toastWarningWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(
-		message,
-		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
-	);
-
-	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
+	return showToastVariant("warning", createLinkedToastContent(message, linkConfig), options);
 };
 
 /**
@@ -85,10 +71,5 @@ export const toastInfoWithLink = (
 	linkConfig?: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(
-		message,
-		linkConfig && renderToastLink(linkConfig, { preventWrapping: true }),
-	);
-
-	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
+	return showToastVariant("info", createLinkedToastContent(message, linkConfig), options);
 };

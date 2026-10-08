@@ -3,12 +3,18 @@ import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
 import type { IChipProps } from "../Chip/Chip.interface";
 import { Chip } from "../Chip/Chip";
-import { TOAST_ICONS, renderToastContent, renderToastLink } from "./Toast.utils";
+import { renderToastContent, renderToastLink, showToastVariant } from "./Toast.utils";
 import type { ToastLinkConfig } from "./Toast.utils";
 
 interface ToastWithChipOptions extends ToastOptions {
 	chip?: IChipProps;
 }
+
+const createToastWithChipContent = (message: string | React.ReactNode, chipProps?: IChipProps) =>
+	renderToastContent(message, chipProps && <Chip {...chipProps} />);
+
+const createLinkedToastContent = (message: string | React.ReactNode, link: ToastLinkConfig) =>
+	renderToastContent(message, renderToastLink(link));
 
 // ---------------------------------------------------------------------------
 // WithChip
@@ -27,9 +33,7 @@ export const toastWithChip = (
 	const { chip, ...toastOptions } = options || {};
 	const finalChipProps = chipProps || chip;
 
-	const content = renderToastContent(message, finalChipProps && <Chip {...finalChipProps} />);
-
-	return toast(content, toastOptions);
+	return toast(createToastWithChipContent(message, finalChipProps), toastOptions);
 };
 
 export const toastInfoWithChip = (
@@ -37,9 +41,7 @@ export const toastInfoWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
-
-	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
+	return showToastVariant("info", createToastWithChipContent(message, chipProps), options);
 };
 
 export const toastSuccessWithChip = (
@@ -47,9 +49,7 @@ export const toastSuccessWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
-
-	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
+	return showToastVariant("success", createToastWithChipContent(message, chipProps), options);
 };
 
 export const toastWarningWithChip = (
@@ -57,9 +57,7 @@ export const toastWarningWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
-
-	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
+	return showToastVariant("warning", createToastWithChipContent(message, chipProps), options);
 };
 
 export const toastErrorWithChip = (
@@ -67,9 +65,7 @@ export const toastErrorWithChip = (
 	chipProps?: IChipProps,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, chipProps && <Chip {...chipProps} />);
-
-	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
+	return showToastVariant("error", createToastWithChipContent(message, chipProps), options);
 };
 
 // ---------------------------------------------------------------------------
@@ -86,9 +82,7 @@ export const toastInfoWithLink = (
 	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderToastLink(link));
-
-	return toast.info(content, { icon: TOAST_ICONS.info, ...options });
+	return showToastVariant("info", createLinkedToastContent(message, link), options);
 };
 
 export const toastSuccessWithLink = (
@@ -96,9 +90,7 @@ export const toastSuccessWithLink = (
 	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderToastLink(link));
-
-	return toast.success(content, { icon: TOAST_ICONS.success, ...options });
+	return showToastVariant("success", createLinkedToastContent(message, link), options);
 };
 
 export const toastWarningWithLink = (
@@ -106,9 +98,7 @@ export const toastWarningWithLink = (
 	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderToastLink(link));
-
-	return toast.warning(content, { icon: TOAST_ICONS.warning, ...options });
+	return showToastVariant("warning", createLinkedToastContent(message, link), options);
 };
 
 export const toastErrorWithLink = (
@@ -116,9 +106,7 @@ export const toastErrorWithLink = (
 	link: ToastLinkConfig,
 	options?: ToastOptions,
 ) => {
-	const content = renderToastContent(message, renderToastLink(link));
-
-	return toast.error(content, { icon: TOAST_ICONS.error, ...options });
+	return showToastVariant("error", createLinkedToastContent(message, link), options);
 };
 
 // ---------------------------------------------------------------------------

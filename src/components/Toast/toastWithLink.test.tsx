@@ -17,6 +17,7 @@ import {
 	toastWarningWithLink,
 	toastInfoWithLink,
 } from "./toastWithLink";
+import { TOAST_ICONS } from "./Toast.utils";
 
 describe("toastWithLink utilities", () => {
 	beforeEach(() => {
@@ -71,5 +72,22 @@ describe("toastWithLink utilities", () => {
 		spyError.mockRestore();
 		spyWarn.mockRestore();
 		spyInfo.mockRestore();
+	});
+
+	it("uses the variant icon by default and allows options to override it", () => {
+		const spySuccess = vi.spyOn(toast as any, "success").mockImplementation(() => "ok");
+
+		toastSuccessWithLink("S", { text: "c", href: "h" });
+		expect(spySuccess).toHaveBeenCalledWith(expect.any(Object), { icon: TOAST_ICONS.success });
+
+		spySuccess.mockClear();
+		toastSuccessWithLink("S", { text: "c", href: "h" }, { icon: false, autoClose: 1000 });
+
+		expect(spySuccess).toHaveBeenCalledWith(expect.any(Object), {
+			icon: false,
+			autoClose: 1000,
+		});
+
+		spySuccess.mockRestore();
 	});
 });
