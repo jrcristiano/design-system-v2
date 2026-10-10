@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
+import { getComponentState, type ComponentState } from "../utils/getComponentState";
 
-export type InteractionState =
-	"default" | "hover" | "pressed" | "focused" | "disabled" | "selected";
+export type InteractionState = ComponentState;
 
 export interface UseInteractionStateOptions {
 	disabled?: boolean;
@@ -61,14 +61,11 @@ export function useInteractionState(
 	const [isPressed, setIsPressed] = useState(false);
 
 	// Calculate final state based on priority
-	const state = useMemo((): InteractionState => {
-		if (disabled) return "disabled";
-		if (selected) return "selected";
-		if (isPressed) return "pressed";
-		if (isFocused) return "focused";
-		if (isHovered) return "hover";
-		return defaultState;
-	}, [disabled, selected, isPressed, isFocused, isHovered, defaultState]);
+	const state = useMemo(
+		(): InteractionState =>
+			getComponentState({ disabled, selected, isPressed, isFocused, isHovered, defaultState }),
+		[disabled, selected, isPressed, isFocused, isHovered, defaultState],
+	);
 
 	// Memoized handlers
 	const handleMouseEnter = useCallback(() => {
