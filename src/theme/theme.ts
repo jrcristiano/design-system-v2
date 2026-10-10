@@ -62,8 +62,10 @@ export const getThemeInitScript = (
 	storageKey = DEFAULT_THEME_STORAGE_KEY,
 	fallbackTheme: ThemePreference = "system",
 ): string => {
-	const serializedStorageKey = JSON.stringify(storageKey);
-	const serializedFallback = JSON.stringify(fallbackTheme);
+	const serializeForInlineScript = (value: string) =>
+		JSON.stringify(value).replace(/</g, "\\u003c");
+	const serializedStorageKey = serializeForInlineScript(storageKey);
+	const serializedFallback = serializeForInlineScript(fallbackTheme);
 
 	return `(function(){try{var k=${serializedStorageKey};var f=${serializedFallback};var s=localStorage.getItem(k);var t=s==='light'||s==='dark'||s==='system'?s:f;var r=t==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;var e=document.documentElement;e.dataset.theme=r;e.dataset.themePreference=t;e.style.colorScheme=r;}catch(_){document.documentElement.dataset.theme='light';document.documentElement.dataset.themePreference='light';document.documentElement.style.colorScheme='light';}})();`;
 };

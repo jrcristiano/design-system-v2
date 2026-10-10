@@ -115,4 +115,11 @@ describe("ThemeProvider", () => {
 		expect(resolveTheme("system", "light")).toBe("light");
 		expect(getThemeInitScript()).toContain("prefers-color-scheme: dark");
 	});
+
+	it("escapes script terminators in serialized values", () => {
+		const script = getThemeInitScript("</script><script>alert(1)</script>", "light");
+
+		expect(script).not.toContain("</script>");
+		expect(script).toContain(String.raw`\u003c/script>`);
+	});
 });

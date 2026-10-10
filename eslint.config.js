@@ -8,7 +8,7 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
 	{
-		ignores: ["dist/**", "node_modules/**", "storybook-static/**", "build/**"],
+		ignores: ["dist/**", "node_modules/**", "storybook-static/**", "build/**", "coverage/**"],
 	},
 	{
 		files: ["**/*.{ts,tsx}"],

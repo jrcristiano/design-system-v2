@@ -12,6 +12,14 @@ import { RichTextFooter } from "./RichTextFooter";
 import "./RichText.inline.css";
 import clsx from "clsx";
 
+const getFormikValue = (values: unknown, path: string): unknown =>
+	path.split(".").reduce<unknown>((value, key) => {
+		if (value && typeof value === "object") {
+			return (value as Record<string, unknown>)[key];
+		}
+		return undefined;
+	}, values);
+
 export const RichText: React.FC<RichTextProps> = ({
 	label,
 	required = false,
@@ -48,15 +56,6 @@ export const RichText: React.FC<RichTextProps> = ({
 		return schema;
 	}, [required, minLength, maxLength]);
 
-	const getFormikValue = useCallback((values: unknown, path: string) => {
-		return path.split(".").reduce<unknown>((acc, key) => {
-			if (acc && typeof acc === "object") {
-				return (acc as Record<string, unknown>)[key];
-			}
-			return undefined;
-		}, values);
-	}, []);
-
 	const validateWithYup = useCallback(
 		(text: string) => {
 			try {
@@ -72,8 +71,7 @@ export const RichText: React.FC<RichTextProps> = ({
 		[validationSchema],
 	);
 
-	const formikValue =
-		hasFormik && name ? (getFormikValue(formik.values, name) as string | undefined) : undefined;
+	const formikValue = hasFormik && name ? getFormikValue(formik.values, name) : undefined;
 	const resolvedValue = typeof formikValue === "string" ? formikValue : value;
 	const [htmlValue, setHtmlValue] = useState(resolvedValue);
 
@@ -89,7 +87,7 @@ export const RichText: React.FC<RichTextProps> = ({
 			onChange?.(html);
 			if (hasFormik && name) {
 				formik.setFieldValue(name, html, false);
-				formik.setFieldError(name, validateWithYup(text) as any);
+				formik.setFieldError(name, validateWithYup(text));
 			}
 		},
 		editorProps: {
@@ -154,7 +152,7 @@ export const RichText: React.FC<RichTextProps> = ({
 					if (hasFormik && name) {
 						formik.setFieldTouched(name, true, false);
 						const text = editor?.getText() ?? "";
-						formik.setFieldError(name, validateWithYup(text) as any);
+						formik.setFieldError(name, validateWithYup(text));
 					}
 				}}
 			>
