@@ -9,36 +9,41 @@
 	box-shadow: var(--ds-shadow-effect-2);
 }
 
+:root[data-theme="dark"] .Toastify__toast--default {
+	background: var(--ds-color-surface);
+	color: var(--ds-color-text-primary);
+}
+
 .Toastify__toast.Toastify__toast--info {
-	background: var(--ds-color-sky-30);
+	background: var(--ds-color-info);
 }
 
 .Toastify__toast.Toastify__toast--success {
-	background: var(--ds-color-green-30);
+	background: var(--ds-color-success);
 }
 
 .Toastify__toast.Toastify__toast--warning {
-	background: var(--ds-color-orange-40);
+	background: var(--ds-color-warning);
 }
 
 .Toastify__toast.Toastify__toast--error {
-	background: var(--ds-color-red-40);
+	background: var(--ds-color-error);
 }
 
 .Toastify__toast.Toastify__toast--info,
 .Toastify__toast.Toastify__toast--success,
 .Toastify__toast.Toastify__toast--warning,
 .Toastify__toast.Toastify__toast--error {
-	color: var(--ds-color-neutral-white);
+	color: var(--ds-color-text-inverse);
 }
 
 .Toastify__close-button {
-	color: var(--ds-color-neutral-white);
+	color: inherit;
 	opacity: 0.8;
 }
 
 .Toastify__close-button.Toastify__close-button--light {
-	color: var(--ds-color-neutral-white);
+	color: inherit;
 }
 
 .Toastify__close-button:hover {
@@ -47,4 +52,18 @@
 
 .Toastify__progress-bar {
 	background: color-mix(in srgb, var(--ds-color-neutral-white) 35%, transparent);
+}
+
+:root[data-theme="dark"] .Toastify__toast--default .Toastify__progress-bar {
+	background: var(--ds-color-text-primary);
+}
+
+:root[data-theme="dark"] .Toastify__toast:not(.Toastify__toast--default) .Toastify__progress-bar {
+	background: var(--ds-color-text-inverse);
+}
+
+:root[data-theme="dark"] .Toastify__close-button:focus-visible {
+	outline: 2px solid var(--ds-color-focus-ring);
+	outline-offset: 2px;
+	border-radius: var(--ds-radius-sm);
 }

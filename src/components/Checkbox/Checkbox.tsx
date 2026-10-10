@@ -140,6 +140,7 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 								<path
 									d="M1.25 4L3.75 6.5L8.75 1.5"
 									stroke="var(--ds-color-neutral-white)"
+									className={disabled ? "dark:stroke-[var(--ds-color-text-primary)]" : undefined}
 									strokeWidth={iconSizes.strokeWidth}
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -159,6 +160,7 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 								<path
 									d="M1.25 1H8.75"
 									stroke="var(--ds-color-neutral-white)"
+									className={disabled ? "dark:stroke-[var(--ds-color-text-primary)]" : undefined}
 									strokeWidth={iconSizes.strokeWidth}
 									strokeLinecap="round"
 								/>

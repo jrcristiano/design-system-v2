@@ -11,11 +11,23 @@ export const SortableItem: React.FC<ISortableItemProps> = ({ id, children, class
 	const style = {
 		transform: CSS.Transform.toString(transform),
 		transition,
-		opacity: isDragging ? 0.4 : 1,
 	};
 
 	return (
-		<div ref={setNodeRef} style={style} className={className} {...attributes} {...listeners}>
+		<div
+			ref={setNodeRef}
+			style={style}
+			className={[
+				className,
+				isDragging &&
+					"opacity-40 dark:opacity-100 dark:outline-2 dark:outline-offset-2 dark:outline-[var(--ds-color-focus-ring)]",
+				"dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)]",
+			]
+				.filter(Boolean)
+				.join(" ")}
+			{...attributes}
+			{...listeners}
+		>
 			{children}
 		</div>
 	);

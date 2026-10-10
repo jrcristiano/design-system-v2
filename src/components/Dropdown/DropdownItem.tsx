@@ -93,7 +93,7 @@ export function DropdownItem({
 				"text-[var(--ds-color-neutral-10)] text-left bg-transparent border-none",
 				"focus-visible:ring-2 focus-visible:ring-[var(--ds-color-blue-10)] focus-visible:outline-none",
 				!disabled && "cursor-pointer hover:bg-[var(--ds-color-neutral-90)]",
-				disabled && "opacity-50 cursor-not-allowed",
+				disabled && "opacity-50 cursor-not-allowed dark:opacity-100",
 			)}
 			style={fontStyle}
 		>

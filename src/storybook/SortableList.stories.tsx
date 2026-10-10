@@ -74,46 +74,50 @@ const LessonCard: React.FC<{ item: ISortableItem<LessonData> }> = ({ item }) => 
 		<div
 			className={`
 				flex items-start gap-3 p-4 
-				bg-white rounded-xl 
+				bg-white rounded-xl dark:bg-[var(--ds-color-surface)]
 				border-2 transition-colors
-				${isActive ? "border-blue-500" : "border-gray-200"}
+				${isActive ? "border-blue-500 dark:border-[var(--ds-color-primary)]" : "border-gray-200 dark:border-[var(--ds-color-border-subtle)]"}
 			`}
 		>
-			<div className="text-gray-400 cursor-grab active:cursor-grabbing mt-1">
+			<div className="text-gray-400 dark:text-[var(--ds-color-text-muted)] cursor-grab active:cursor-grabbing mt-1">
 				<DotsSixVerticalIcon size={20} weight="bold" />
 			</div>
 
-			<div className="flex items-center justify-center w-7 h-7 rounded-full text-white font-bold text-sm sortablelist-stories-inline-1">
+			<div className="flex items-center justify-center w-7 h-7 rounded-full text-white dark:text-[var(--ds-color-on-primary)] font-bold text-sm sortablelist-stories-inline-1">
 				{number}
 			</div>
 
 			<div className="flex-grow">
 				<div className="flex items-center gap-2 mb-1">
-					<h3 className="text-base font-semibold text-gray-800">{title}</h3>
+					<h3 className="text-base font-semibold text-gray-800 dark:text-[var(--ds-color-text-primary)]">
+						{title}
+					</h3>
 					<span
 						className={`
 							text-xs px-2.5 py-0.5 rounded-full border
 							${
 								status === "Em edição"
-									? "bg-yellow-50 text-yellow-700 border-yellow-300"
+									? "bg-yellow-50 text-yellow-700 border-yellow-300 dark:bg-[var(--ds-color-warning-container)] dark:text-[var(--ds-color-warning-text)] dark:border-[var(--ds-color-border-subtle)]"
 									: status === "Concluída"
-										? "bg-green-50 text-green-700 border-green-300"
-										: "bg-blue-50 text-blue-700 border-blue-300"
+										? "bg-green-50 text-green-700 border-green-300 dark:bg-[var(--ds-color-success-container)] dark:text-[var(--ds-color-success-text)] dark:border-[var(--ds-color-border-subtle)]"
+										: "bg-blue-50 text-blue-700 border-blue-300 dark:bg-[var(--ds-color-info-container)] dark:text-[var(--ds-color-blue-10)] dark:border-[var(--ds-color-border-subtle)]"
 							}
 						`}
 					>
 						{status}
 					</span>
 				</div>
-				<p className="text-sm text-gray-500 mb-2">{description}</p>
-				<div className="flex items-center gap-1 text-xs text-gray-500">
+				<p className="text-sm text-gray-500 dark:text-[var(--ds-color-text-secondary)] mb-2">
+					{description}
+				</p>
+				<div className="flex items-center gap-1 text-xs text-gray-500 dark:text-[var(--ds-color-text-secondary)]">
 					<ClockIcon size={14} weight="regular" />
 					{duration}
 				</div>
 			</div>
 
 			<button
-				className="p-1 rounded text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors"
+				className="p-1 rounded text-gray-400 dark:text-[var(--ds-color-text-muted)] hover:bg-red-50 hover:text-red-500 dark:hover:bg-[var(--ds-color-error-container)] dark:hover:text-[var(--ds-color-error-text)] transition-colors"
 				onClick={(e) => {
 					e.stopPropagation();
 					console.log("Delete:", item.id);
@@ -129,9 +133,11 @@ const DefaultStory = () => {
 	const [items, setItems] = useState(initialLessons);
 
 	return (
-		<div className="w-[450px] bg-gray-50 p-5 rounded-lg shadow-md">
+		<div className="w-[450px] bg-gray-50 dark:bg-[var(--ds-color-bg-subtle)] p-5 rounded-lg shadow-md">
 			<div className="flex justify-between items-center mb-5">
-				<h2 className="text-2xl font-bold text-gray-800">Aulas</h2>
+				<h2 className="text-2xl font-bold text-gray-800 dark:text-[var(--ds-color-text-primary)]">
+					Aulas
+				</h2>
 				<Button variant="primary" iconLeft={PlusIcon}>
 					Nova Aula
 				</Button>

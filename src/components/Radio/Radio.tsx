@@ -80,7 +80,12 @@ export const Radio: React.FC<IRadioProps> = ({
 							{...props}
 						/>
 
-						<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--ds-color-neutral-white)] pointer-events-none opacity-0 peer-checked:opacity-100" />
+						<div
+							className={clsx(
+								"absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--ds-color-neutral-white)] pointer-events-none opacity-0 peer-checked:opacity-100",
+								disabled && "dark:bg-[var(--ds-color-text-primary)]",
+							)}
+						/>
 					</div>
 				</div>
 			</div>

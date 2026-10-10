@@ -121,7 +121,7 @@ export const DateCalendar = ({
 						onClick={() =>
 							setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))
 						}
-						className="p-1 font-[var(--ds-font-weight-regular)] hover:bg-[var(--ds-color-neutral-95)] rounded transition-colors cursor-pointer"
+						className="p-1 font-[var(--ds-font-weight-regular)] hover:bg-[var(--ds-color-neutral-95)] rounded transition-colors cursor-pointer dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)]"
 					>
 						<CaretRightIcon className="rotate-180 text-[var(--ds-color-neutral-30)]" size={20} />
 					</button>
@@ -134,7 +134,7 @@ export const DateCalendar = ({
 						onClick={() =>
 							setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))
 						}
-						className="p-1 font-[var(--ds-font-weight-regular)] hover:bg-[var(--ds-color-neutral-95)] rounded transition-colors cursor-pointer"
+						className="p-1 font-[var(--ds-font-weight-regular)] hover:bg-[var(--ds-color-neutral-95)] rounded transition-colors cursor-pointer dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)]"
 					>
 						<CaretRightIcon className="text-[var(--ds-color-neutral-30)]" size={20} />
 					</button>
@@ -160,7 +160,7 @@ export const DateCalendar = ({
 							onClick={() => handleDateClick(day)}
 							disabled={!day}
 							className={`
-								aspect-square h-10 rounded-full text-sm font-medium transition-all cursor-pointer
+								aspect-square h-10 rounded-full text-sm font-medium transition-all cursor-pointer dark:focus-visible:outline-2 dark:focus-visible:outline-offset-1 dark:focus-visible:outline-[var(--ds-color-focus-ring)]
 								${day ? "" : "invisible"}
 								${isSelected(day) ? "bg-[var(--ds-color-blue-40)] text-[var(--ds-color-neutral-white)] scale-105" : ""}
 								${isToday(day) && !isSelected(day) ? "border-2 border-[var(--ds-color-blue-40)] text-[var(--ds-color-blue-40)]" : ""}

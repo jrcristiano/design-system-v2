@@ -18,7 +18,8 @@ const STATE_STYLES: Record<TabType, Record<TabState, string>> = {
 		hover: "text-[var(--ds-color-neutral-10)]",
 		pressed: "text-[var(--ds-color-neutral-10)]",
 		selected: "text-[var(--ds-color-neutral-10)]",
-		disabled: "text-[var(--ds-color-neutral-40)] cursor-not-allowed",
+		disabled:
+			"text-[var(--ds-color-neutral-40)] cursor-not-allowed dark:text-[var(--ds-color-text-disabled)]",
 	},
 	"horizontal-indicator": {
 		default:
@@ -30,7 +31,7 @@ const STATE_STYLES: Record<TabType, Record<TabState, string>> = {
 		selected:
 			"text-[var(--ds-color-neutral-10)] relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1 after:bg-[var(--ds-color-blue-40)] after:rounded-t-lg after:backface-hidden",
 		disabled:
-			"text-[var(--ds-color-neutral-40)] cursor-not-allowed relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1 after:bg-[var(--ds-color-neutral-80)] after:rounded-t-lg after:backface-hidden",
+			"text-[var(--ds-color-neutral-40)] cursor-not-allowed relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1 after:bg-[var(--ds-color-neutral-80)] after:rounded-t-lg after:backface-hidden dark:text-[var(--ds-color-text-disabled)]",
 	},
 	"vertical-indicator": {
 		default:
@@ -42,7 +43,7 @@ const STATE_STYLES: Record<TabType, Record<TabState, string>> = {
 		selected:
 			"text-[var(--ds-color-neutral-10)] relative before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[9px] before:bg-[var(--ds-color-blue-40)] before:rounded-tr-lg before:rounded-br-lg before:backface-hidden",
 		disabled:
-			"text-[var(--ds-color-neutral-40)] cursor-not-allowed relative before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[9px] before:bg-[var(--ds-color-neutral-80)] before:rounded-tr-lg before:rounded-br-lg before:backface-hidden",
+			"text-[var(--ds-color-neutral-40)] cursor-not-allowed relative before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[9px] before:bg-[var(--ds-color-neutral-80)] before:rounded-tr-lg before:rounded-br-lg before:backface-hidden dark:text-[var(--ds-color-text-disabled)]",
 	},
 	contained: {
 		default: "bg-[var(--ds-color-blue-40)] text-[var(--ds-color-neutral-white)]",
@@ -50,7 +51,7 @@ const STATE_STYLES: Record<TabType, Record<TabState, string>> = {
 		pressed: "bg-[var(--ds-color-blue-10)] text-[var(--ds-color-neutral-white)]",
 		selected: "bg-[var(--ds-color-blue-30)] text-[var(--ds-color-neutral-white)]",
 		disabled:
-			"bg-[var(--ds-color-neutral-40)] text-[var(--ds-color-neutral-80)] cursor-not-allowed",
+			"bg-[var(--ds-color-neutral-40)] text-[var(--ds-color-neutral-80)] cursor-not-allowed dark:bg-[var(--ds-color-surface-disabled)] dark:text-[var(--ds-color-text-disabled)]",
 	},
 };
 
@@ -83,7 +84,7 @@ export const Tab: React.FC<ITabProps> = React.memo(
 		const isHorizontalIndicator = type === "horizontal-indicator";
 
 		const finalClasses = clsx(
-			"cursor-pointer inline-flex items-center justify-center transition-all duration-150 focus:outline-none",
+			"cursor-pointer inline-flex items-center justify-center transition-all duration-150 focus:outline-none dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)]",
 			BASE_STYLES[type],
 			STATE_STYLES[type][currentState],
 			isHorizontalIndicator && "flex-col",
@@ -139,7 +140,14 @@ export const Tab: React.FC<ITabProps> = React.memo(
 							<IconLeft size={16} weight={iconWeight} className="flex-shrink-0" />
 						</IconSlot>
 					)}
-					<span className="truncate max-w-full text-[var(--ds-font-size-16)] font-poppins font-normal leading-[20px] break-words">
+					<span
+						className={clsx(
+							"truncate max-w-full text-[var(--ds-font-size-16)] font-poppins font-normal leading-[20px] break-words",
+							currentState === "selected" &&
+								!disabled &&
+								"dark:underline dark:decoration-2 dark:underline-offset-4",
+						)}
+					>
 						{label}
 					</span>
 					{IconRight && (

@@ -44,7 +44,7 @@ export const renderToastLink = (
 		href={link.href}
 		target="_blank"
 		rel="noopener noreferrer"
-		className={`hover:opacity-80 transition-opacity toast-inline ${preventWrapping ? "toast-inline--no-wrap" : ""}`}
+		className={`hover:opacity-80 transition-opacity toast-inline dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)] ${preventWrapping ? "toast-inline--no-wrap" : ""}`}
 	>
 		{link.text}
 	</a>

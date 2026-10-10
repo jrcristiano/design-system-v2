@@ -1,3 +1,7 @@
 .sortablelist-stories-inline-1 {
 	background-color: #5bbad5;
 }
+
+:root[data-theme="dark"] .sortablelist-stories-inline-1 {
+	background-color: var(--ds-color-primary);
+}

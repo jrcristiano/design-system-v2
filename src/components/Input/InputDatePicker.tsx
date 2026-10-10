@@ -121,6 +121,7 @@ export const InputDatePicker: React.FC<InputProps> = ({
 				onIconLeftClick={handleLeftIconClick}
 				iconRight={
 					<button
+						className="dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)]"
 						type="button"
 						onClick={handleCalendarClick}
 						onKeyDown={handleKeyDown}
@@ -142,14 +143,14 @@ export const InputDatePicker: React.FC<InputProps> = ({
 							<>
 								<button
 									onClick={handleCancelClick}
-									className="px-3 py-2 text-sm font-[var(--ds-font-weight-regular)] text-[var(--ds-color-neutral-10)] hover:bg-[var(--ds-color-neutral-95)] rounded-full transition-colors"
+									className="px-3 py-2 text-sm font-[var(--ds-font-weight-regular)] text-[var(--ds-color-neutral-10)] hover:bg-[var(--ds-color-neutral-95)] rounded-full transition-colors dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)]"
 								>
 									Cancelar
 								</button>
 								<button
 									onClick={handleOkClick}
 									disabled={!selectedDate}
-									className={`px-3 py-2 text-sm rounded-full transition-colors font-[var(--ds-font-weight-regular)] ${
+									className={`px-3 py-2 text-sm rounded-full transition-colors font-[var(--ds-font-weight-regular)] dark:focus-visible:outline-2 dark:focus-visible:outline-offset-2 dark:focus-visible:outline-[var(--ds-color-focus-ring)] ${
 										selectedDate
 											? "bg-[var(--ds-color-blue-40)] text-[var(--ds-color-neutral-white)] hover:bg-[var(--ds-color-blue-60)]"
 											: "bg-[var(--ds-color-neutral-80)] text-[var(--ds-color-neutral-40)] cursor-not-allowed"
