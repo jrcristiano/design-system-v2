@@ -71,6 +71,7 @@ export const Avatar: FC<AvatarProps> = ({
 
 	return (
 		<div
+			role="img"
 			className={`${containerClasses} avatar-inline avatar-inline--${iconSize} ${hasUserName ? "avatar-inline--named" : "avatar-inline--generic"}`}
 			{...accessibilityProps}
 			{...rest}

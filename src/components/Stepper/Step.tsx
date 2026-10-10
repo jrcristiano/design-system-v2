@@ -29,7 +29,7 @@ const LABEL_CLASSES = "text-[var(--ds-font-size-14)] font-medium";
 
 const getNumberColor = (status: StepStatus, disabled: boolean): string => {
 	if (disabled) return "var(--ds-color-neutral-40)";
-	if (status === "completed") return "var(--ds-surface)";
+	if (status === "completed") return "var(--ds-color-text-inverse)";
 	if (status === "default") return "var(--ds-color-neutral-40)";
 	return "var(--ds-color-neutral-white)";
 };

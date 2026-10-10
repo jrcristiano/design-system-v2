@@ -38,24 +38,24 @@ const STATE_STYLES: Record<Variant, Record<State, string>> = {
 	},
 	error: {
 		default:
-			"bg-[var(--ds-color-red-50)] text-[var(--ds-color-neutral-white)] hover:bg-[var(--ds-color-red-20)] active:bg-[var(--ds-color-red-10)]",
+			"bg-[var(--ds-color-red-40)] text-[var(--ds-color-neutral-white)] hover:bg-[var(--ds-color-red-20)] active:bg-[var(--ds-color-red-10)]",
 		hover: "bg-[var(--ds-color-red-20)] text-[var(--ds-color-neutral-white)]",
 		pressed: "bg-[var(--ds-color-red-10)] text-[var(--ds-color-neutral-white)]",
 		focused:
-			"bg-[var(--ds-color-red-50)] text-[var(--ds-color-neutral-white)] ring-2 ring-offset-2 ring-[var(--ds-color-red-10)] ring-offset-[var(--ds-bg-secondary)]",
+			"bg-[var(--ds-color-red-40)] text-[var(--ds-color-neutral-white)] ring-2 ring-offset-2 ring-[var(--ds-color-red-10)] ring-offset-[var(--ds-bg-secondary)]",
 		disabled:
 			"bg-[var(--ds-color-neutral-80)] text-[var(--ds-color-neutral-40)] cursor-not-allowed",
 	},
 	outline: {
 		default:
-			"ring-2 bg-[var(--ds-color-neutral-white)] ring-[var(--ds-color-neutral-50)] text-[var(--ds-color-neutral-10)] hover:bg-[var(--ds-color-neutral-90)] hover:ring-[var(--ds-color-neutral-30)] active:ring-[var(--ds-color-blue-10)]",
+			"ring-2 bg-[var(--ds-color-surface)] ring-[var(--ds-color-neutral-50)] text-[var(--ds-color-neutral-10)] hover:bg-[var(--ds-color-neutral-90)] hover:ring-[var(--ds-color-neutral-30)] active:ring-[var(--ds-color-blue-10)]",
 		hover: "ring-2 bg-[var(--ds-color-neutral-90)] text-[var(--ds-color-neutral-30)]",
 		pressed:
 			"ring-2 ring-[var(--ds-color-neutral-50)] text-[var(--ds-color-neutral-40)] bg-[var(--ds-color-neutral-90)]",
 		focused:
 			"relative ring-2 ring-[var(--ds-color-blue-10)] bg-[var(--ds-color-neutral-90)] text-[var(--ds-color-neutral-10)] after:content-[''] after:absolute after:inset-[2px] after:rounded-[26px] after:border-[2px] after:border-[var(--ds-color-neutral-50)] focus:outline-none transition-all duration-150 ease-in-out",
 		disabled:
-			"bg-[var(--ds-color-neutral-white)] ring-2 ring-offset-2 ring-[var(--ds-color-neutral-80)] text-[var(--ds-color-neutral-80)] ring-offset-[var(--ds-bg-secondary)] cursor-not-allowed",
+			"bg-[var(--ds-color-surface)] ring-2 ring-offset-2 ring-[var(--ds-color-neutral-80)] text-[var(--ds-color-text-disabled)] ring-offset-[var(--ds-bg-secondary)] cursor-not-allowed",
 	},
 };
 

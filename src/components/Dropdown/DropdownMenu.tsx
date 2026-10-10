@@ -100,7 +100,7 @@ export function DropdownMenu({
 			onKeyDown={handleKeyDown}
 			className={clsx(
 				styles.menuItemList,
-				"absolute rounded-[var(--ds-radius-md)] shadow-lg py-2 px-2 z-50 animate-fadeIn bg-[var(--ds-color-neutral-white)]",
+				"absolute rounded-[var(--ds-radius-md)] shadow-lg py-2 px-2 z-50 animate-fadeIn bg-[var(--ds-color-surface-raised)]",
 				directionClass,
 				{
 					"border border-[var(--ds-color-neutral-50)]": bordered,

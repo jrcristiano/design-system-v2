@@ -22,7 +22,7 @@ const sizeStyles: Record<Size, string> = {
 const variantAccentStyles: Record<ModalVariant, string> = {
 	default: "text-[var(--ds-color-blue-50)]",
 	confirmation: "text-[var(--ds-color-green-30)]",
-	warning: "text-[var(--ds-color-orange-50)]",
+	warning: "text-[var(--ds-color-warning-text)]",
 	destructive: "text-[var(--ds-color-red-50)]",
 	fullscreen: "text-[var(--ds-color-neutral-10)]",
 	form: "text-[var(--ds-color-blue-50)]",
@@ -189,7 +189,7 @@ export const Modal: React.FC<IModalProps> = React.memo(
 
 		const modalClasses = useMemo(() => {
 			const base =
-				"relative w-full bg-[var(--ds-surface)] text-[var(--ds-color-neutral-10)] shadow-[var(--ds-shadow-effect-6)]";
+				"relative w-full bg-[var(--ds-color-surface)] text-[var(--ds-color-text-primary)] shadow-[var(--ds-shadow-effect-6)]";
 			const shape = "rounded-[var(--ds-radius-xl)]";
 			const layout = "flex flex-col gap-[var(--ds-pad-app)] p-[var(--ds-pad-modal)]";
 			const sizing = sizeStyles[size];

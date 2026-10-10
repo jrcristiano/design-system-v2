@@ -7,11 +7,11 @@
 }
 
 button.triggerStateColors[data-open="true"] {
-	background-color: var(--ds-color-blue-10) !important;
-	color: var(--ds-color-neutral-white) !important;
-	--tw-ring-color: var(--ds-color-blue-10) !important;
+	background-color: var(--ds-color-blue-10);
+	color: var(--ds-color-neutral-white);
+	--tw-ring-color: var(--ds-color-blue-10);
 }
 
 button.triggerStateColors[data-open="true"]:hover {
-	background-color: var(--ds-color-blue-20) !important;
+	background-color: var(--ds-color-blue-20);
 }

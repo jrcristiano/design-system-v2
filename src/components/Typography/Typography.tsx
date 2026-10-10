@@ -262,7 +262,7 @@ const TypographyTable = memo<{ title: string; rows: TypographyRow[] }>(({ title,
 							data-typography-size={r.size}
 							data-typography-weight={r.weight}
 							key={r.name}
-							className="bg-[var(--ds-color-neutral-white)] even:bg-[var(--ds-color-neutral-98)] hover:bg-[var(--ds-color-neutral-95)] transition"
+							className="bg-[var(--ds-color-surface)] even:bg-[var(--ds-color-bg-subtle)] hover:bg-[var(--ds-color-neutral-95)] transition"
 						>
 							<td className={`py-3 px-4 ${r.className} whitespace-nowrap`}>{r.name}</td>
 							<td className={`py-3 px-4 ${r.className} whitespace-nowrap`}>{r.size}</td>
@@ -317,7 +317,7 @@ const TypefaceAndWeights = memo<{ active: ActiveTypography }>(({ active }) => {
 				{WEIGHTS.map((w) => (
 					<div
 						key={w.name}
-						className="flex items-center gap-4 bg-[var(--ds-color-neutral-white)] rounded-xl p-4 border border-[var(--ds-color-neutral-90)] shadow-sm"
+						className="flex items-center gap-4 bg-[var(--ds-color-surface)] rounded-xl p-4 border border-[var(--ds-color-neutral-90)] shadow-sm"
 					>
 						<div
 							className="text-[60px] text-[var(--ds-color-neutral-10)]"
@@ -336,7 +336,7 @@ const TypefaceAndWeights = memo<{ active: ActiveTypography }>(({ active }) => {
 								{w.name}
 							</div>
 							<div
-								className="text-sm text-[var(--ds-color-neutral-50)]"
+								className="text-sm text-[var(--ds-color-neutral-40)]"
 								data-font-scheme={fontScheme}
 								data-font-role="body"
 							>
@@ -408,7 +408,7 @@ export const Typography: React.FC = () => {
 	return (
 		<div
 			ref={containerRef}
-			className={`p-8 bg-[var(--ds-color-neutral-white)] text-[var(--ds-color-neutral-10)] ${fontTokenClass}`}
+			className={`p-8 bg-[var(--ds-color-surface)] text-[var(--ds-color-neutral-10)] ${fontTokenClass}`}
 		>
 			<PlaygroundHeader
 				pretitle="Tipografia"

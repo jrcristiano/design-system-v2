@@ -310,15 +310,15 @@ export const Input: React.FC<InputProps> = ({
 	};
 	const states = {
 		default:
-			"border-[var(--ds-color-neutral-50,#737D8C)] hover:[&:not(:focus-within)]:border-[var(--ds-color-neutral-50,#737D8C)] focus-within:border-[var(--ds-color-blue-10)] focus-within:ring-1 focus-within:ring-[var(--ds-color-blue-10)] placeholder:text-ds-color-neutral-30",
+			"border-[var(--ds-color-neutral-50,#737D8C)] hover:[&:not(:focus-within)]:border-[var(--ds-color-neutral-50,#737D8C)] focus-within:border-[var(--ds-color-blue-10)] focus-within:ring-1 focus-within:ring-[var(--ds-color-blue-10)]",
 		error:
 			"bg-[var(--ds-color-red-90)] text-[var(--ds-color-red-10)] border-[var(--ds-color-red-10)] focus-within:border-[var(--ds-color-red-10)] focus-within:ring-1 focus-within:ring-[var(--ds-color-red-10)]",
 		disabled:
-			"bg-[var(--ds-color-neutral-80)] border-[var(--ds-color-neutral-80)] hover:border-[var(--ds-color-neutral-80)] text-ds-color-neutral-40 placeholder:text-ds-color-neutral-40 cursor-not-allowed",
+			"bg-[var(--ds-color-neutral-80)] border-[var(--ds-color-neutral-80)] hover:border-[var(--ds-color-neutral-80)] text-[var(--ds-color-neutral-10)] cursor-not-allowed",
 	};
 
 	const baseStyles =
-		"w-full flex items-center gap-2 rounded-full border-[1px] transition-all duration-150 font-body text-ds-color-neutral-10";
+		"w-full flex items-center gap-2 rounded-full border-[1px] transition-all duration-150 font-body text-[var(--ds-color-neutral-10)]";
 	const wrapperClasses = `relative ${baseStyles} ${sizeStyles[size]} ${
 		disabled ? states.disabled : states[state]
 	}`;

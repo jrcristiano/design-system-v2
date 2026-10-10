@@ -27,7 +27,7 @@
 }
 .avatar-inline--generic {
 	background-color: var(--ds-color-sky-90);
-	color: var(--ds-color-sky-90);
+	color: var(--ds-color-text-primary);
 }
 .avatar-inline__initials {
 	font-size: var(--ds-font-size-16);

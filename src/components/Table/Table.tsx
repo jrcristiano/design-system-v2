@@ -57,7 +57,7 @@ export const Table: React.FC<ITableProps> = React.memo(({ children, className, .
 			className="bg-[var(--ds-color-surface)] inline-flex flex-col w-full overflow-x-auto"
 		>
 			<table
-				className={clsx("w-full border-collapse bg-[var(--ds-surface)]", className)}
+				className={clsx("w-full border-collapse bg-[var(--ds-color-surface)]", className)}
 				{...props}
 			>
 				{children}
@@ -174,7 +174,7 @@ export const TableHeadCell: React.FC<ITableHeadCellProps> = React.memo(
 		};
 
 		const contentClasses = clsx(
-			"h-12 px-6 bg-[var(--ds-surface)] inline-flex items-center gap-2 w-full",
+			"h-12 px-6 bg-[var(--ds-color-surface)] inline-flex items-center gap-2 w-full",
 			SIZE_STYLES[columnSize],
 			ALIGN_STYLES[align],
 		);

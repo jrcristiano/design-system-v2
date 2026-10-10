@@ -20,6 +20,13 @@ const VARIANT_COLORS: Record<ProgressBarVariant, string> = {
 	danger: "var(--ds-color-red-40)",
 };
 
+const VARIANT_TEXT_COLORS: Record<ProgressBarVariant, string> = {
+	primary: "var(--ds-color-primary)",
+	success: "var(--ds-color-success-text)",
+	warning: "var(--ds-color-warning-text)",
+	danger: "var(--ds-color-error-text)",
+};
+
 const STATUS_LABELS: Record<Exclude<ProgressBarStatus, "in-progress">, string> = {
 	success: "Sucesso",
 	error: "Erro",
@@ -38,6 +45,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 	const clampedProgress = Math.max(0, Math.min(100, progress));
 	const completedStatus = status === "in-progress" ? null : status;
 	const resolvedColor = VARIANT_COLORS[variant];
+	const resolvedTextColor = VARIANT_TEXT_COLORS[variant];
 	const resolvedIcon = (() => {
 		if (icon) {
 			if (isValidElement<IconCloneProps>(icon)) {
@@ -83,7 +91,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 				aria-valuetext={`${Math.round(clampedProgress)}%`}
 				className="w-full flex items-center gap-2"
 			>
-				<div className="flex-1 h-2 bg-[var(--ds-color-neutral-white)] rounded-full overflow-hidden">
+				<div className="flex-1 h-2 bg-[var(--ds-color-surface-raised)] rounded-full overflow-hidden">
 					<div
 						data-testid="progressbar-fill"
 						className="h-full rounded-full transition-[width] duration-300 ease-out"
@@ -98,7 +106,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 			{(message || completedStatus) && (
 				<span
 					className="mt-1 text-[var(--ds-font-size-12)] font-[var(--ds-font-family-body)] font-normal"
-					style={{ color: resolvedColor }}
+					style={{ color: resolvedTextColor }}
 				>
 					{message ?? STATUS_LABELS[completedStatus ?? "success"]}
 				</span>

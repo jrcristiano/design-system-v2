@@ -37,7 +37,7 @@ export const Radio: React.FC<IRadioProps> = ({
 
 	const getLabelStyles = () => {
 		if (disabled && props.checked) return "text-[var(--ds-color-neutral-40)] cursor-not-allowed";
-		if (disabled) return "text-[var(--ds-color-neutral-80)] cursor-not-allowed";
+		if (disabled) return "text-[var(--ds-color-text-disabled)] cursor-not-allowed";
 		return "text-[var(--ds-color-neutral-10)]";
 	};
 

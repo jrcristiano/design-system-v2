@@ -154,7 +154,7 @@ export const InputDigitalTime: React.FC<InputDigitalTimeProps> = ({
 			</div>
 
 			{hint && (
-				<span className="text-center text-xs font-normal leading-5 text-[var(--ds-color-neutral-50)]">
+				<span className="text-center text-xs font-normal leading-5 text-[var(--ds-color-text-secondary)]">
 					{hint}
 				</span>
 			)}

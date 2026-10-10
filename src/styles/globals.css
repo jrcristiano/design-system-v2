@@ -200,6 +200,15 @@
 }
 
 @layer base {
+	select.ds-select option {
+		color: var(--ds-color-text-primary);
+		background-color: var(--ds-color-surface);
+	}
+
+	select.ds-select option:disabled {
+		color: var(--ds-color-text-disabled);
+	}
+
 	input[type="number"]::-webkit-inner-spin-button,
 	input[type="number"]::-webkit-outer-spin-button {
 		-webkit-appearance: none;

@@ -711,7 +711,7 @@ const ShoppingListExampleComponent = () => {
 										{item.active ? "Ativa" : "Inativa"}
 									</span>
 								</div>
-								<p className="text-caption-2 text-[var(--ds-color-neutral-50)] mt-2">
+								<p className="text-caption-2 text-[var(--ds-color-text-secondary)] mt-2">
 									Data: {new Date(item.date).toLocaleDateString("pt-BR")}
 								</p>
 							</div>

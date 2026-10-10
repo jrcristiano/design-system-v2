@@ -84,7 +84,7 @@ export const Checkbox: React.FC<ICheckboxProps> = ({
 
 	const labelStyles = `
     text-[var(--ds-font-size-16)] font-body font-normal leading-[15px]
-    ${disabled ? "text-[var(--ds-color-neutral-80)] cursor-not-allowed" : "text-[var(--ds-color-neutral-10)]"}
+    ${disabled ? "text-[var(--ds-color-text-disabled)] cursor-not-allowed" : "text-[var(--ds-color-neutral-10)]"}
   `;
 
 	const getFinalState = (): string => {

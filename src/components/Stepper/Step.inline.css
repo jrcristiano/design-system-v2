@@ -13,14 +13,14 @@
 	color: var(--ds-color-neutral-40);
 }
 .step-number-color[data-disabled="false"][data-status="completed"] {
-	color: var(--ds-surface);
+	color: var(--ds-color-text-inverse);
 }
 .step-number-color[data-disabled="false"][data-status="focused"],
 .step-number-color[data-disabled="false"][data-status="active"] {
 	color: var(--ds-color-neutral-white);
 }
 .step-label-color[data-disabled="true"] {
-	color: var(--ds-color-neutral-80);
+	color: var(--ds-color-text-disabled);
 }
 .step-label-color[data-disabled="false"][data-status="default"],
 .step-label-color[data-disabled="false"][data-status="completed"] {

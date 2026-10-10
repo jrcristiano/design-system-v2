@@ -49,13 +49,13 @@
 	border-color: var(--ds-color-blue-10);
 }
 .chip-inline[data-variant="primary"][data-visual-state="outline"] {
-	background-color: var(--ds-color-neutral-white);
+	background-color: var(--ds-color-surface);
 	color: var(--ds-color-blue-40);
 	border-color: var(--ds-color-blue-40);
 }
 .chip-inline[data-variant="success"][data-visual-state="default"] {
 	background-color: var(--ds-color-green-90);
-	color: var(--ds-color-green-30);
+	color: var(--ds-color-green-20);
 	border-color: transparent;
 }
 .chip-inline[data-variant="success"][data-visual-state="pressed"] {
@@ -69,13 +69,13 @@
 	border-color: var(--ds-color-green-10);
 }
 .chip-inline[data-variant="success"][data-visual-state="outline"] {
-	background-color: var(--ds-color-neutral-white);
+	background-color: var(--ds-color-surface);
 	color: var(--ds-color-green-30);
 	border-color: var(--ds-color-green-30);
 }
 .chip-inline[data-variant="danger"][data-visual-state="default"] {
 	background-color: var(--ds-color-red-90);
-	color: var(--ds-color-red-40);
+	color: var(--ds-color-red-30);
 	border-color: transparent;
 }
 .chip-inline[data-variant="danger"][data-visual-state="pressed"] {
@@ -89,7 +89,7 @@
 	border-color: var(--ds-color-red-10);
 }
 .chip-inline[data-variant="danger"][data-visual-state="outline"] {
-	background-color: var(--ds-color-neutral-white);
+	background-color: var(--ds-color-surface);
 	color: var(--ds-color-red-40);
 	border-color: var(--ds-color-red-40);
 }

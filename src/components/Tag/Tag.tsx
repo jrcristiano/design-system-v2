@@ -11,11 +11,11 @@ const DISABLED_STATE = {
 	bg: "var(--semantic-info-on-info, #FFF)",
 } as const;
 
-const WHITE_BG = "var(--ds-color-neutral-white, #FFF)";
+const SURFACE_BG = "var(--ds-color-surface, #FFF)";
 
-const colorState = (color: string, bg: string = WHITE_BG) => ({
+const colorState = (color: string, bg: string = SURFACE_BG, text = color) => ({
 	border: color,
-	text: color,
+	text,
 	bg,
 });
 
@@ -30,7 +30,7 @@ interface VariantConfig {
 }
 
 const createVariantStates = (config: VariantConfig) => {
-	const bg = config.defaultBg || WHITE_BG;
+	const bg = config.defaultBg || SURFACE_BG;
 	return {
 		default: colorState(config.default, bg),
 		hover: colorState(config.hover, bg),
@@ -47,7 +47,7 @@ const variantColors = {
 		hover: "var(--semantic-success-success-hover, #296C13)",
 		pressed: "var(--semantic-success-success-pressed, #19410C)",
 		selected: "var(--semantic-success-on-success-container, #296C13)",
-		selectedBg: WHITE_BG,
+		selectedBg: SURFACE_BG,
 		focusedBg: "var(--ds-color-green-90, #ddf7d4)",
 	}),
 	primary: createVariantStates({
@@ -85,14 +85,31 @@ const variantColors = {
 		focusedBg: "var(--ds-color-red-90, #FFF)",
 	}),
 	inactive: {
-		default: colorState("var(--semantic-outline-outline, #737D8C)"),
-		hover: colorState("var(--semantic-outline-outline, #737D8C)"),
-		pressed: colorState("var(--semantic-outline-outline, #737D8C)"),
+		default: colorState(
+			"var(--semantic-outline-outline, #737D8C)",
+			SURFACE_BG,
+			"var(--ds-color-text-secondary)",
+		),
+		hover: colorState(
+			"var(--semantic-outline-outline, #737D8C)",
+			SURFACE_BG,
+			"var(--ds-color-text-secondary)",
+		),
+		pressed: colorState(
+			"var(--semantic-outline-outline, #737D8C)",
+			SURFACE_BG,
+			"var(--ds-color-text-secondary)",
+		),
 		selected: colorState(
 			"var(--semantic-outline-outline, #737D8C)",
 			"var(--semantic-secondary-secondary-container, #E3E5E8)",
+			"var(--ds-color-text-secondary)",
 		),
-		focused: colorState("var(--semantic-outline-outline, #737D8C)"),
+		focused: colorState(
+			"var(--semantic-outline-outline, #737D8C)",
+			SURFACE_BG,
+			"var(--ds-color-text-secondary)",
+		),
 		disabled: DISABLED_STATE,
 	},
 };

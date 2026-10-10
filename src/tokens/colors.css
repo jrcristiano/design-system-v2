@@ -132,6 +132,6 @@
 	--ds-color-purple-98: #f9f6fe !important;
 
 	/* Bases usadas pelos tokens semânticos */
-	--ds-surface: #ffffff !important;
-	--ds-bg-secondary: var(--ds-color-neutral-98) !important;
+	--ds-surface: #ffffff;
+	--ds-bg-secondary: var(--ds-color-neutral-98);
 }

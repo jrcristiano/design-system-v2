@@ -102,12 +102,12 @@ export const DateCalendar = ({
 	};
 
 	return (
-		<div className="bg-[var(--ds-surface)] rounded-[var(--ds-radius-md)] shadow-2xl p-4 w-[320px] border-2 border-[var(--ds-color-neutral-50)]">
+		<div className="bg-[var(--ds-color-surface)] rounded-[var(--ds-radius-md)] shadow-2xl p-4 w-[320px] border-2 border-[var(--ds-color-neutral-50)]">
 			<div className="flex items-center justify-between">
 				<select
 					value={currentMonth.getFullYear()}
 					onChange={handleYearChange}
-					className="h-[var(--ds-control-height-sm)] px-3 border-2 font-[var(--ds-font-weight-regular)] border-[var(--ds-color-neutral-50)] rounded-full text-sm focus:outline-none focus:border-[var(--ds-color-blue-40)] text-[var(--ds-color-neutral-30)] bg-[var(--ds-surface)] max-w-[90px] cursor-pointer"
+					className="h-[var(--ds-control-height-sm)] px-3 border-2 font-[var(--ds-font-weight-regular)] border-[var(--ds-color-neutral-50)] rounded-full text-sm focus:outline-none focus:border-[var(--ds-color-blue-40)] text-[var(--ds-color-neutral-30)] bg-[var(--ds-color-surface)] max-w-[90px] cursor-pointer"
 				>
 					{Array.from({ length: 120 }, (_, i) => new Date().getFullYear() - i).map((year) => (
 						<option key={year} value={year}>

@@ -25,6 +25,9 @@
 	--ds-color-border: var(--ds-color-neutral-50);
 	--ds-color-border-subtle: var(--ds-color-neutral-90);
 	--ds-color-focus-ring: var(--ds-color-blue-10);
+	--ds-color-tooltip-surface: var(--ds-color-neutral-10);
+	--ds-color-tooltip-text: var(--ds-color-neutral-white);
+	--ds-color-media-backdrop: var(--ds-color-neutral-10);
 	--ds-color-overlay: rgb(0 0 0 / 50%);
 	--ds-color-selection-bg: var(--ds-color-blue-90);
 	--ds-color-selection-text: var(--ds-color-blue-10);
@@ -36,17 +39,20 @@
 	--ds-color-on-primary: #ffffff;
 
 	--ds-color-success: var(--ds-color-green-30);
+	--ds-color-success-text: var(--ds-color-green-20);
 	--ds-color-success-container: var(--ds-color-green-90);
 	--ds-color-warning: var(--ds-color-orange-40);
+	--ds-color-warning-text: var(--ds-color-orange-30);
 	--ds-color-warning-container: var(--ds-color-yellow-90);
 	--ds-color-error: var(--ds-color-red-40);
+	--ds-color-error-text: var(--ds-color-red-30);
 	--ds-color-error-container: var(--ds-color-red-90);
 	--ds-color-info: var(--ds-color-sky-30);
 	--ds-color-info-container: var(--ds-color-sky-90);
 
 	/* Existing aliases used by components generated from earlier token names. */
-	--ds-surface: var(--ds-color-surface) !important;
-	--ds-bg-secondary: var(--ds-color-bg-subtle) !important;
+	--ds-surface: var(--ds-color-surface);
+	--ds-bg-secondary: var(--ds-color-bg-subtle);
 	--Semantic-surface-surface: var(--ds-color-surface);
 	--Semantic-surface-on-surface: var(--ds-color-text-primary);
 	--Semantic-primary-primary: var(--ds-color-primary);
@@ -80,6 +86,8 @@
 
 :root[data-theme="dark"] {
 	color-scheme: dark;
+	--ds-surface: var(--ds-color-surface);
+	--ds-bg-secondary: var(--ds-color-bg-subtle);
 
 	/* Neutral roles (legacy compatibility). */
 	--ds-color-neutral-black: #ffffff !important;
@@ -219,6 +227,9 @@
 	--ds-color-border: #737d8c;
 	--ds-color-border-subtle: #454b54;
 	--ds-color-focus-ring: #99c0ff;
+	--ds-color-tooltip-surface: var(--ds-color-surface-raised);
+	--ds-color-tooltip-text: var(--ds-color-text-primary);
+	--ds-color-media-backdrop: var(--ds-color-bg-canvas);
 	--ds-color-overlay: rgb(0 0 0 / 72%);
 	--ds-color-selection-bg: #003b99;
 	--ds-color-selection-text: #f5f9ff;

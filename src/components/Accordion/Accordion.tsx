@@ -51,7 +51,7 @@ export const Accordion: React.FC<IAccordionProps> = React.memo(
 		);
 
 		const contentStyles = clsx(
-			"overflow-hidden transition-all duration-300 ease-in-out bg-[var(--ds-color-neutral-white)] rounded-b-2xl",
+			"overflow-hidden transition-all duration-300 ease-in-out bg-[var(--ds-color-surface)] rounded-b-2xl",
 			isOpen ? "max-h-[5000px] opacity-100" : "max-h-0 opacity-0",
 		);
 

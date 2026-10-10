@@ -19,29 +19,29 @@ const variantStyles: Record<
 	success: {
 		bg: "bg-[var(--ds-color-green-30)]",
 		border: "border-[var(--ds-color-green-30)]",
-		text: "text-[var(--ds-surface)]",
-		icon: "text-[var(--ds-surface)]",
+		text: "text-[var(--ds-color-on-primary)]",
+		icon: "text-[var(--ds-color-on-primary)]",
 		action: "text-green-700 dark:text-green-300 hover:text-green-900 dark:hover:text-green-100",
 	},
 	warning: {
 		bg: "bg-[var(--ds-color-orange-40)]",
 		border: "border-[var(--ds-color-orange-40)]",
-		text: "text-[var(--ds-surface)]",
-		icon: "text-[var(--ds-surface)]",
+		text: "text-[var(--ds-color-on-primary)]",
+		icon: "text-[var(--ds-color-on-primary)]",
 		action: "text-amber-700 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-100",
 	},
 	error: {
 		bg: "bg-[var(--ds-color-red-40)]",
 		border: "border-[var(--ds-color-red-40)]",
-		text: "text-[var(--ds-surface)]",
-		icon: "text-[var(--ds-surface)]",
+		text: "text-[var(--ds-color-on-primary)]",
+		icon: "text-[var(--ds-color-on-primary)]",
 		action: "text-red-700 dark:text-red-300 hover:text-red-900 dark:hover:text-red-100",
 	},
 	info: {
 		bg: "bg-[var(--ds-color-sky-30)]",
 		border: "border-[var(--ds-color-sky-30)]",
-		text: "text-[var(--ds-surface)]",
-		icon: "text-[var(--ds-surface)]",
+		text: "text-[var(--ds-color-on-primary)]",
+		icon: "text-[var(--ds-color-on-primary)]",
 		action: "text-blue-700 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-100",
 	},
 };
@@ -139,7 +139,7 @@ export const Alert = memo<AlertProps>(
 					<div className="flex-1 min-w-0">
 						{title && <h3 className={`text-sm ${styles.text}`}>{title}</h3>}
 
-						{message && <p className={`text-sm mt-1 ${styles.text} opacity-90`}>{message}</p>}
+						{message && <p className={`text-sm mt-1 ${styles.text}`}>{message}</p>}
 					</div>
 
 					{/* Action */}

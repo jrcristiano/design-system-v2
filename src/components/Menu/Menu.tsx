@@ -141,7 +141,7 @@ export const Menu: React.FC<IMenuProps> = React.memo(
 					)}
 					{logo && !isCollapsed && <div className="px-3 flex-shrink-0">{logo}</div>}
 					{showSearch && !isCollapsed && (
-						<div className="px-3 flex-shrink-0 [&_>div>div]:bg-[var(--ds-color-neutral-white)]">
+						<div className="px-3 flex-shrink-0 [&_>div>div]:bg-[var(--ds-color-surface)]">
 							<Input
 								label=""
 								placeholder={searchPlaceholder}

@@ -327,7 +327,9 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 							</div>
 							<div className="text-center">
 								<p className="font-semibold text-[var(--ds-color-neutral-10)]">{fileInfo?.name}</p>
-								<p className="text-sm text-[var(--ds-color-neutral-50)] mt-1">{fileInfo?.size}</p>
+								<p className="text-sm text-[var(--ds-color-text-secondary)] mt-1">
+									{fileInfo?.size}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -342,7 +344,9 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 							</div>
 							<div className="text-center">
 								<p className="font-semibold text-[var(--ds-color-neutral-10)]">{fileInfo?.name}</p>
-								<p className="text-sm text-[var(--ds-color-neutral-50)] mt-1">{fileInfo?.size}</p>
+								<p className="text-sm text-[var(--ds-color-text-secondary)] mt-1">
+									{fileInfo?.size}
+								</p>
 							</div>
 							<Button
 								onClick={() => toggleAudioPlay(item.id)}
@@ -366,7 +370,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 
 			case "video":
 				return (
-					<div className="w-full bg-[var(--ds-color-neutral-10)] rounded-lg overflow-hidden">
+					<div className="w-full bg-[var(--ds-color-media-backdrop)] rounded-lg overflow-hidden">
 						<video src={item.preview} controls className="w-full">
 							<track kind="captions" src={EMPTY_VTT_DATA_URI} srcLang="pt-BR" label="Legendas" />
 							Seu navegador não suporta o elemento de vídeo.
@@ -381,7 +385,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 							<div className="text-[var(--ds-color-neutral-40)]">
 								<FileIcon size={48} />
 							</div>
-							<p className="text-[var(--ds-color-neutral-50)]">Tipo de arquivo não suportado</p>
+							<p className="text-[var(--ds-color-text-secondary)]">Tipo de arquivo não suportado</p>
 						</div>
 					</div>
 				);
@@ -512,7 +516,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 													<h6 className="truncate text-sm font-semibold text-[var(--ds-color-neutral-30)]">
 														{fileInfo.name}
 													</h6>
-													<small className="text-[var(--ds-color-neutral-50)]">
+													<small className="text-[var(--ds-color-text-secondary)]">
 														{fileInfo.size}
 													</small>
 												</div>

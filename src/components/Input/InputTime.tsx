@@ -127,7 +127,7 @@ export const InputTime: React.FC<InputTimeProps> = ({
 								{
 									"text-[var(--ds-color-neutral-30)]": !disabled,
 									"text-[var(--ds-color-neutral-40)]": disabled,
-									"placeholder:text-[var(--ds-color-neutral-50)]": true,
+									"placeholder:text-[var(--ds-color-text-secondary)]": true,
 								},
 							)}
 						/>
@@ -137,7 +137,7 @@ export const InputTime: React.FC<InputTimeProps> = ({
 				{hint && (
 					<span
 						className={clsx("text-xs font-normal leading-5", {
-							"text-[var(--ds-color-neutral-50)]": !disabled,
+							"text-[var(--ds-color-text-secondary)]": !disabled,
 							"text-[var(--ds-color-neutral-40)]": disabled,
 						})}
 					>

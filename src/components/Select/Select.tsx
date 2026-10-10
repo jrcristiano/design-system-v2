@@ -84,7 +84,7 @@ export function Select({
 	const resolvedRightIcon = iconRight ?? <CaretDownIcon size={16} weight="bold" />;
 
 	const selectClasses = clsx(
-		"h-full min-w-0 flex-1 appearance-none bg-transparent outline-none",
+		"ds-select h-full min-w-0 flex-1 appearance-none bg-transparent outline-none",
 		"font-body text-[var(--ds-color-text-primary)]",
 		"focus-visible:outline-none",
 		"disabled:cursor-not-allowed disabled:text-[var(--ds-color-text-disabled)]",
