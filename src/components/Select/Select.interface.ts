@@ -9,6 +9,8 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
 	iconRight?: ReactNode;
 	onIconLeftClick?: () => void;
 	onIconRightClick?: () => void;
+	iconLeftLabel?: string;
+	iconRightLabel?: string;
 	iconClassName?: string;
 	disabled?: boolean;
 	state?: InputState;
