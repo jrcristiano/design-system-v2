@@ -17,6 +17,7 @@
 - [🛠️ Tecnologias Utilizadas](#%EF%B8%8F-tecnologias-utilizadas)
 - [⚙️ Instalação e Uso](#%EF%B8%8F-instalação-e-uso)
 - [🌓 Temas](#-temas)
+- [🧩 Inventário e expansão](#-inventário-e-expansão)
 - [🧪 Scripts Disponíveis](#-scripts-disponíveis)
 - [📁 Estrutura do Projeto](#-estrutura-do-projeto)
 - [🐳 Docker](#-docker)
@@ -134,6 +135,11 @@ Novos estilos devem preferir os tokens semânticos de `src/tokens/theme.css`, co
 `--ds-color-surface`, `--ds-color-text-primary`, `--ds-color-border` e `--ds-color-primary`, em vez de
 cores literais. O seletor Tailwind `dark:` também está configurado para responder a
 `data-theme="dark"`.
+
+## 🧩 Inventário e expansão
+
+O [inventário dos componentes e a documentação da expansão](docs/design-system-expansion.md)
+descrevem as APIs existentes, a priorização e o uso de `EmptyState` e `StatusIndicator`.
 
 ---
 
