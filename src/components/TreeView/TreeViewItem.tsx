@@ -144,8 +144,8 @@ export function TreeViewItem({ node, level = 0 }: Readonly<TreeViewItemProps>) {
 				<div
 					className={clsx(
 						"flex items-center h-11 cursor-pointer outline-none",
-						isSelected && !withCheckbox ? "bg-[#E3E5E8]" : "bg-transparent",
-						"hover:bg-[#E3E5E8] transition-colors duration-150",
+						isSelected && !withCheckbox ? "bg-[var(--ds-color-neutral-90)]" : "bg-transparent",
+						"hover:bg-[var(--ds-color-neutral-90)] transition-colors duration-150",
 						node.disabled && "opacity-50 cursor-not-allowed hover:bg-transparent",
 					)}
 					style={indentStyle}

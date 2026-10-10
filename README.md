@@ -16,6 +16,7 @@
 - [🚀 Sobre o Projeto](#-sobre-o-projeto)
 - [🛠️ Tecnologias Utilizadas](#%EF%B8%8F-tecnologias-utilizadas)
 - [⚙️ Instalação e Uso](#%EF%B8%8F-instalação-e-uso)
+- [🌓 Temas](#-temas)
 - [🧪 Scripts Disponíveis](#-scripts-disponíveis)
 - [📁 Estrutura do Projeto](#-estrutura-do-projeto)
 - [🐳 Docker](#-docker)
@@ -90,6 +91,49 @@ pnpm storybook
 ```
 
 > 💡 Dica: utilize `pnpm build` para gerar os artefatos de produção ou `pnpm lint` para validar o código.
+
+## 🌓 Temas
+
+O Design System suporta as preferências `light`, `dark` e `system`. O tema é aplicado no elemento
+`html` por meio de `data-theme`, de modo que componentes renderizados em portals também recebam os
+tokens corretos. A preferência explícita é persistida em `localStorage` com a chave `ds-theme`.
+
+```tsx
+import { ThemeProvider, useTheme } from "./src/theme";
+import "./src/styles/globals.css";
+
+function ThemeControls() {
+	const { theme, resolvedTheme, setTheme } = useTheme();
+
+	return (
+		<label>
+			Tema efetivo: {resolvedTheme}
+			<select value={theme} onChange={(event) => setTheme(event.target.value as typeof theme)}>
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
+				<option value="system">System</option>
+			</select>
+		</label>
+	);
+}
+
+export function App() {
+	return (
+		<ThemeProvider defaultTheme="system">
+			<ThemeControls />
+		</ThemeProvider>
+	);
+}
+```
+
+Em aplicações com SSR, renderize `ThemeScript` dentro do `<head>` antes do conteúdo da página. Ele
+restaura a preferência antes da hidratação, evitando flash de tema incorreto. O mesmo script já está
+incluído no `index.html` desta aplicação Vite. Para políticas CSP restritivas, informe a prop `nonce`.
+
+Novos estilos devem preferir os tokens semânticos de `src/tokens/theme.css`, como
+`--ds-color-surface`, `--ds-color-text-primary`, `--ds-color-border` e `--ds-color-primary`, em vez de
+cores literais. O seletor Tailwind `dark:` também está configurado para responder a
+`data-theme="dark"`.
 
 ---
 

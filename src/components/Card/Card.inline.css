@@ -184,7 +184,7 @@
 }
 
 .card-inline-21 {
-	color: black;
+	color: var(--ds-color-neutral-10);
 	font-size: 14px;
 	font-family: var(--ds-font-family-poppins, Poppins);
 	font-weight: 500;
@@ -252,7 +252,7 @@
 	margin-top: 8px;
 }
 .card-label-text {
-	color: black;
+	color: var(--ds-color-neutral-10);
 	font-size: 14px;
 	font-family: var(--ds-font-family-poppins, Poppins);
 	font-weight: 500;

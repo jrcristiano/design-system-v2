@@ -25,14 +25,14 @@ const useInteractiveClasses = () =>
 	flex items-center gap-1 transition-all duration-200
 	${responsiveTokens.typography.mobile}
 	md:${responsiveTokens.typography.desktop}
-	text-blue-600 hover:text-blue-800
-	focus:text-blue-800 focus:outline-none
-	focus:ring-2 focus:ring-blue-200 focus:ring-offset-1
-	active:text-blue-900 disabled:text-gray-400
+	text-[var(--ds-color-blue-40)] hover:text-[var(--ds-color-blue-20)]
+	focus:text-[var(--ds-color-blue-20)] focus:outline-none
+	focus:ring-2 focus:ring-[var(--ds-color-focus-ring)] focus:ring-offset-1
+	active:text-[var(--ds-color-blue-10)] disabled:text-[var(--ds-color-neutral-40)]
 	disabled:cursor-not-allowed truncate
 	${responsiveTokens.container.mobile}
 	md:${responsiveTokens.container.desktop}
-	rounded-lg hover:bg-blue-50 focus:bg-blue-50
+	rounded-lg hover:bg-[var(--ds-color-blue-95)] focus:bg-[var(--ds-color-blue-95)]
 `,
 		[],
 	);
@@ -128,7 +128,7 @@ const BreadcrumbItemComponent: FC<{
 					flex items-center gap-1
 					${responsiveTokens.typography.mobile}
 					md:${responsiveTokens.typography.desktop}
-					text-gray-900 truncate
+					text-[var(--ds-color-neutral-10)] truncate
 				`,
 					"breadcrumb-inline-1",
 				)}
@@ -149,7 +149,7 @@ const BreadcrumbItemComponent: FC<{
 export const Breadcrumb: FC<Readonly<BreadcrumbProps>> = ({
 	items,
 	separator = "/",
-	separatorColor = "text-gray-400",
+	separatorColor = "text-[var(--ds-color-neutral-40)]",
 	iconLeft,
 	iconRight,
 	iconColor = "currentColor",

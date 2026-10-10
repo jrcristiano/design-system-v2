@@ -38,9 +38,9 @@ const STATE_STYLES: Record<Variant, Record<State, string>> = {
 	},
 	error: {
 		default:
-			"bg-[var(--ds-color-red-50)] text-white hover:bg-[var(--ds-color-red-20)] active:bg-[var(--ds-color-red-10)]",
-		hover: "bg-[var(--ds-color-red-20)] text-white",
-		pressed: "bg-[var(--ds-color-red-10)] text-white",
+			"bg-[var(--ds-color-red-50)] text-[var(--ds-color-neutral-white)] hover:bg-[var(--ds-color-red-20)] active:bg-[var(--ds-color-red-10)]",
+		hover: "bg-[var(--ds-color-red-20)] text-[var(--ds-color-neutral-white)]",
+		pressed: "bg-[var(--ds-color-red-10)] text-[var(--ds-color-neutral-white)]",
 		focused:
 			"bg-[var(--ds-color-red-50)] text-[var(--ds-color-neutral-white)] ring-2 ring-offset-2 ring-[var(--ds-color-red-10)] ring-offset-[var(--ds-bg-secondary)]",
 		disabled:

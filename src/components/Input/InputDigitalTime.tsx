@@ -65,7 +65,7 @@ const DigitalTimeUnitComponent: React.FC<DigitalTimeUnitProps> = ({
 					"inline-flex items-center justify-center rounded-xl p-3",
 					"outline outline-1 outline-offset-[-1px]",
 					{
-						"bg-white outline-[var(--ds-color-neutral-50)]": !disabled,
+						"bg-[var(--ds-color-surface)] outline-[var(--ds-color-neutral-50)]": !disabled,
 						"bg-[var(--ds-color-neutral-80)] outline-[var(--ds-color-neutral-80)] cursor-not-allowed":
 							disabled,
 					},

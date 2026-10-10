@@ -77,7 +77,12 @@ export const InputTime: React.FC<InputTimeProps> = ({
 	};
 
 	return (
-		<div className={clsx("w-full max-w-[320px] rounded-2xl bg-white p-3", className)}>
+		<div
+			className={clsx(
+				"w-full max-w-[320px] rounded-2xl bg-[var(--ds-color-surface)] p-3",
+				className,
+			)}
+		>
 			<div className="flex flex-col gap-1">
 				<div className="flex flex-col gap-1.5">
 					{label && (
@@ -98,9 +103,9 @@ export const InputTime: React.FC<InputTimeProps> = ({
 							"shadow-[0px_1px_2px_rgba(10,13,18,0.05)]",
 							"outline outline-1 outline-offset-[-1px]",
 							{
-								"bg-white outline-[var(--ds-color-neutral-50)]":
+								"bg-[var(--ds-color-surface)] outline-[var(--ds-color-neutral-50)]":
 									currentState === "default" && !disabled,
-								"bg-white outline-[3px] outline-[var(--ds-color-blue-10)]":
+								"bg-[var(--ds-color-surface)] outline-[3px] outline-[var(--ds-color-blue-10)]":
 									currentState === "focus" && !disabled,
 								"bg-[var(--ds-color-neutral-80)] outline-[var(--ds-color-neutral-80)]": disabled,
 							},

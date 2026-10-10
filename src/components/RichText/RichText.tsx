@@ -133,7 +133,7 @@ export const RichText: React.FC<RichTextProps> = ({
 
 	const getBackgroundColor = () => {
 		if (disabled) return "var(--ds-color-neutral-95)";
-		return "white";
+		return "var(--ds-color-surface)";
 	};
 
 	return (

@@ -17,7 +17,7 @@
 }
 .step-number-color[data-disabled="false"][data-status="focused"],
 .step-number-color[data-disabled="false"][data-status="active"] {
-	color: #ffffff;
+	color: var(--ds-color-neutral-white);
 }
 .step-label-color[data-disabled="true"] {
 	color: var(--ds-color-neutral-80);

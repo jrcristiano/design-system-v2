@@ -68,7 +68,7 @@ type StateStyleKey =
 	| "mainDefault";
 
 const STATE_STYLES: Record<StateStyleKey, string> = {
-	collapsed: "bg-transparent text-white border-none",
+	collapsed: "bg-transparent text-[var(--ds-color-neutral-white)] border-none",
 	collapsedDisabled: "bg-transparent text-[var(--ds-color-neutral-80)] cursor-not-allowed",
 	submenuDefault: "bg-transparent text-[var(--ds-color-neutral-white)] rounded-r-[24px]",
 	submenuDisabled:

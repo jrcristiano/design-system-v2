@@ -69,8 +69,8 @@
 	height: 16px;
 }
 .avatar-inline__status--available {
-	background-color: #338618;
+	background-color: var(--ds-color-green-30);
 }
 .avatar-inline__status--away {
-	background-color: #c1290b;
+	background-color: var(--ds-color-red-40);
 }

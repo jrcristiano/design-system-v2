@@ -153,7 +153,7 @@ const FiltersCompleteComponent = () => {
 			</div>
 
 			{filtersOpen && (
-				<div className="w-full p-6 bg-white rounded-lg border-2 border-[var(--ds-color-neutral-50)] shadow-[0px_4px_5px_rgba(0,0,0,0.12)]">
+				<div className="w-full p-6 bg-[var(--ds-color-surface)] rounded-lg border-2 border-[var(--ds-color-neutral-50)] shadow-[0px_4px_5px_rgba(0,0,0,0.12)]">
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 						<div className="flex flex-col gap-2">
 							<label className="text-label-1 text-[var(--ds-color-neutral-10)] font-ui uppercase tracking-[1.4px]">
@@ -539,7 +539,7 @@ const ShoppingListExampleComponent = () => {
 			</div>
 
 			{filtersOpen && (
-				<div className="w-full p-6 bg-white rounded-lg border-2 border-[var(--ds-color-neutral-50)] shadow-[0px_4px_5px_rgba(0,0,0,0.12)] mb-8">
+				<div className="w-full p-6 bg-[var(--ds-color-surface)] rounded-lg border-2 border-[var(--ds-color-neutral-50)] shadow-[0px_4px_5px_rgba(0,0,0,0.12)] mb-8">
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 						<div className="flex flex-col gap-2">
 							<label className="text-label-1 text-[var(--ds-color-neutral-10)] font-ui uppercase tracking-[1.4px]">

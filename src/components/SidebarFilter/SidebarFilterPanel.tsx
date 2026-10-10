@@ -98,7 +98,7 @@ export function SidebarFilterPanel({ children, position }: Readonly<SidebarFilte
 			{/* CORREÇÃO 4: Removido role="presentation" (aria-hidden="true" é suficiente para o overlay) */}
 			<div
 				className={clsx(
-					"fixed inset-0 bg-black/50 z-[998]",
+					"fixed inset-0 bg-[var(--ds-color-overlay)] z-[998]",
 					isClosing ? styles.fadeOut : styles.fadeIn,
 				)}
 				onClick={handleOverlayClick}
@@ -115,7 +115,7 @@ export function SidebarFilterPanel({ children, position }: Readonly<SidebarFilte
 				inert={!isOpen}
 				aria-labelledby={headerId}
 				className={clsx(
-					"fixed inset-y-0 w-[360px] z-[999] p-0 border-none bg-white",
+					"fixed inset-y-0 w-[360px] z-[999] p-0 border-none bg-[var(--ds-color-surface)]",
 					"flex flex-col",
 					isClosing ? styles.slideOut : styles.slideIn,
 				)}

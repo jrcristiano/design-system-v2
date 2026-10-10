@@ -1,0 +1,230 @@
+/*
+ * Semantic theme contract.
+ *
+ * The numbered color variables predate theme support and are used throughout
+ * the public components. Their light values remain defined in colors.css. In
+ * dark mode they are remapped here as compatibility aliases, while new code
+ * should prefer the semantic --ds-color-* roles below.
+ */
+:root,
+:root[data-theme="light"] {
+	color-scheme: light;
+
+	--ds-color-bg-canvas: #ffffff;
+	--ds-color-bg-subtle: var(--ds-color-neutral-98);
+	--ds-color-surface: #ffffff;
+	--ds-color-surface-raised: #ffffff;
+	--ds-color-surface-hover: var(--ds-color-neutral-95);
+	--ds-color-surface-active: var(--ds-color-neutral-90);
+	--ds-color-surface-disabled: var(--ds-color-neutral-80);
+	--ds-color-text-primary: var(--ds-color-neutral-10);
+	--ds-color-text-secondary: var(--ds-color-neutral-40);
+	--ds-color-text-muted: var(--ds-color-neutral-50);
+	--ds-color-text-disabled: var(--ds-color-neutral-80);
+	--ds-color-text-inverse: #ffffff;
+	--ds-color-border: var(--ds-color-neutral-50);
+	--ds-color-border-subtle: var(--ds-color-neutral-90);
+	--ds-color-focus-ring: var(--ds-color-blue-10);
+	--ds-color-overlay: rgb(0 0 0 / 50%);
+	--ds-color-selection-bg: var(--ds-color-blue-90);
+	--ds-color-selection-text: var(--ds-color-blue-10);
+
+	--ds-color-primary: var(--ds-color-blue-40);
+	--ds-color-primary-hover: var(--ds-color-blue-20);
+	--ds-color-primary-active: var(--ds-color-blue-10);
+	--ds-color-primary-container: var(--ds-color-blue-90);
+	--ds-color-on-primary: #ffffff;
+
+	--ds-color-success: var(--ds-color-green-30);
+	--ds-color-success-container: var(--ds-color-green-90);
+	--ds-color-warning: var(--ds-color-orange-40);
+	--ds-color-warning-container: var(--ds-color-yellow-90);
+	--ds-color-error: var(--ds-color-red-40);
+	--ds-color-error-container: var(--ds-color-red-90);
+	--ds-color-info: var(--ds-color-sky-30);
+	--ds-color-info-container: var(--ds-color-sky-90);
+
+	/* Existing aliases used by components generated from earlier token names. */
+	--ds-surface: var(--ds-color-surface) !important;
+	--ds-bg-secondary: var(--ds-color-bg-subtle) !important;
+	--Semantic-surface-surface: var(--ds-color-surface);
+	--Semantic-surface-on-surface: var(--ds-color-text-primary);
+	--Semantic-primary-primary: var(--ds-color-primary);
+	--Semantic-primary-primary-hover: var(--ds-color-primary-hover);
+	--Semantic-primary-on-primary: var(--ds-color-on-primary);
+	--Semantic-outline-outline-variant: var(--ds-color-border-subtle);
+	--semantic-outline-outline: var(--ds-color-border);
+	--semantic-secondary-secondary-container: var(--ds-color-surface-active);
+	--semantic-success-success: var(--ds-color-success);
+	--semantic-success-success-hover: var(--ds-color-green-20);
+	--semantic-success-success-pressed: var(--ds-color-green-10);
+	--semantic-success-on-success-container: var(--ds-color-green-20);
+	--semantic-info-info: var(--ds-color-info);
+	--semantic-info-info-hover: var(--ds-color-sky-20);
+	--semantic-info-info-pressed: var(--ds-color-sky-10);
+	--semantic-info-info-container: var(--ds-color-info-container);
+	--semantic-info-on-info: var(--ds-color-on-primary);
+	--semantic-info-on-info-container: var(--ds-color-sky-20);
+	--semantic-warning-warning: var(--ds-color-warning);
+	--semantic-warning-warning-hover: var(--ds-color-orange-20);
+	--semantic-warning-warning-pressed: var(--ds-color-orange-10);
+	--semantic-warning-on-warning: var(--ds-color-on-primary);
+	--semantic-warning-on-warning-container: var(--ds-color-orange-30);
+	--semantic-highlight-yellow-highlight-yellow-container: var(--ds-color-warning-container);
+	--semantic-error-error: var(--ds-color-error);
+	--semantic-error-error-hover: var(--ds-color-red-20);
+	--semantic-error-error-pressed: var(--ds-color-red-10);
+	--semantic-error-error-container: var(--ds-color-error-container);
+	--semantic-error-on-error-container: var(--ds-color-red-30);
+}
+
+:root[data-theme="dark"] {
+	color-scheme: dark;
+
+	/* Neutral roles (legacy compatibility). */
+	--ds-color-neutral-black: #ffffff !important;
+	--ds-color-neutral-10: #f9fafa !important;
+	--ds-color-neutral-20: #f1f2f3 !important;
+	--ds-color-neutral-30: #e3e5e8 !important;
+	--ds-color-neutral-40: #c7cbd1 !important;
+	--ds-color-neutral-50: #abb1ba !important;
+	--ds-color-neutral-60: #737d8c !important;
+	--ds-color-neutral-70: #5c6470 !important;
+	--ds-color-neutral-80: #454b54 !important;
+	--ds-color-neutral-90: #2e3238 !important;
+	--ds-color-neutral-95: #20242a !important;
+	--ds-color-neutral-98: #17191c !important;
+	--ds-color-neutral-white: #0f1115 !important;
+
+	/* Brand and feedback scales are tuned for contrast on dark surfaces. */
+	--ds-color-blue-10: #cce0ff !important;
+	--ds-color-blue-20: #99c0ff !important;
+	--ds-color-blue-30: #66a1ff !important;
+	--ds-color-blue-40: #3381ff !important;
+	--ds-color-blue-50: #66a1ff !important;
+	--ds-color-blue-60: #0062ff !important;
+	--ds-color-blue-80: #003b99 !important;
+	--ds-color-blue-90: #16345f !important;
+	--ds-color-blue-95: #10294d !important;
+	--ds-color-blue-98: #0d1b2d !important;
+
+	--ds-color-green-10: #ddf7d4 !important;
+	--ds-color-green-20: #baefa9 !important;
+	--ds-color-green-30: #75e052 !important;
+	--ds-color-green-40: #53d827 !important;
+	--ds-color-green-50: #42ad1f !important;
+	--ds-color-green-60: #338618 !important;
+	--ds-color-green-70: #296c13 !important;
+	--ds-color-green-80: #225b12 !important;
+	--ds-color-green-90: #1d3d19 !important;
+	--ds-color-green-95: #162f13 !important;
+	--ds-color-green-98: #10240d !important;
+
+	--ds-color-red-10: #fcd6cf !important;
+	--ds-color-red-20: #faad9e !important;
+	--ds-color-red-30: #f7856e !important;
+	--ds-color-red-40: #f45c3e !important;
+	--ds-color-red-50: #f23c18 !important;
+	--ds-color-red-60: #c1290b !important;
+	--ds-color-red-70: #911f08 !important;
+	--ds-color-red-80: #6d1a0b !important;
+	--ds-color-red-90: #4f1d18 !important;
+	--ds-color-red-95: #361713 !important;
+	--ds-color-red-98: #27110e !important;
+
+	--ds-color-sky-10: #ccf3ff !important;
+	--ds-color-sky-20: #9ae7fe !important;
+	--ds-color-sky-30: #67dbfe !important;
+	--ds-color-sky-40: #35cffd !important;
+	--ds-color-sky-50: #02c2fc !important;
+	--ds-color-sky-60: #029cca !important;
+	--ds-color-sky-70: #017da2 !important;
+	--ds-color-sky-80: #015f7a !important;
+	--ds-color-sky-90: #123b47 !important;
+	--ds-color-sky-95: #102b33 !important;
+	--ds-color-sky-98: #0d2026 !important;
+
+	--ds-color-orange-10: #fee7cd !important;
+	--ds-color-orange-20: #fccf9c !important;
+	--ds-color-orange-30: #fbb76a !important;
+	--ds-color-orange-40: #f9a039 !important;
+	--ds-color-orange-50: #f88807 !important;
+	--ds-color-orange-60: #b36205 !important;
+	--ds-color-orange-70: #955104 !important;
+	--ds-color-orange-80: #704006 !important;
+	--ds-color-orange-90: #4a3218 !important;
+	--ds-color-orange-95: #332513 !important;
+	--ds-color-orange-98: #251a0e !important;
+
+	--ds-color-yellow-10: #fff5cc !important;
+	--ds-color-yellow-20: #ffeb99 !important;
+	--ds-color-yellow-30: #ffdd57 !important;
+	--ds-color-yellow-40: #ffd633 !important;
+	--ds-color-yellow-50: #ffcc00 !important;
+	--ds-color-yellow-60: #cca300 !important;
+	--ds-color-yellow-70: #856a00 !important;
+	--ds-color-yellow-80: #665200 !important;
+	--ds-color-yellow-90: #443a18 !important;
+	--ds-color-yellow-95: #302a13 !important;
+	--ds-color-yellow-98: #221e0e !important;
+
+	--ds-color-cyan-10: #d4f7f3 !important;
+	--ds-color-cyan-20: #a8f0e7 !important;
+	--ds-color-cyan-30: #7de8db !important;
+	--ds-color-cyan-40: #52e0cf !important;
+	--ds-color-cyan-50: #27d8c3 !important;
+	--ds-color-cyan-60: #22bfac !important;
+	--ds-color-cyan-70: #178275 !important;
+	--ds-color-cyan-80: #0f574e !important;
+	--ds-color-cyan-90: #173d39 !important;
+	--ds-color-cyan-95: #122c2a !important;
+	--ds-color-cyan-98: #0d201e !important;
+
+	--ds-color-cherry-10: #f6d5d9 !important;
+	--ds-color-cherry-20: #eeaab3 !important;
+	--ds-color-cherry-30: #e5808d !important;
+	--ds-color-cherry-40: #dd5568 !important;
+	--ds-color-cherry-50: #e5808d !important;
+	--ds-color-cherry-60: #c5283d !important;
+	--ds-color-cherry-70: #aa2235 !important;
+	--ds-color-cherry-80: #7f1a27 !important;
+	--ds-color-cherry-90: #4b2027 !important;
+	--ds-color-cherry-95: #35181e !important;
+	--ds-color-cherry-98: #261116 !important;
+
+	--ds-color-purple-10: #e2d0fb !important;
+	--ds-color-purple-20: #c5a2f6 !important;
+	--ds-color-purple-30: #a873f2 !important;
+	--ds-color-purple-40: #8b45ed !important;
+	--ds-color-purple-50: #a873f2 !important;
+	--ds-color-purple-60: #6e16e9 !important;
+	--ds-color-purple-70: #5812ba !important;
+	--ds-color-purple-80: #420d8c !important;
+	--ds-color-purple-90: #302044 !important;
+	--ds-color-purple-95: #241833 !important;
+	--ds-color-purple-98: #1a1125 !important;
+
+	--ds-color-bg-canvas: #0b0d10;
+	--ds-color-bg-subtle: #111419;
+	--ds-color-surface: #17191c;
+	--ds-color-surface-raised: #20242a;
+	--ds-color-surface-hover: #2e3238;
+	--ds-color-surface-active: #3b4149;
+	--ds-color-surface-disabled: #2e3238;
+	--ds-color-text-primary: #f9fafa;
+	--ds-color-text-secondary: #c7cbd1;
+	--ds-color-text-muted: #abb1ba;
+	--ds-color-text-disabled: #737d8c;
+	--ds-color-text-inverse: #0f1115;
+	--ds-color-border: #737d8c;
+	--ds-color-border-subtle: #454b54;
+	--ds-color-focus-ring: #99c0ff;
+	--ds-color-overlay: rgb(0 0 0 / 72%);
+	--ds-color-selection-bg: #003b99;
+	--ds-color-selection-text: #f5f9ff;
+	--ds-color-on-primary: #0f1115;
+
+	--ds-shadow-ambient-color: rgb(0 0 0 / 32%);
+	--ds-shadow-key-color: rgb(0 0 0 / 48%);
+	--ds-shadow-inset-color: rgb(0 0 0 / 40%);
+}

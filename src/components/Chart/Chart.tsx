@@ -151,32 +151,32 @@ type ChartProps = {
 // ========== TOKENS PADRÃO ==========
 const DEFAULT_TOKENS: ChartTokens = {
 	colors: {
-		primary: "#017DA2",
-		secondary: "#004ECC",
+		primary: "var(--ds-color-sky-30)",
+		secondary: "var(--ds-color-blue-40)",
 		// Paleta de cores padrão para múltiplas séries
 		palette: [
-			"#017DA2", // primary
-			"#004ECC", // secondary
-			"#EAB308", // yellow
-			"#22C55E", // green
-			"#EF4444", // red
-			"#A855F7", // purple
-			"#EC4899", // pink
-			"#F97316", // orange
+			"var(--ds-color-sky-30)",
+			"var(--ds-color-blue-40)",
+			"var(--ds-color-yellow-50)",
+			"var(--ds-color-green-40)",
+			"var(--ds-color-red-50)",
+			"var(--ds-color-purple-50)",
+			"var(--ds-color-cherry-50)",
+			"var(--ds-color-orange-50)",
 		],
 		background: {
-			muted: "#E5E7EB",
-			paper: "#FFFFFF",
-			default: "#F9FAFB",
+			muted: "var(--ds-color-neutral-90)",
+			paper: "var(--ds-color-surface)",
+			default: "var(--ds-color-neutral-98)",
 		},
 		text: {
-			primary: "#111827",
-			secondary: "#4B5563",
-			muted: "#9CA3AF",
+			primary: "var(--ds-color-neutral-10)",
+			secondary: "var(--ds-color-neutral-40)",
+			muted: "var(--ds-color-neutral-50)",
 		},
 		border: {
-			default: "#D1D5DB",
-			muted: "#E5E7EB",
+			default: "var(--ds-color-neutral-80)",
+			muted: "var(--ds-color-neutral-90)",
 		},
 	},
 	typography: {
@@ -241,16 +241,16 @@ const DEFAULT_CONFIG: ChartConfig = {
 	},
 	axis: {
 		grid: {
-			stroke: "#E5E7EB",
+			stroke: "var(--ds-color-neutral-90)",
 			strokeWidth: 1,
 		},
 		tickLabels: {
 			fontSize: 10,
-			fill: "#666666",
+			fill: "var(--ds-color-neutral-40)",
 			padding: 8,
 		},
 		axis: {
-			stroke: "#999999",
+			stroke: "var(--ds-color-neutral-50)",
 			strokeWidth: 1,
 		},
 	},

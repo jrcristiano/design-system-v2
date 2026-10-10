@@ -24,7 +24,7 @@
 
 .tippy-box[data-theme~="ds"] {
 	background: var(--ds-color-neutral-10);
-	color: #fff;
+	color: var(--ds-color-neutral-white);
 }
 
 .tippy-box[data-theme~="ds"][data-placement^="top"] > .tippy-arrow::before {

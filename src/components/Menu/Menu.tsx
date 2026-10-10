@@ -125,7 +125,7 @@ export const Menu: React.FC<IMenuProps> = React.memo(
 							onClick={handleToggle}
 							className={clsx(
 								"w-5 h-5 flex items-center justify-center flex-shrink-0",
-								"text-white transition-transform duration-300",
+								"text-[var(--ds-color-neutral-white)] transition-transform duration-300",
 								!isCollapsed && "rotate-180",
 							)}
 							aria-label={isCollapsed ? "Expandir menu" : "Recolher menu"}
@@ -141,7 +141,7 @@ export const Menu: React.FC<IMenuProps> = React.memo(
 					)}
 					{logo && !isCollapsed && <div className="px-3 flex-shrink-0">{logo}</div>}
 					{showSearch && !isCollapsed && (
-						<div className="px-3 flex-shrink-0 [&_>div>div]:bg-white">
+						<div className="px-3 flex-shrink-0 [&_>div>div]:bg-[var(--ds-color-neutral-white)]">
 							<Input
 								label=""
 								placeholder={searchPlaceholder}

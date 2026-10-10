@@ -15,10 +15,10 @@ export interface ToastLinkConfig {
 }
 
 export const TOAST_ICONS = {
-	info: <InfoIcon size={20} color="white" weight="light" />,
-	success: <CheckCircleIcon size={20} color="white" weight="light" />,
-	warning: <WarningCircleIcon size={20} color="white" weight="light" />,
-	error: <WarningOctagonIcon size={20} color="white" weight="light" />,
+	info: <InfoIcon size={20} color="var(--ds-color-neutral-white)" weight="light" />,
+	success: <CheckCircleIcon size={20} color="var(--ds-color-neutral-white)" weight="light" />,
+	warning: <WarningCircleIcon size={20} color="var(--ds-color-neutral-white)" weight="light" />,
+	error: <WarningOctagonIcon size={20} color="var(--ds-color-neutral-white)" weight="light" />,
 };
 
 export type ToastVariant = keyof typeof TOAST_ICONS;

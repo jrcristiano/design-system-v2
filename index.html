@@ -4,6 +4,30 @@
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script>
+			(function () {
+				try {
+					var storedTheme = localStorage.getItem("ds-theme");
+					var preference =
+						storedTheme === "light" || storedTheme === "dark" || storedTheme === "system"
+							? storedTheme
+							: "system";
+					var resolved =
+						preference === "system"
+							? matchMedia("(prefers-color-scheme: dark)").matches
+								? "dark"
+								: "light"
+							: preference;
+					document.documentElement.dataset.theme = resolved;
+					document.documentElement.dataset.themePreference = preference;
+					document.documentElement.style.colorScheme = resolved;
+				} catch {
+					document.documentElement.dataset.theme = "light";
+					document.documentElement.dataset.themePreference = "light";
+					document.documentElement.style.colorScheme = "light";
+				}
+			})();
+		</script>
 		<title>ds-lib-components</title>
 	</head>
 	<body>

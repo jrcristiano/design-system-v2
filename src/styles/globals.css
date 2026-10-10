@@ -9,7 +9,10 @@
 @import "../tokens/breakpoints.css";
 @import "../tokens/z-index.css";
 @import "../tokens/shadow-effects.css";
+@import "../tokens/theme.css";
 @import "./custom-tippy.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ================================
    ANIMAÇÕES CUSTOMIZADAS
@@ -211,4 +214,20 @@
 
 html {
 	font-family: var(--ds-font-family-poppins);
+	background: var(--ds-color-bg-canvas);
+	color: var(--ds-color-text-primary);
+}
+
+body {
+	background: var(--ds-color-bg-canvas);
+	color: var(--ds-color-text-primary);
+}
+
+::selection {
+	background: var(--ds-color-selection-bg);
+	color: var(--ds-color-selection-text);
+}
+
+:where(input, textarea, select) {
+	caret-color: var(--ds-color-primary);
 }

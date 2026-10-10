@@ -131,9 +131,9 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 	const totalFilesLabel = `${media.length} arquivo${media.length === 1 ? "" : "s"}`;
 	const sizeSummary = `${formatFileSize(totalBytes)} / ${formatFileSize(maxBytes)} max`;
 	let dropzoneClasses =
-		"border-gray-300 hover:border-[var(--ds-color-blue-40)] bg-[var(--ds-color-neutral-98)] cursor-pointer";
+		"border-[var(--ds-color-neutral-80)] hover:border-[var(--ds-color-blue-40)] bg-[var(--ds-color-neutral-98)] cursor-pointer";
 	if (disabled) {
-		dropzoneClasses = "border-gray-300 cursor-not-allowed opacity-60";
+		dropzoneClasses = "border-[var(--ds-color-neutral-80)] cursor-not-allowed opacity-60";
 	} else if (error) {
 		dropzoneClasses = "border-[var(--ds-color-red-30)] bg-[var(--ds-color-red-90)] cursor-pointer";
 	} else if (isDragging) {
@@ -309,7 +309,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 		switch (mediaType) {
 			case "image":
 				return (
-					<div className="w-full h-64 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+					<div className="w-full h-64 flex items-center justify-center bg-[var(--ds-color-neutral-98)] rounded-lg overflow-hidden">
 						<img
 							src={item.preview}
 							alt={item.file.name}
@@ -320,14 +320,14 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 
 			case "pdf":
 				return (
-					<div className="w-full p-8 bg-gray-50 rounded-lg border-gray-300">
+					<div className="w-full p-8 bg-[var(--ds-color-neutral-98)] rounded-lg border-[var(--ds-color-neutral-80)]">
 						<div className="flex flex-col items-center gap-4">
 							<div className="text-[var(--ds-color-blue-40)]">
 								<FilePdfIcon size={48} />
 							</div>
 							<div className="text-center">
-								<p className="font-semibold text-gray-900">{fileInfo?.name}</p>
-								<p className="text-sm text-gray-500 mt-1">{fileInfo?.size}</p>
+								<p className="font-semibold text-[var(--ds-color-neutral-10)]">{fileInfo?.name}</p>
+								<p className="text-sm text-[var(--ds-color-neutral-50)] mt-1">{fileInfo?.size}</p>
 							</div>
 						</div>
 					</div>
@@ -341,8 +341,8 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 								<FileAudioIcon size={48} />
 							</div>
 							<div className="text-center">
-								<p className="font-semibold text-gray-900">{fileInfo?.name}</p>
-								<p className="text-sm text-gray-500 mt-1">{fileInfo?.size}</p>
+								<p className="font-semibold text-[var(--ds-color-neutral-10)]">{fileInfo?.name}</p>
+								<p className="text-sm text-[var(--ds-color-neutral-50)] mt-1">{fileInfo?.size}</p>
 							</div>
 							<Button
 								onClick={() => toggleAudioPlay(item.id)}
@@ -366,7 +366,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 
 			case "video":
 				return (
-					<div className="w-full bg-gray-900 rounded-lg overflow-hidden">
+					<div className="w-full bg-[var(--ds-color-neutral-10)] rounded-lg overflow-hidden">
 						<video src={item.preview} controls className="w-full">
 							<track kind="captions" src={EMPTY_VTT_DATA_URI} srcLang="pt-BR" label="Legendas" />
 							Seu navegador não suporta o elemento de vídeo.
@@ -376,12 +376,12 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 
 			default:
 				return (
-					<div className="w-full p-8 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+					<div className="w-full p-8 bg-[var(--ds-color-neutral-98)] rounded-lg border-2 border-dashed border-[var(--ds-color-neutral-80)]">
 						<div className="flex flex-col items-center gap-4">
-							<div className="text-gray-400">
+							<div className="text-[var(--ds-color-neutral-40)]">
 								<FileIcon size={48} />
 							</div>
-							<p className="text-gray-500">Tipo de arquivo não suportado</p>
+							<p className="text-[var(--ds-color-neutral-50)]">Tipo de arquivo não suportado</p>
 						</div>
 					</div>
 				);
@@ -462,10 +462,14 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 							onDrop={handleDrop}
 							disabled={disabled}
 						>
-							<p className={`mb-2 ${error ? "text-[var(--ds-color-red-30)]" : "text-gray-600"}`}>
+							<p
+								className={`mb-2 ${error ? "text-[var(--ds-color-red-30)]" : "text-[var(--ds-color-neutral-40)]"}`}
+							>
 								Clique para fazer upload
 							</p>
-							<p className={`text-sm ${error ? "text-[var(--ds-color-red-30)]" : "text-gray-400"}`}>
+							<p
+								className={`text-sm ${error ? "text-[var(--ds-color-red-30)]" : "text-[var(--ds-color-neutral-40)]"}`}
+							>
 								JPG, PNG, PDF, MP3 ou MP4
 							</p>
 						</button>
@@ -475,7 +479,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 				{loading && (
 					<div className="flex flex-col items-center justify-center py-16">
 						<div className="animate-spin rounded-full h-12 w-12 border-4 border-[var(--ds-color-blue-90)] border-t-[var(--ds-color-blue-40)] mb-4"></div>
-						<p className="text-gray-600">Carregando...</p>
+						<p className="text-[var(--ds-color-neutral-40)]">Carregando...</p>
 					</div>
 				)}
 
@@ -492,7 +496,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 								return (
 									<div
 										key={item.id}
-										className="h-full space-y-4 bg-white shadow-sm rounded-[8px] p-3"
+										className="h-full space-y-4 bg-[var(--ds-color-surface)] shadow-sm rounded-[8px] p-3"
 									>
 										<div className="flex items-center justify-between">
 											<button
@@ -501,14 +505,16 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 												onClick={() => handleOpenMedia(item)}
 												disabled={disabled}
 											>
-												<span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e9f3fd] text-[#4c96f0]">
+												<span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ds-color-blue-95)] text-[var(--ds-color-blue-40)]">
 													<TypeIcon size={20} />
 												</span>
 												<div className="min-w-0 flex-1">
-													<h6 className="truncate text-sm font-semibold text-gray-700">
+													<h6 className="truncate text-sm font-semibold text-[var(--ds-color-neutral-30)]">
 														{fileInfo.name}
 													</h6>
-													<small className="text-gray-500">{fileInfo.size}</small>
+													<small className="text-[var(--ds-color-neutral-50)]">
+														{fileInfo.size}
+													</small>
 												</div>
 											</button>
 											<button
@@ -517,7 +523,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 													updateMedia(media.filter((_, currentIndex) => currentIndex !== index));
 												}}
 												onKeyDownCapture={(event) => event.stopPropagation()}
-												className="flex items-center gap-2 px-3 py-2 text-[var(--ds-color-red-50)] cursor-pointer rounded-lg hover:bg-gray-100 transition-colors"
+												className="flex items-center gap-2 px-3 py-2 text-[var(--ds-color-red-50)] cursor-pointer rounded-lg hover:bg-[var(--ds-color-neutral-95)] transition-colors"
 												type="button"
 												disabled={disabled}
 												aria-label="Remover arquivo"
@@ -543,13 +549,17 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({
 									disabled={disabled}
 									className={`flex min-h-[40px] flex-col items-center justify-center gap-2 rounded-[8px] border-2 border-dashed p-6 text-center transition-colors ${
 										disabled
-											? "border-gray-300 cursor-not-allowed opacity-60"
-											: "border-gray-300 hover:border-[var(--ds-color-blue-40)] bg-[var(--ds-color-neutral-98)] cursor-pointer"
+											? "border-[var(--ds-color-neutral-80)] cursor-not-allowed opacity-60"
+											: "border-[var(--ds-color-neutral-80)] hover:border-[var(--ds-color-blue-40)] bg-[var(--ds-color-neutral-98)] cursor-pointer"
 									}`}
 								>
-									<UploadIcon size={32} className="text-gray-400" />
-									<span className="text-sm font-medium text-gray-600">Adicionar arquivo</span>
-									<span className="text-xs text-gray-400">JPG, PNG, PDF, MP3 ou MP4</span>
+									<UploadIcon size={32} className="text-[var(--ds-color-neutral-40)]" />
+									<span className="text-sm font-medium text-[var(--ds-color-neutral-40)]">
+										Adicionar arquivo
+									</span>
+									<span className="text-xs text-[var(--ds-color-neutral-40)]">
+										JPG, PNG, PDF, MP3 ou MP4
+									</span>
 								</button>
 							)}
 						</div>

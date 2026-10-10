@@ -103,9 +103,10 @@ export const Stopwatch: React.FC<StopwatchProps> = ({
 					"inline-flex items-center justify-center rounded-xl p-4",
 					"outline outline-1 outline-offset-[-1px]",
 					{
-						"bg-white outline-[var(--ds-color-neutral-50)]":
+						"bg-[var(--ds-color-surface)] outline-[var(--ds-color-neutral-50)]":
 							!disabled && !isRunning && durationToSeconds(stopwatchTime) === 0,
-						"bg-white outline-[var(--ds-color-blue-40)]": !disabled && isRunning,
+						"bg-[var(--ds-color-surface)] outline-[var(--ds-color-blue-40)]":
+							!disabled && isRunning,
 						"bg-[var(--ds-color-blue-90)] outline-[var(--ds-color-blue-10)]":
 							!disabled && !isRunning && durationToSeconds(stopwatchTime) > 0,
 						"bg-[var(--ds-color-neutral-80)] outline-[var(--ds-color-neutral-80)] cursor-not-allowed":

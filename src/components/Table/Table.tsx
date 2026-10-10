@@ -54,7 +54,7 @@ export const Table: React.FC<ITableProps> = React.memo(({ children, className, .
 			role="region"
 			aria-label="Tabela rolável"
 			tabIndex={0}
-			className="bg-white inline-flex flex-col w-full  overflow-x-auto"
+			className="bg-[var(--ds-color-surface)] inline-flex flex-col w-full overflow-x-auto"
 		>
 			<table
 				className={clsx("w-full border-collapse bg-[var(--ds-surface)]", className)}

@@ -40,8 +40,9 @@ export const TIME_FORMATS = {
 
 export const STOPWATCH_COLORS = {
 	background: {
-		idle: "bg-white outline outline-1 outline-offset-[-1px] outline-[var(--ds-color-neutral-50)]",
-		running: "bg-white outline outline-1 outline-offset-[-1px] outline-[var(--ds-color-blue-40)]",
+		idle: "bg-[var(--ds-color-surface)] outline outline-1 outline-offset-[-1px] outline-[var(--ds-color-neutral-50)]",
+		running:
+			"bg-[var(--ds-color-surface)] outline outline-1 outline-offset-[-1px] outline-[var(--ds-color-blue-40)]",
 		paused:
 			"bg-[var(--ds-color-blue-90)] outline outline-1 outline-offset-[-1px] outline-[var(--ds-color-blue-10)]",
 		disabled:

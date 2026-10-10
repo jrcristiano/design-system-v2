@@ -3,7 +3,7 @@
 exports[`Chart component > matches snapshot (bar) 1`] = `
 <div>
   <div
-    style="position: relative; width: 500px; background-color: rgb(255, 255, 255); border-radius: 8px;"
+    style="position: relative; width: 500px; background-color: var(--ds-color-surface); border-radius: 8px;"
   >
     <div
       class="VictoryContainer"
@@ -34,7 +34,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
           <line
             role="presentation"
             shape-rendering="auto"
-            style="stroke: #D1D5DB; fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
+            style="stroke: var(--ds-color-neutral-80); fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
             vector-effect="non-scaling-stroke"
             x1="50"
             x2="450"
@@ -47,7 +47,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="70"
               x2="70"
@@ -74,7 +74,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="middle"
                 x="70"
               >
@@ -88,7 +88,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="250"
               x2="250"
@@ -115,7 +115,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="middle"
                 x="250"
               >
@@ -129,7 +129,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="430"
               x2="430"
@@ -156,7 +156,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="middle"
                 x="430"
               >
@@ -171,7 +171,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
           <line
             role="presentation"
             shape-rendering="auto"
-            style="stroke: #D1D5DB; fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
+            style="stroke: var(--ds-color-neutral-80); fill: transparent; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;"
             vector-effect="non-scaling-stroke"
             x1="50"
             x2="50"
@@ -184,7 +184,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="50"
               x2="450"
@@ -211,7 +211,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="end"
                 x="37"
               >
@@ -225,7 +225,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="50"
               x2="450"
@@ -252,7 +252,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="end"
                 x="37"
               >
@@ -266,7 +266,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="50"
               x2="450"
@@ -293,7 +293,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="end"
                 x="37"
               >
@@ -307,7 +307,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="50"
               x2="450"
@@ -334,7 +334,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="end"
                 x="37"
               >
@@ -348,7 +348,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="50"
               x2="450"
@@ -375,7 +375,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="end"
                 x="37"
               >
@@ -389,7 +389,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
             <line
               role="presentation"
               shape-rendering="auto"
-              style="stroke: #E5E7EB; fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
+              style="stroke: var(--ds-color-neutral-90); fill: none; stroke-dasharray: 10, 5; stroke-linecap: round; stroke-linejoin: round; pointer-events: painted;"
               vector-effect="non-scaling-stroke"
               x1="50"
               x2="450"
@@ -416,7 +416,7 @@ exports[`Chart component > matches snapshot (bar) 1`] = `
               <tspan
                 dx="0"
                 dy="0"
-                style="fill: #4B5563; font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
+                style="fill: var(--ds-color-neutral-40); font-size: 10px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: normal; padding: 8px; stroke: transparent; stroke-width: 0;"
                 text-anchor="end"
                 x="37"
               >
@@ -441,7 +441,7 @@ A 0 0 0 0 1, 90, 250
             index="0"
             role="presentation"
             shape-rendering="auto"
-            style="fill: #017DA2; stroke: none; padding: 8px; stroke-width: 0;"
+            style="fill: var(--ds-color-sky-30); stroke: none; padding: 8px; stroke-width: 0;"
           />
           <path
             d="M 230, 250 
@@ -456,7 +456,7 @@ A 0 0 0 0 1, 270, 250
             index="1"
             role="presentation"
             shape-rendering="auto"
-            style="fill: #017DA2; stroke: none; padding: 8px; stroke-width: 0;"
+            style="fill: var(--ds-color-sky-30); stroke: none; padding: 8px; stroke-width: 0;"
           />
           <path
             d="M 410, 250 
@@ -471,7 +471,7 @@ A 0 0 0 0 1, 450, 250
             index="2"
             role="presentation"
             shape-rendering="auto"
-            style="fill: #017DA2; stroke: none; padding: 8px; stroke-width: 0;"
+            style="fill: var(--ds-color-sky-30); stroke: none; padding: 8px; stroke-width: 0;"
           />
         </g>
       </svg>

@@ -31,7 +31,7 @@ const getNumberColor = (status: StepStatus, disabled: boolean): string => {
 	if (disabled) return "var(--ds-color-neutral-40)";
 	if (status === "completed") return "var(--ds-surface)";
 	if (status === "default") return "var(--ds-color-neutral-40)";
-	return "#FFFFFF";
+	return "var(--ds-color-neutral-white)";
 };
 
 export const Step: FC<StepProps> = memo(

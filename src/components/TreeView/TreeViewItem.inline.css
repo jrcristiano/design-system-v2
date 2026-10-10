@@ -2,7 +2,7 @@
 	font-size: var(--ds-font-size-14);
 	font-weight: var(--ds-font-weight-medium);
 	line-height: 20px;
-	color: #17191c;
+	color: var(--ds-color-neutral-10);
 }
 .treeviewitem-inline-label[data-disabled="true"] {
 	color: var(--ds-color-neutral-40);
