@@ -16,7 +16,6 @@ export function SidebarFilter({
 }: Readonly<SidebarFilterProps>) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [internalFilters, setInternalFilters] = useState<FilterValue>(defaultFilters);
-	const containerRef = useRef<HTMLDivElement | null>(null);
 	const triggerRef = useRef<HTMLElement | null>(null);
 
 	// Filtros controlados ou não controlados
@@ -74,8 +73,10 @@ export function SidebarFilter({
 
 	// Fecha ao pressionar Escape
 	useEffect(() => {
+		if (!isOpen) return undefined;
+
 		const handleEscape = (event: KeyboardEvent) => {
-			if (event.key === "Escape" && isOpen) {
+			if (event.key === "Escape") {
 				close();
 			}
 		};
@@ -107,9 +108,7 @@ export function SidebarFilter({
 
 	return (
 		<SidebarFilterContext.Provider value={contextValue}>
-			<div ref={containerRef} data-position={position}>
-				{children}
-			</div>
+			<div data-position={position}>{children}</div>
 		</SidebarFilterContext.Provider>
 	);
 }
