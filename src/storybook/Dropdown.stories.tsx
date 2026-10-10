@@ -455,10 +455,12 @@ export const OnlyCheckbox: Story = {
 };
 
 export const ManyCheckboxes: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <ManyCheckboxesComponent />,
 };
 
 export const Divisor: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<Dropdown>
 			<DropdownTrigger>
@@ -475,10 +477,12 @@ export const Divisor: Story = {
 };
 
 export const SearchableDropdown: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <SearchableDropdownComponent />,
 };
 
 export const SearchableMultiSelect: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <SearchableMultiSelectComponent />,
 };
 
@@ -497,6 +501,7 @@ export const IconRotation: Story = {
 		</Dropdown>
 	),
 	parameters: {
+		controls: { disable: true },
 		docs: {
 			description: {
 				story: "Exemplo de rotação do ícone do trigger quando o dropdown abre e fecha.",
@@ -547,6 +552,7 @@ export const Directions: Story = {
 		</div>
 	),
 	parameters: {
+		controls: { disable: true },
 		docs: {
 			description: {
 				story: "Exemplo de uso da prop `direction` para controlar a direção do menu.",

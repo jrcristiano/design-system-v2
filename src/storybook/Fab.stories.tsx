@@ -87,6 +87,7 @@ export const Default: Story = {
 };
 
 export const Examples: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="flex flex-wrap items-center gap-4 p-6">
 			<Fab icon={PlusIcon} aria-label="Adicionar" floatingOn="contextual" variant="primary" />
@@ -99,6 +100,7 @@ export const Examples: Story = {
 };
 
 export const WithText: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="flex flex-wrap items-center gap-4 p-6">
 			<Fab icon={PlusIcon} aria-label="Adicionar" floatingOn="contextual" circle={false}>
@@ -112,6 +114,7 @@ export const WithText: Story = {
 };
 
 export const Sizes: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="flex flex-wrap items-center gap-4 p-6">
 			<Fab icon={PlusIcon} aria-label="Pequeno" floatingOn="contextual" size="sm" />

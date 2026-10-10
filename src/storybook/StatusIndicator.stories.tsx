@@ -32,6 +32,7 @@ export const Basic: Story = {
 
 export const AllStatuses: Story = {
 	args: { status: "success", label: "Ativo" },
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="flex flex-wrap gap-[var(--ds-pad-section)] rounded-[var(--ds-radius-md)] border border-[var(--ds-color-border-subtle)] bg-[var(--ds-color-surface)] p-[var(--ds-pad-card)]">
 			<StatusIndicator status="success" label="Ativo" />

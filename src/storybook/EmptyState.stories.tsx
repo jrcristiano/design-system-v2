@@ -47,14 +47,14 @@ export const WithAction: Story = {
 };
 
 export const InResultsPanel: Story = {
-	args: { title: "Nenhuma pessoa encontrada" },
-	render: () => (
+	args: {
+		title: "Nenhuma pessoa encontrada",
+		description: "Tente outra busca ou limpe os filtros.",
+		size: "sm",
+	},
+	render: (args) => (
 		<section className="rounded-[var(--ds-radius-md)] border border-[var(--ds-color-border-subtle)] bg-[var(--ds-color-surface)]">
-			<EmptyState
-				title="Nenhuma pessoa encontrada"
-				description="Tente outra busca ou limpe os filtros."
-				size="sm"
-			/>
+			<EmptyState {...args} />
 		</section>
 	),
 };

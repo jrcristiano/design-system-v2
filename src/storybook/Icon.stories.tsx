@@ -41,6 +41,7 @@ type Story = StoryObj<typeof Icon>;
 
 // Galeria completa
 export const AllIcons: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="flex flex-col gap-12 p-8">
 			<div>

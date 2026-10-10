@@ -51,6 +51,7 @@ export default meta;
 type Story = StoryObj<typeof Skeleton>;
 
 export const Examples: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="space-y-12 p-8 rounded-lg">
 			{/* Variantes Básicas */}

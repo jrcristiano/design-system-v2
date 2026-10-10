@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Checkbox } from "../components/Checkbox/Checkbox";
 import { useState } from "react";
+import { fn } from "storybook/test";
 
 const meta: Meta<typeof Checkbox> = {
 	title: "Form/Inputs/Checkbox",
@@ -50,9 +51,8 @@ Componente Checkbox com suporte a estados visuais (default, hover, pressed, focu
 			},
 		},
 		state: {
-			table: {
-				disable: true,
-			},
+			control: false,
+			table: { disable: true },
 			description:
 				"Estado interno do checkbox (usado para estilização em estados como hover, pressed, focused).",
 		},
@@ -67,6 +67,7 @@ export const CheckboxExamples: Story = {
 	args: {
 		label: "Aceito os termos e condições",
 		checked: false,
+		onChange: fn(),
 		indeterminate: false,
 		disabled: false,
 	},
@@ -100,7 +101,10 @@ export const CheckboxExamples: Story = {
 						<Checkbox
 							{...args}
 							checked={playgroundChecked}
-							onChange={(e) => setPlaygroundChecked(e.target.checked)}
+							onChange={(event) => {
+								setPlaygroundChecked(event.target.checked);
+								args.onChange?.(event);
+							}}
 						/>
 						<p className="text-sm text-[var(--ds-color-neutral-40)] mt-2">
 							Estado:{" "}

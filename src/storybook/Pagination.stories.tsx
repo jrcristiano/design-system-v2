@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { Pagination } from "../components/Pagination/Pagination";
 import { useState, useEffect } from "react";
 import "./Pagination.stories.inline.css";
@@ -16,6 +16,7 @@ const meta: Meta<typeof Pagination> = {
 		},
 	},
 	component: Pagination,
+	args: { onPageChange: fn() },
 	argTypes: {
 		currentPage: {
 			control: { type: "number", min: 1 },
@@ -105,6 +106,7 @@ const PaginationExample: Story["render"] = (args) => {
 			currentPage={currentPage}
 			onPageChange={(page) => {
 				setCurrentPage(page);
+				args.onPageChange?.(page);
 				console.log("Página alterada para:", page);
 			}}
 		/>

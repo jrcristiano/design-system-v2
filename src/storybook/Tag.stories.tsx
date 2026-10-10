@@ -277,6 +277,7 @@ export const Examples: Story = {
 		</div>
 	),
 	parameters: {
+		controls: { disable: true },
 		docs: {
 			description: {
 				story:

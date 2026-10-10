@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, type ComponentProps } from "react";
 import { Form, Formik } from "formik";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as Yup from "yup";
@@ -56,8 +56,11 @@ export default meta;
 type Story = StoryObj<typeof RichText>;
 
 // Componente wrapper para controlar o estado
-const RichTextWrapper = (args: any) => {
+const RichTextWrapper = (args: ComponentProps<typeof RichText>) => {
 	const [value, setValue] = useState(args.value || "");
+	useEffect(() => {
+		setValue(args.value || "");
+	}, [args.value]);
 
 	return (
 		<div className="richtext-stories-inline-1">

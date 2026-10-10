@@ -98,6 +98,7 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Examples: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="flex gap-4">
 			<Button variant="primary" iconLeft={PlusIcon}>

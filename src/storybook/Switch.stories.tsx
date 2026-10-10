@@ -79,11 +79,19 @@ DisabledChecked.parameters = {
 };
 
 export const Controlled = (args: ComponentProps<typeof Switch>) => {
-	const [isChecked, setIsChecked] = React.useState(false);
+	const [isChecked, setIsChecked] = React.useState(args.checked ?? false);
+	React.useEffect(() => {
+		setIsChecked(args.checked ?? false);
+	}, [args.checked]);
+
+	const handleChange: NonNullable<ComponentProps<typeof Switch>["onChange"]> = (checked, event) => {
+		setIsChecked(checked);
+		args.onChange?.(checked, event);
+	};
 
 	return (
 		<div className="switch-stories-inline-1">
-			<Switch {...args} checked={isChecked} onChange={setIsChecked} />
+			<Switch {...args} checked={isChecked} onChange={handleChange} />
 			<span className="switch-stories-inline-2">
 				Estado atual: {isChecked ? "Ligado" : "Desligado"}
 			</span>

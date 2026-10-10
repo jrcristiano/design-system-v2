@@ -187,6 +187,7 @@ export const Examples = {
 		</div>
 	),
 	parameters: {
+		controls: { disable: true },
 		docs: {
 			description: {
 				story: `

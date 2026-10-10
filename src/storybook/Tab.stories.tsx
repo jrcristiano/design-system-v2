@@ -115,6 +115,7 @@ const NavigationTabsComponent = () => {
 };
 
 export const NavigationTabs: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <NavigationTabsComponent />,
 };
 
@@ -149,6 +150,7 @@ const DashboardTabsComponent = () => {
 };
 
 export const DashboardTabs: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <DashboardTabsComponent />,
 };
 
@@ -181,6 +183,7 @@ const SidebarTabsComponent = () => {
 };
 
 export const SidebarTabs: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <SidebarTabsComponent />,
 };
 
@@ -218,6 +221,7 @@ const StatusTabsComponent = () => {
 };
 
 export const StatusTabs: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <StatusTabsComponent />,
 };
 
@@ -255,10 +259,12 @@ const SettingsTabsComponent = () => {
 };
 
 export const SettingsTabs: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => <SettingsTabsComponent />,
 };
 
 export const ComparisonTypes: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="space-y-8 p-6">
 			<div className="space-y-2">

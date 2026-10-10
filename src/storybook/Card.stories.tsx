@@ -213,6 +213,7 @@ export const Type2Complete: Story = {
  * Múltiplos cards simples com diferentes cores
  */
 export const MultipleSimpleCards: Story = {
+	parameters: { controls: { disable: true } },
 	render: () => (
 		<div className="card-stories-inline-1">
 			<Card variant="simple" title="Status Azul" label="Informação" leftBorderColor="#017DA2" />
