@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { FocusEvent, KeyboardEvent, MouseEvent, PointerEvent } from "react";
 import { CaretLeftIcon, CaretRightIcon, PauseIcon, PlayIcon } from "@phosphor-icons/react";
 import { clsx } from "clsx";
@@ -6,6 +6,7 @@ import type { CarouselProps } from "./Carousel.types";
 import "./Carousel.css";
 
 const EMPTY_ITEMS: CarouselProps["items"] = [];
+const EMPTY_PAGE_START_INDICES: number[] = [];
 const DEFAULT_ITEMS_PER_VIEW = { mobile: 1, tablet: 2, desktop: 3 } as const;
 const TABLET_BREAKPOINT = 768;
 const DESKTOP_BREAKPOINT = 1024;
@@ -117,9 +118,12 @@ export const Carousel = ({
 	const maxIndex = Math.max(0, safeItems.length - visibleItems);
 	const currentIndex = clamp(currentIndexState, maxIndex);
 	const totalPages = safeItems.length === 0 ? 0 : Math.ceil(safeItems.length / visibleItems);
-	const pageStartIndices = Array.from({ length: totalPages }, (_, index) =>
-		index === totalPages - 1 ? maxIndex : index * visibleItems,
-	);
+	const pageStartIndices = useMemo(() => {
+		if (!showDots || totalPages <= 1) return EMPTY_PAGE_START_INDICES;
+		return Array.from({ length: totalPages }, (_, index) =>
+			index === totalPages - 1 ? maxIndex : index * visibleItems,
+		);
+	}, [maxIndex, showDots, totalPages, visibleItems]);
 	const canMove = maxIndex > 0;
 	const canGoPrev = canMove && (loop || currentIndex > 0);
 	const canGoNext = canMove && (loop || currentIndex < maxIndex);
