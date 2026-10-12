@@ -42,7 +42,7 @@ export const Accordion: React.FC<IAccordionProps> = React.memo(
 		const titleStyles = clsx(
 			"flex-1 font-body font-[var(--ds-font-weight-semibold)] break-words text-left",
 			"text-[length:var(--ds-font-size-14)] leading-[20px] sm:text-[length:var(--ds-font-size-16)] sm:leading-[22.4px]",
-			isOpen ? "text-[var(--ds-color-blue-30)]" : "text-[var(--ds-color-blue-40)]",
+			isOpen ? "text-[var(--ds-color-blue-30)]" : "text-[var(--ds-color-on-primary-container)]",
 		);
 
 		const iconStyles = clsx(

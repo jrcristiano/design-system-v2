@@ -35,7 +35,7 @@
 }
 .chip-inline[data-variant="primary"][data-visual-state="default"] {
 	background-color: var(--ds-color-blue-90);
-	color: var(--ds-color-blue-40);
+	color: var(--ds-color-on-primary-container);
 	border-color: transparent;
 }
 .chip-inline[data-variant="primary"][data-visual-state="pressed"] {

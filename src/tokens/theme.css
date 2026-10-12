@@ -19,7 +19,7 @@
 	--ds-color-surface-disabled: var(--ds-color-neutral-80);
 	--ds-color-text-primary: var(--ds-color-neutral-10);
 	--ds-color-text-secondary: var(--ds-color-neutral-40);
-	--ds-color-text-muted: var(--ds-color-neutral-50);
+	--ds-color-text-muted: var(--ds-color-text-secondary);
 	--ds-color-text-disabled: var(--ds-color-neutral-80);
 	--ds-color-text-inverse: #ffffff;
 	--ds-color-border: var(--ds-color-neutral-50);
@@ -37,6 +37,7 @@
 	--ds-color-primary-active: var(--ds-color-blue-10);
 	--ds-color-primary-container: var(--ds-color-blue-90);
 	--ds-color-on-primary: #ffffff;
+	--ds-color-on-primary-container: var(--ds-color-blue-40);
 
 	--ds-color-success: var(--ds-color-green-30);
 	--ds-color-success-text: var(--ds-color-green-20);
@@ -234,6 +235,7 @@
 	--ds-color-selection-bg: #003b99;
 	--ds-color-selection-text: #f5f9ff;
 	--ds-color-on-primary: #0f1115;
+	--ds-color-on-primary-container: var(--ds-color-blue-10);
 
 	--ds-shadow-ambient-color: rgb(0 0 0 / 32%);
 	--ds-shadow-key-color: rgb(0 0 0 / 48%);
