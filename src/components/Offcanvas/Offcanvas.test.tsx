@@ -96,6 +96,24 @@ describe("Offcanvas", () => {
 		fireEvent(dialog, new Event("cancel", { cancelable: true }));
 		expect(change).not.toHaveBeenCalled();
 	});
+	it("handles Escape keydown and respects a prevented consumer event", () => {
+		const change = vi.fn();
+		const onKeyDown = vi.fn((event: React.KeyboardEvent<HTMLDialogElement>) =>
+			event.preventDefault(),
+		);
+		const { rerender } = render(
+			<Offcanvas open onOpenChange={change} onKeyDown={onKeyDown} aria-label="Painel" />,
+		);
+		const dialog = screen.getByRole("dialog");
+
+		fireEvent.keyDown(dialog, { key: "Escape" });
+		expect(onKeyDown).toHaveBeenCalledOnce();
+		expect(change).not.toHaveBeenCalled();
+
+		rerender(<Offcanvas open onOpenChange={change} aria-label="Painel" />);
+		fireEvent.keyDown(dialog, { key: "Escape" });
+		expect(change).toHaveBeenCalledExactlyOnceWith(false);
+	});
 	it("closes only for a gesture starting and ending on the backdrop", () => {
 		const change = vi.fn();
 		const { rerender } = render(<Offcanvas open onOpenChange={change} aria-label="Painel" />);

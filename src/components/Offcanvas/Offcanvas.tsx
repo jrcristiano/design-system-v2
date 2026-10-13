@@ -40,6 +40,7 @@ export function Offcanvas({
 	className,
 	children,
 	onClick,
+	onKeyDown,
 	onPointerDown,
 	...props
 }: IOffcanvasProps) {
@@ -146,6 +147,12 @@ export function Offcanvas({
 					event.preventDefault();
 					event.stopPropagation();
 					if (closeOnEsc) requestClose();
+				}}
+				onKeyDown={(event) => {
+					onKeyDown?.(event);
+					if (event.defaultPrevented || event.key !== "Escape" || !closeOnEsc) return;
+					event.preventDefault();
+					requestClose();
 				}}
 				onPointerDown={(event) => {
 					onPointerDown?.(event);

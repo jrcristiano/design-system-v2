@@ -183,6 +183,7 @@ export const Keyboard: Story = {
 		within(dialog).getByRole("button", { name: "Fechar painel" }).focus();
 		await userEvent.tab({ shift: true });
 		await expect(trigger).not.toHaveFocus();
+		within(dialog).getByRole("button", { name: "Fechar painel" }).focus();
 		await userEvent.keyboard("{Escape}");
 		await waitFor(() => expect(page.queryByRole("dialog")).not.toBeInTheDocument());
 		await expect(trigger).toHaveFocus();

@@ -135,6 +135,21 @@ describe("Carousel", () => {
 		expect(onSlideChange).toHaveBeenLastCalledWith(0);
 	});
 
+	it("uses the latest onSlideChange callback after rerender", () => {
+		const previousCallback = vi.fn();
+		const nextCallback = vi.fn();
+		const items = createItems(3);
+		const { rerender } = render(
+			<Carousel items={items} itemsPerView={onePerView} onSlideChange={previousCallback} />,
+		);
+
+		rerender(<Carousel items={items} itemsPerView={onePerView} onSlideChange={nextCallback} />);
+		fireEvent.click(screen.getByRole("button", { name: "Próximo slide" }));
+
+		expect(previousCallback).not.toHaveBeenCalled();
+		expect(nextCallback).toHaveBeenCalledWith(1);
+	});
+
 	it("changes pages from dots and uses current-page semantics", () => {
 		const onSlideChange = vi.fn();
 		render(

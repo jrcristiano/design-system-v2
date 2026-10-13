@@ -111,7 +111,10 @@ export const Carousel = ({
 	const gestureRef = useRef<PointerGesture | null>(null);
 	const suppressClickRef = useRef(false);
 	const suppressClickTimerRef = useRef<ReturnType<typeof globalThis.setTimeout> | null>(null);
-	onSlideChangeRef.current = onSlideChange;
+
+	useIsomorphicLayoutEffect(() => {
+		onSlideChangeRef.current = onSlideChange;
+	}, [onSlideChange]);
 
 	const requestedItemsPerView = getItemsPerView(containerWidth, itemsPerView);
 	const visibleItems = Math.max(1, Math.min(requestedItemsPerView, Math.max(1, safeItems.length)));
